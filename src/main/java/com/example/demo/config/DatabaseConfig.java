@@ -1,15 +1,7 @@
 package com.example.demo.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-@Configuration
 public class DatabaseConfig {
+	/*
 	@Value("${spring.datasource.first.url}")
 	private String url;
 
@@ -33,5 +25,5 @@ public class DatabaseConfig {
 	
     @Value("${spring.datasource.second.driver-class-name}")
     private String secondDriverClassName;
-	
+	*/
 }

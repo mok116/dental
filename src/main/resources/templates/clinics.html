@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Clinics</title></head>
+<body>
+    <h1>Clinic Information</h1>
+    <ul>
+        <li th:each="clinic : ${clinics}" th:text="${clinic.name + ' - ' + clinic.address + ' (' + clinic.openHours + ')'}"></li>
+    </ul>
+</body>
+</html>

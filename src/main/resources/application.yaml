@@ -2,15 +2,9 @@ spring:
   application:
     name: demo
   datasource:
-    first:
-      url: jdbc:jtds:sybase://venus2.i-cable.com:4100/icms
-      username: misdev
-      password: mis@328
-      driver-class-name: net.sourceforge.jtds.jdbc.Driver
-    second:
-      url: jdbc:jtds:sybase://venus2.i-cable.com:4100/icms
-      username: misdev
-      password: mis@328
-      driver-class-name: net.sourceforge.jtds.jdbc.Driver
+    url: /jdbc:jtds:sybase://venus2.i-cable.com:4100/icms
+    username: misdev
+    password: mis@328
+    driver-class-name: net.sourceforge.jtds.jdbc.Driver
 server:
   port: 6616

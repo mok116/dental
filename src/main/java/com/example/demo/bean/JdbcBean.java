@@ -1,23 +1,7 @@
 package com.example.demo.bean;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.datasource.SingleConnectionDataSource;
-
-import com.example.demo.config.DatabaseConfig;
-
-@Configuration
 public class JdbcBean {
-
+/*
 	@Autowired
 	private DatabaseConfig databaseConfig;
 
@@ -77,4 +61,5 @@ public class JdbcBean {
 	JdbcTemplate jdbcTemplate(DataSource dataSource) {
 		return new JdbcTemplate(dataSource, true);
 	}
+	*/
 }
