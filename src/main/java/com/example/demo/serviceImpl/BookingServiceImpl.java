@@ -39,7 +39,7 @@ public class BookingServiceImpl implements BookingService {
         appointmentRepository.save(appointment);
 
         // Send email
-        sendConfirmationEmail(appointment);
+        //sendConfirmationEmail(appointment);  
         return null; // Success
     }
 
