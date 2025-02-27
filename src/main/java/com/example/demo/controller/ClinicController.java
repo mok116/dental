@@ -4,31 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.model.Patient;
-import com.example.demo.repository.PatientRepository;
+import com.example.demo.repository.ClinicRepository;
+import com.example.demo.repository.DentistRepository;
+import com.example.demo.repository.ScheduleRepository;
 
 @Controller
 public class ClinicController {
-	@Autowired
-	private PatientRepository patientRepository;
+    @Autowired
+    private ClinicRepository clinicRepository;
 
-	@GetMapping("/register")
-	public String showRegistrationForm(Model model) {
-		model.addAttribute("patient", new Patient());
-		return "register";
-	}
+    @Autowired
+    private DentistRepository dentistRepository;
 
-	@PostMapping("/register")
-	public String registerPatient(@ModelAttribute Patient patient) {
-		patientRepository.save(patient);
-		return "redirect:/login";
-	}
+    @Autowired
+    private ScheduleRepository scheduleRepository;
 
-	@GetMapping("/login")
-	public String showLoginForm() {
-		return "login";
-	}
-}
+    @GetMapping("/clinics")
+    public String showClinicInfo(Model model) {
+        model.addAttribute("clinics", clinicRepository.findAll());
+        model.addAttribute("dentists", dentistRepository.findAll());
+        model.addAttribute("schedules", scheduleRepository.findAll());
+        return "clinics";
+    }
+}	

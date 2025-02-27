@@ -1,24 +1,37 @@
 package com.example.demo.model;
 
-import org.springframework.data.annotation.Id;
+
+
+import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Table(name = "schedules")
+@Getter
+@Setter
 public class Schedule {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@ManyToOne
-	private Dentist dentist;
-	@ManyToOne
-	private Clinic clinic;
-	private String dayOfWeek; // e.g., "Monday"
-	private String startTime; // e.g., "09:00"
-	private String endTime; // e.g., "12:00"
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "dentist_id")
+    private Dentist dentist;
+
+    @ManyToOne
+    @JoinColumn(name = "clinic_id")
+    private Clinic clinic;
+
+    private String dayOfWeek;
+    private LocalTime startTime;
+    private LocalTime endTime;
 }

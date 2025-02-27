@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Dental Appointment</title>
+    <style>body { font-family: Arial, sans-serif; margin: 20px; } label { display: inline-block; width: 100px; }</style>
+</head>
+<body>
+    <h2>Book an Appointment</h2>
+    <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+    <form th:action="@{/booking}" th:object="${appointment}" method="post">
+        <label for="dentist">Dentist:</label>
+        <select th:field="*{dentist.id}" id="dentist">
+            <option th:each="dentist : ${dentists}" th:value="${dentist.id}" th:text="${dentist.name}"></option>
+        </select><br><br>
+
+        <label for="clinic">Clinic:</label>
+        <select th:field="*{clinic.id}" id="clinic">
+            <option th:each="clinic : ${clinics}" th:value="${clinic.id}" th:text="${clinic.name}"></option>
+        </select><br><br>
+
+        <label for="date">Date:</label>
+        <input type="date" th:field="*{date}" id="date" required/><br><br>
+
+        <label for="time">Time:</label>
+        <input type="time" th:field="*{time}" id="time" required/><br><br>
+
+        <input type="submit" value="Book Appointment"/>
+    </form>
+    <a th:href="@{/patient/logout}">Logout</a>
+</body>
+</html>
