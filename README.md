@@ -65,8 +65,7 @@ INSERT INTO `schedules` (
     (2, 3, '20:00:00.000000', '17:00:00.000000', 'Monday');
 
     
-
-
+# API
     
 ## Patient
 
@@ -115,8 +114,6 @@ INSERT INTO `schedules` (
 | :-------- | :------- | :------------------------- |
 | `email_address` | `string` | **Required**. |
 | `password` | `string` | **Required**. hash|
-
-# API
 
 ## Item
 
