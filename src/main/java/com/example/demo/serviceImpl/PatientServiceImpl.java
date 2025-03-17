@@ -14,7 +14,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
 	public Patient registerPatient(Patient patient) {
-        if (patientRepository.findByEmail(patient.getEmail()) != null) {
+        if (patientRepository.findByEmailAddress(patient.getEmailAddress()) != null) {
             throw new RuntimeException("Email already registered!");
         }
         return patientRepository.save(patient);
@@ -22,7 +22,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
 	public Patient login(String email, String password) {
-        Patient patient = patientRepository.findByEmail(email);
+        Patient patient = patientRepository.findByEmailAddress(email);
         if (patient != null && patient.getPassword().equals(password)) {
             return patient;
         }

@@ -2,14 +2,9 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,13 +22,14 @@ public class Appointment {
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "dentist_id")
-    private Dentist dentist;
+    @JoinColumn(name = "clinic_dentist_id")
+    private ClinicDentist clinicDentist;
 
-    @ManyToOne
-    @JoinColumn(name = "clinic_id")
-    private Clinic clinic;
+    @OneToMany(mappedBy = "appointment")
+    private List<AppointmentItem> appointmentItems;
 
-    private LocalDate date;
-    private LocalTime time;
+    private LocalTime appointmentDate;
+    private String totalAmount;
+    private String status;
+    private LocalTime createAt;
 }

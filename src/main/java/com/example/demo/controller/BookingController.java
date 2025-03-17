@@ -40,31 +40,31 @@ public class BookingController {
         return "booking";
     }
 
-    @PostMapping
-    public String bookAppointment(@ModelAttribute Appointment appointment, 
-                                  HttpSession session, Model model) {
-        Patient patient = (Patient) session.getAttribute("patient");
-        if (patient == null) {
-            return "redirect:/patient/login";
-        }
-        appointment.setPatient(patient);
-        String error = bookingService.bookAppointment(appointment);
-        if (error != null) {
-            model.addAttribute("error", error);
-            model.addAttribute("dentists", dentistRepository.findAll());
-            model.addAttribute("clinics", clinicRepository.findAll());
-            return "booking";
-        }
-        return "success";
-    }
+//    @PostMapping
+//    public String bookAppointment(@ModelAttribute Appointment appointment,
+//                                  HttpSession session, Model model) {
+//        Patient patient = (Patient) session.getAttribute("patient");
+//        if (patient == null) {
+//            return "redirect:/patient/login";
+//        }
+//        appointment.setPatient(patient);
+//        String error = bookingService.bookAppointment(appointment);
+//        if (error != null) {
+//            model.addAttribute("error", error);
+//            model.addAttribute("dentists", dentistRepository.findAll());
+//            model.addAttribute("clinics", clinicRepository.findAll());
+//            return "booking";
+//        }
+//        return "success";
+//    }
 
-    @GetMapping("/enquiry")
-    public String showBookingEnquiry(Model model, HttpSession session) {
-        Patient patient = (Patient) session.getAttribute("patient");
-        if (patient == null) {
-            return "redirect:/patient/login";
-        }
-        model.addAttribute("appointments", bookingService.getPatientAppointments(patient.getId()));
-        return "enquiry";
-    }
+//    @GetMapping("/enquiry")
+//    public String showBookingEnquiry(Model model, HttpSession session) {
+//        Patient patient = (Patient) session.getAttribute("patient");
+//        if (patient == null) {
+//            return "redirect:/patient/login";
+//        }
+//        model.addAttribute("appointments", bookingService.getPatientAppointments(patient.getId()));
+//        return "enquiry";
+//    }
 }

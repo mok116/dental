@@ -21,12 +21,11 @@ public class Clinic {
     private int id;
     private String name;
     private String address;
+    private String district;
+    private String phone;
     private String openHours;
 
     @OneToMany(mappedBy = "clinic")
-    private List<Schedule> schedules;
-
-    @OneToMany(mappedBy = "clinic")
-    private List<Appointment> appointments;
+    private List<ClinicDentist> clinicDentists;
 
 }

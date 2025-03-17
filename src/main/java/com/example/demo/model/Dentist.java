@@ -24,9 +24,9 @@ public class Dentist {
     private String name;
 
     @OneToMany(mappedBy = "dentist")
-    private List<Schedule> schedules;
+    private List<ClinicDentist> clinicDentist;
 
     @OneToMany(mappedBy = "dentist")
-    private List<Appointment> appointments;
+    private List<DentistItem> dentistItems;
 
 }
