@@ -12,9 +12,9 @@
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `first_name` | `string` | **Required**. |
-| `last_name` | `string` | **Required**. |
-| `email_address` | `string` | **Required**. |
+| `firstName` | `string` | **Required**. |
+| `lastName` | `string` | **Required**. |
+| `emailAddress` | `string` | **Required**. |
 | `gender` | `string` | **Required**. M/F|
 | `dob` | `string` | **Required**. YYYY-mm-dd|
 | `phone` | `string` | **Required**.|
@@ -23,7 +23,7 @@
 #### Get patient by id 
 
 ```http
-  GET /patient/id/{id}
+  GET /patient/{id}
 ```
 
 | Parameter | Type     | Description                       |
@@ -47,7 +47,7 @@
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `email_address` | `string` | **Required**. |
+| `emailAddress` | `string` | **Required**. |
 | `password` | `string` | **Required**. hash|
 
 ## Item
@@ -90,7 +90,7 @@
 #### Get dentist by id 
 
 ```http
-  GET /dentist/id/{id}
+  GET /dentist/{id}
 ```
 
 | Parameter | Type     | Description                       |
@@ -113,38 +113,38 @@
 #### Get Clinic dentists by clinic_id 
 
 ```http
-  GET /clinic_dentist/clinic_id/{clinic_id}
+  GET /clinicDentist/clinic/{clinicId}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `clinic_id`      | `int` | **Required**. Id of item to fetch |
+| `clinicId`      | `int` | **Required**. Id of item to fetch |
 
 #### Get Clinic dentists by dentist_id 
 
 ```http
-  GET /clinic_dentist/dentist_id/{dentist_id}
+  GET /clinicDentist/dentist/{dentistId}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `dentist_id`      | `int` | **Required**. Id of item to fetch |
+| `dentistId`      | `int` | **Required**. Id of item to fetch |
 
 #### Get Clinic dentists by time_slot_id 
 
 ```http
-  GET /clinic_dentist/time_slot_id/{time_slot_id}
+  GET /clinicDentist/timeslot/{timeslotId}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `time_slot_id`      | `int` | **Required**. Id of item to fetch |
+| `timeslotId`      | `int` | **Required**. Id of item to fetch |
 
 
 #### Get Clinic dentists
 
 ```http
-  GET /clinic_dentist/list
+  GET /clinicDentist/list
 ```
 
 | Parameter | Type     | Description                       |
@@ -156,27 +156,27 @@
 #### Get Dentist items by dentist_id 
 
 ```http
-  GET /dentist_item/dentist_id/{dentist_id}
+  GET /dentistItem/dentist/{dentistId}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `dentist_id`      | `int` | **Required**. Id of item to fetch |
+| `dentistId`      | `int` | **Required**. Id of item to fetch |
 
 #### Get Dentist items by dentist_id 
 
 ```http
-  GET /dentist_item/{item_id}
+  GET /dentistItem/{itemId}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `item_id`      | `int` | **item_id**. Id of item to fetch |
+| `itemId`      | `int` | **item_id**. Id of item to fetch |
 
 #### Get Dentist items
 
 ```http
-  GET /dentist_item/list
+  GET /dentistItem/list
 ```
 
 | Parameter | Type     | Description                       |
@@ -193,16 +193,16 @@
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `patient_id` | `int` | **Required**. |
-| `clinic_dentist_id` | `int` | **Required**. |
-| `appointment_date` | `string` | **Required**. YYYY-mm-dd |
-| `total_amount` | `decimal` | **Required**. 0.00|
+| `patientId` | `int` | **Required**. |
+| `clinicDentistId` | `int` | **Required**. |
+| `appointmentDate` | `string` | **Required**. YYYY-mm-dd |
+| `totalAmount` | `decimal` | **Required**. 0.00|
 | `status` | `string` | **Required**. |
 
 #### Get patient by id 
 
 ```http
-  GET /appointment/patient/{id}
+  GET /appointment/patient/{patientId}
 ```
 
 | Parameter | Type     | Description                       |
@@ -224,7 +224,7 @@
 #### Create appointment items
 
 ```http
-  POST /appointment_item/create
+  POST /appointmentItem/create
 ```
 
 | Parameter | Type     | Description                |
@@ -235,20 +235,20 @@
 #### Get patient by appointment_id 
 
 ```http
-  GET /appointment_item/appointment/{appointment_id}
+  GET /appointmentItem/appointment/{appointmentId}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `appointment_id`      | `int` | **Required**. Id of item to fetch |
+| `appointmentId`      | `int` | **Required**. Id of item to fetch |
 
 #### Get patient by dentist_item_id 
 
 ```http
-  GET /appointment_item/dentistItem/{dentist_item_id}
+  GET /appointmentItem/dentistItem/{dentistItemId}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `dentist_item_id`      | `int` | **Required**. Id of item to fetch |
+| `dentistItemId`      | `int` | **Required**. Id of item to fetch |
 
