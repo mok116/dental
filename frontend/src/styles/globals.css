@@ -1,0 +1,161 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  border: 0;
+  outline: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font: inherit;
+  text-decoration: none;
+  list-style: none;
+}
+
+html {
+  font-family: FT Base, -apple-system, system-ui, BlinkMacSystemFont,
+    SF Pro Text, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  overflow-x: hidden;
+  webkitfontsmoothing: "antialiased";
+}
+
+:root {
+  --primary-color: rgb(0, 103, 213);
+  --primary-darker-color: rgb(0, 105, 217);
+  --secondary-color: rgb(40, 167, 69);
+  --dark-color: rgb(33, 37, 41);
+  --primary-font-color: rgb(33, 37, 41);
+  --secondary-font-color: rgb(73, 80, 87);
+  --paragraph-font-color: #333;
+  --primary-button-color: rgb(0, 123, 255);
+  --primary-button-hover-color: #1558b0;
+  --secondary-button-color: rgb(40, 167, 69);
+  --font-paragraph-color: rgb(73, 80, 87);
+  --white: rgb(255, 255, 255);
+  --red: rgb(220, 53, 69);
+  --background-color: rgb(244 244 245);
+  --gray-color: rgb(108, 117, 125);
+  --box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  --box-shadow-hover: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  --font-size-base: 16px;
+  --font-size-xs: calc(var(--font-size-base) / 1.75);
+  --font-size-sm: calc(var(--font-size-base) / 1.25);
+  --font-size-md: calc(var(--font-size-base) * 1.25);
+  --font-size-lg: calc(var(--font-size-md) * 1.5);
+  --font-size-xl: calc(var(--font-size-lg) * 1.75);
+  --font-size-xxl: calc(var(--font-size-xl) * 2);
+}
+
+.rdp-root {
+  --rdp-accent-color:var(--primary-color);
+  --rdp-accent-background-color:red;
+  --rdp-font-family:"Poppins",serif;
+  --rdp-day_button-border-radius:4px;
+  --rdp-selected-font:var(--font-size-base);
+  --rdp-day-width:52px;
+  --rdp-day-height:52px;
+  width: max-content;
+}
+
+@media (min-width:576px) and (max-width:768px) {
+  .rdp-root  {
+    --rdp-day-width:48px;
+    --rdp-day-height:48px;
+  }
+}
+
+@media (max-width:576px) {
+  .rdp-root  {
+    --rdp-day-width:36px;
+    --rdp-day-height:36px;
+  }
+}
+
+
+
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: inherit;
+  overflow-wrap: break-word;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+section {
+  margin: 72px 0;
+}
+
+/* --- Global Classes --- */
+.textHeader {
+  font-size: var(--font-size-xl);
+  margin-bottom: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.textSubheader {
+  font-family: "Raleway", sans-serif;
+  font-size: var(--font-size-md);
+  color: var(--paragraph-font-color);
+  margin: 12px 0;
+}
+
+@media (max-width: 768px) {
+  .textHeader {
+    font-size: var(--font-size-lg);
+  }
+}
+
+
+/* --- End of Global Classes --- */
+
+.container,
+.container-m {
+  width: 100%;
+  padding: 0 16px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.containerFluid {
+  width: 100vw;
+}
+
+/* Container infrastracture. */
+@media (min-width: 480px) {
+  .container,
+  .container-m {
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container,
+  .container-m {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 992px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}

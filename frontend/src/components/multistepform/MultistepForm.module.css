@@ -1,0 +1,49 @@
+.formContainer {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 32px;
+  width: 100%;
+}
+
+.formContainer .buttonsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.formContainer .buttonsWrapper button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 4px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--white);
+  background-color: var(--primary-color);
+  transition: background-color ease-in-out 0.1;
+}
+
+.formContainer .buttonsWrapper button:disabled {
+  background-color: #d6d6d6;
+  color: #a1a1a1;
+  cursor: not-allowed;
+}
+
+.formContainer .buttonsWrapper button:disabled:hover {
+  background-color: #d6d6d6;
+  cursor: not-allowed;
+}
+
+.formContainer .buttonsWrapper button svg {
+  color: var(--white-color);
+  width: 20px;
+  height: 20px;
+}
+
+.formContainer .buttonsWrapper button:hover {
+  cursor: pointer;
+  background-color: var(--primary-button-hover-color);
+}

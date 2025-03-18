@@ -1,0 +1,36 @@
+{
+  "name": "dentalclinic-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.6",
+    "date-fns": "^3.6.0",
+    "moment": "^2.30.1",
+    "next": "14.2.5",
+    "rc-picker": "^4.6.12",
+    "react": "^18",
+    "react-calendar": "^5.0.0",
+    "react-day-picker": "^9.0.8",
+    "react-dom": "^18",
+    "react-icons": "^5.2.1",
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1",
+    "sweetalert2": "^11.12.4",
+    "swiper": "^11.1.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/react-icons": "^3.0.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "typescript": "^5"
+  }
+}

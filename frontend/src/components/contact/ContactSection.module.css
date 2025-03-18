@@ -1,0 +1,75 @@
+/* ContactSection.module.css */
+
+.main {
+  margin-bottom: 0px !important;
+}
+
+.contactContainer {
+  box-shadow: 0 4px 8px var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-image: url("/treatmentsContact.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  overflow: hidden;
+}
+
+.contactContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.contactContainer > * {
+  position: relative;
+  z-index: 2;
+}
+
+.contactHeader {
+  font-size: var(--font-size-xl);
+  margin-bottom: 1rem;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-weight: 500;
+  color: var(--white);
+  z-index: 5;
+}
+
+.contactContainer a {
+  font-size: var(--font-size-md);
+  background-color: var(--primary-color);
+  padding: 16px 24px;
+  font-family: "Poppins", sans-serif;
+  color: var(--white);
+  font-weight: 400;
+  border-radius: 8px;
+  z-index: 10;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.contactContainer a:hover {
+  cursor: pointer;
+  background-color: var(--primary-button-hover-color);
+}
+
+@media (max-width: 768px) {
+  .contactContainer .contactHeader {
+    font-size: var(--font-size-lg);
+  }
+
+  .contactContainer a {
+    font-size: var(--font-size-base);
+  }
+}

@@ -1,0 +1,51 @@
+/* Denist.module.css */
+
+.dentistContainer {
+  display: flex;
+  gap: 32px;
+}
+
+.dentistContainer article {
+  flex-basis: 50%;
+  order: 1;
+}
+
+.dentistContainer article h3,
+.dentistContainer article h4 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: var(--font-size-md);
+  margin: 16px 0;
+}
+
+.dentistContainer article p {
+  line-height: 1.75;
+}
+
+.dentistContainer figure {
+  position: relative;
+  flex-basis: 50%;
+  height: 500px;
+  border-radius: 8x;
+  order: 2;
+}
+
+.dentistContainer figure img {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .dentistContainer {
+    flex-direction: column;
+  }
+  .dentistContainer article {
+    order: 2;
+  }
+  .dentistContainer figure {
+    order: 1;
+    flex-basis: auto;
+  }
+}

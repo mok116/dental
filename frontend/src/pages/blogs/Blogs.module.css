@@ -1,0 +1,52 @@
+/* Blogs.module.css */
+.blogsHero {
+  margin-top: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.blogsHero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 12;
+}
+
+.blogsHero > * {
+  position: relative;
+  z-index: 13;
+}
+
+.blogsHero .carouselWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 48px;
+}
+
+/* Tablets and below */
+@media (max-width: 768px) {
+  .articles {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  
+}

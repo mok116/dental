@@ -1,0 +1,39 @@
+/* RecommendCard.module.css */
+
+.recommendCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 400px;
+  box-shadow: 0 4px 8px var(--box-shadow);
+  border: 1px solid rgba(229, 231, 235, 1);
+  transition: transform 0.3s;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+.recommendCardContainer figure {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  border-top-right-radius: 8px;
+}
+
+.recommendCardContainer figure picture img {
+  object-fit: cover;
+  object-position: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.recommendCardContainer article {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.recommendCardContainer article h2 {
+  font-weight: 500;
+  text-align: center;
+}

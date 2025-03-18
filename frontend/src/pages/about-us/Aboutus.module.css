@@ -1,0 +1,197 @@
+/* Aboutus.module.css */
+
+.aboutusHero {
+  margin-top: 0px !important;
+  box-shadow: 0 4px 8px var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-image: url("/aboutus.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  overflow: hidden;
+}
+
+.aboutusHero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.aboutusHero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.aboutusHero h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  z-index: 10;
+}
+
+.aboutusHero p {
+  font-size: var(--font-size-md);
+  text-align: center;
+  max-width: 768px;
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  z-index: 10;
+}
+
+.aboutUsContainer .aboutUsWrapper {
+  display: flex;
+  gap: 32px;
+}
+
+.aboutUsContainer .aboutUsWrapper article {
+  order: 1;
+  flex-basis: 50%;
+}
+
+.aboutUsContainer .aboutUsWrapper article p {
+  font-family: "Manrope", sans-serif;
+  font-size: var(--font-size-base);
+  line-height: 1.75;
+}
+
+.aboutUsContainer .aboutUsWrapper article h4 {
+  font-size: var(--font-size-lg);
+  margin: 16px 0;
+  color: var(--primary-color);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.aboutUsContainer .aboutUsWrapper figure {
+  order: 2;
+  flex-basis: 50%;
+  height: 400px;
+  max-height: 400px;
+  position: relative;
+}
+
+.aboutUsContainer .aboutUsWrapper figure picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.aboutUsContainer .aboutUsWrapper figure picture img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.countUpContainer h2:first-child {
+  text-align: center;
+  margin: 48px 0;
+}
+
+.galleryContainer .galleryWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.galleryContainer .galleryWrapper figure {
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+}
+
+.galleryContainer .galleryWrapper figure picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.galleryContainer .galleryWrapper figure picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.teamContainer .teamWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* Media Queries. */
+/* Larger Screens.*/
+@media (min-width: 576px) and (max-width: 1024px) {
+  .galleryContainer .galleryWrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .titleMobile {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* Mobile Devices and Tablets */
+@media (max-width: 768px) {
+  .aboutusHero h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .aboutusHero p {
+    font-size: var(--font-size-base);
+  }
+
+  .aboutUsContainer .aboutUsWrapper {
+    flex-direction: column;
+  }
+
+  .aboutUsContainer .aboutUsWrapper article {
+    flex-basis: 100%;
+    order: 2;
+  }
+  .aboutUsContainer .aboutUsWrapper figure {
+    flex-basis: auto;
+    order: 1;
+  }
+
+  .countUpContainer .countUpWrapper {
+    flex-direction: column;
+  }
+
+  .galleryContainer .galleryWrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .teamContainer .teamWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile Devices */
+@media (min-width: 576px) and (max-width: 768px) {
+  .aboutUsContainer .aboutUsWrapper article {
+    flex-basis: 100%;
+    order: 2;
+  }
+  .aboutUsContainer .aboutUsWrapper figure {
+    flex-basis: auto;
+    order: 1;
+  }
+}

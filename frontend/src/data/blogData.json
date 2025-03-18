@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "title": "Diş Muayenesi: Sağlıklı Gülüş İçin İlk Adım",
+    "slug": "dis-muayenesi-saglikli-gulus-icin-ilk-adim",
+    "snippet": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, debitis!",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, debitis! Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "date": "19.07.2024",
+    "image": "/images/heroDoctors.png"
+  },
+  {
+    "id": "2",
+    "title": "Diş Beyazlatma: Parlak Bir Gülüş İçin İpuçları",
+    "slug": "dis-beyazlatma-parlak-bir-gulus-icin-ipuclari",
+    "snippet": "Diş beyazlatma işlemleri hakkında bilmeniz gerekenler.",
+    "content": "Diş beyazlatma işlemleri, dişlerin doğal rengini geri kazandırmak için yapılan estetik uygulamalardır. İşlem süreci, kullanılan ürünler ve bakım önerileri hakkında bilgi edinin.",
+    "date": "20.07.2024",
+    "image": "/images/orthodontia.jpg"
+  },
+  {
+    "id": "3",
+    "title": "Köprü ve Kron: Dişleriniz İçin En İyi Çözümler",
+    "slug": "kopru-ve-kron-disleriniz-icin-en-iyi-cozumler",
+    "snippet": "Köprü ve kron uygulamaları hakkında her şey.",
+    "content": "Köprüler ve kronlar, diş kayıplarını telafi etmek için kullanılan diş tedavi yöntemleridir. Bu yazıda, köprü ve kron uygulamalarının nasıl yapıldığını ve hangi durumlarda kullanıldığını öğrenin.",
+    "date": "21.07.2024",
+    "image": "/images/maxillofacialSurgery.jpg"
+  },
+  {
+    "id": "4",
+    "title": "Ortodontik Tedavi: Dişlerinizi Düzenleyin",
+    "slug": "ortodontik-tedavi-dislerinizi-duzenleyin",
+    "snippet": "Ortodontik tedavi süreci ve faydaları.",
+    "content": "Ortodontik tedavi, dişlerinizi düzeltmek ve çene yapınızı iyileştirmek için yapılan bir tedavidir. Braketler, teller ve diğer ortodontik araçlar hakkında bilgi sahibi olun.",
+    "date": "22.07.2024",
+    "image": "/images/implant.jpg"
+  },
+  {
+    "id": "5",
+    "title": "Çocuk Diş Hekimliği: Küçük Yaşta Sağlıklı Dişler",
+    "slug": "cocuk-dis-hekimligi-kucuk-yasta-saglikli-disler",
+    "snippet": "Çocuk diş hekimliğinin önemi ve uygulamaları.",
+    "content": "Çocuk diş hekimliği, çocukların diş sağlığını korumak ve gelişimini desteklemek için yapılan bir tedavidir. Erken yaşta diş bakımı ve tedavi yöntemleri hakkında bilgi edinin.",
+    "date": "23.07.2024",
+    "image": "/images/dentalRestoration.jpg"
+  },
+  {
+    "id": "6",
+    "title": "İmplant Uygulamaları: Kalıcı Diş Çözümleri",
+    "slug": "implant-uygulamalari-kalici-dis-cozumleri",
+    "snippet": "Diş implantları ve uygulama süreçleri.",
+    "content": "Diş implantları, kaybolmuş dişlerin yerine kalıcı çözümler sunar. Bu yazıda, implant uygulamalarının nasıl yapıldığını ve avantajlarını öğrenin.",
+    "date": "24.07.2024",
+    "image": "/images/pediatricDentistry.jpg"
+  },
+  {
+    "id": "7",
+    "title": "Diş Eti Hastalıkları: Belirtiler ve Tedavi Yöntemleri",
+    "slug": "dis-eti-hastaliklari-belirtiler-ve-tedavi-yontemleri",
+    "snippet": "Diş eti hastalıklarının belirtileri ve tedavi yöntemleri.",
+    "content": "Diş eti hastalıkları, dişlerin etrafındaki dokuların iltihaplanmasıyla ortaya çıkar. Belirtiler, nedenler ve tedavi yöntemleri hakkında bilgi edinin.",
+    "date": "25.07.2024",
+    "image": "/images/teethWhitening.jpg"
+  },
+  {
+    "id": "8",
+    "title": "Diş Çürükleri: Koruma ve Tedavi Yöntemleri",
+    "slug": "dis-curukleri-koruma-ve-tedavi-yontemleri",
+    "snippet": "Diş çürüklerinden korunma ve tedavi yöntemleri.",
+    "content": "Diş çürükleri, diş minesi üzerinde oluşan zararlı etkilerdir. Çürüklerden korunmak ve mevcut çürükleri tedavi etmek için uygulanabilecek yöntemler hakkında bilgi edinin.",
+    "date": "26.07.2024",
+    "image": "/images/toothExtraction.jpg"
+  },
+  {
+    "id": "9",
+    "title": "Diş Hekimi Seçerken Nelere Dikkat Etmelisiniz?",
+    "slug": "dis-hekimi-secerken-nelere-dikkat-etmelisiniz",
+    "snippet": "Diş hekimi seçerken göz önünde bulundurmanız gerekenler.",
+    "content": "Diş hekimi seçimi, diş sağlığınız açısından önemlidir. Doğru diş hekimini seçmek için nelere dikkat etmeniz gerektiğini öğrenin.",
+    "date": "27.07.2024",
+    "image": "/images/aestheticDentistry.jpg"
+  },
+  {
+    "id": "10",
+    "title": "Diş Temizliği: Profesyonel Temizlik ve Bakım",
+    "slug": "dis-temizligi-profesyonel-temizlik-ve-bakim",
+    "snippet": "Diş temizliği ve bakım önerileri.",
+    "content": "Diş temizliği, diş sağlığını korumak için önemli bir adımdır. Profesyonel temizlik işlemleri ve evde bakım yöntemleri hakkında bilgi edinin.",
+    "date": "28.07.2024",
+    "image": "/images/rootCanal.jpg"
+  }
+]

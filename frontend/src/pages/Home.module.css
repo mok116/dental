@@ -1,0 +1,342 @@
+/* Home.module.css */
+
+/* Start of Hero Section */
+.heroContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  height: 450px;
+}
+
+.heroContainer h1 {
+  font-size: var(--font-size-xl);
+  line-height: 1.25;
+  margin-bottom: 12px;
+  color: var(--primary-color);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.heroContainer p {
+  font-size: var(--font-size-md);
+  margin-bottom: 32px;
+  color: var(--paragraph-font-color);
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+}
+
+.contactHero a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  width: max-content;
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-family: "Raleway", sans-serif;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 400;
+  transition: background-color 0.3 ease-in;
+}
+
+.contactHero svg {
+  font-size: 16px;
+}
+
+.contactHero a:hover {
+  background-color: var(--primary-button-hover-color);
+}
+
+.heroContainer figure {
+  position: relative;
+  width: 100%;
+}
+
+.heroContainer picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.heroContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+}
+
+/* End of Hero Section */
+
+/* --- Treatments Section --- */
+.treatmentsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+  margin-bottom: 72px;
+}
+
+.treatmentsContainer article {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.treatmentsContainer figure {
+  position: relative;
+}
+
+.treatmentsContainer picture {
+  display: block;
+  width: 100%;
+  height: 256px;
+}
+
+.treatmentsContainer article figure picture img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.treatmentsContainer article figure picture img:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.treatmentsContainer article span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--white);
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+/* Start of  Team Section */
+.team h1 {
+  font-size: var(--font-size-xl);
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.team article {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+/* End Of Team Section */
+
+/* Start Of Workhours Section */
+.workhourShowcase {
+  background-color: var(--primary-color);
+  margin: 144px 0 144px 0;
+  position: relative;
+}
+
+.workhours {
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  justify-content: space-between;
+}
+
+.workhours article h1 {
+  font-size: var(--font-size-lg);
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.workhours svg {
+  margin-left: auto;
+  width: 256px;
+  height: 256px;
+}
+
+.workhours .workhourTable {
+  font-family: "Manrope", sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 16px 0;
+}
+
+.workhourTable th,
+.workhourTable td {
+  border: none;
+  padding: 4px;
+  text-align: left;
+}
+
+.workhourShowcase .shapeTop {
+  position: absolute;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 90px;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(360deg);
+  top: -82px;
+  background-color: var(--background-color);
+  fill: var(--primary-color);
+  border-bottom: px solid var(--background-color);
+}
+
+.workhourShowcase .shapeBottom {
+  position: absolute;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 90px;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(360deg);
+  bottom: -88px;
+  background-color: var(--background-color);
+  fill: var(--primary-color);
+}
+
+/* End Of Workhours Section */
+
+/* Media Queries */
+
+@media (max-width: 1024px) {
+  .heroContainer {
+    height: auto;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .services .serviceShowcase {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .workhourShowcase .shapeTop {
+    top: -83px;
+  }
+
+  .workhourShowcase .shapeBottom {
+    bottom: -84px;
+  }
+
+  .team {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024) {
+  .heroContainer {
+    gap: 16px;
+  }
+
+  .services .serviceShowcase {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .workhours {
+    align-items: flex-start;
+  }
+
+  .workhours svg {
+    width: 200px;
+    height: 200px;
+  }
+
+  .workhours svg {
+    display: block !;
+    margin-top: 32px;
+  }
+
+  .treatmentsContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 425px) and (max-width: 768px) {
+  .heroContainer {
+    gap: 12px;
+  }
+
+  .services .serviceShowcase {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .workhours svg {
+    display: none;
+    margin-top: 32px;
+  }
+
+  .workhourShowcase .shapeTop {
+    top: -82px;
+  }
+
+  .treatmentsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .team article {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 425px) {
+  .heroContainer {
+    gap: 8px;
+  }
+
+  .services .serviceShowcase {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .services h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  .treatmentsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .team article {
+    grid-template-columns: 1fr;
+  }
+
+  .team h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  .services .serviceShowcase {
+    gap: 16px;
+  }
+
+  .workhours {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .workhours svg {
+    display: none;
+  }
+
+  .workhourShowcase .shapeTop {
+    top: -84px;
+  }
+}
