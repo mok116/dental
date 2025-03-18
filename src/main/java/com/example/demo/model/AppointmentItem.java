@@ -21,4 +21,6 @@ public class AppointmentItem {
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
+    @Column(name = "dental_item_id") 
+    private Integer dentalItemId;
 }
