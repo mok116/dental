@@ -77,7 +77,7 @@
 
 #### Get clinics
 
-```http
+```httpf
   GET /patient/list
 ```
 
@@ -229,8 +229,8 @@
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `appointment_id` | `int` | **Required**. |
-| `dentist_item_id` | `int` | **Required**. |
+| `appointmentId` | `int` | **Required**. |
+| `dentistItemId` | `int` | **Required**. |
 
 #### Get patient by appointment_id 
 
