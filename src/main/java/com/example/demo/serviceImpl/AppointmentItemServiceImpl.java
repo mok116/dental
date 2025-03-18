@@ -1,24 +1,41 @@
 package com.example.demo.serviceImpl;
 
-import java.time.LocalDate;
-import java.util.List;
-
+import com.example.demo.model.AppointmentItem;
+import com.example.demo.repository.AppointmentItemRepository;
+import com.example.demo.service.AppointmentItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Appointment;
-import com.example.demo.repository.AppointmentRepository;
-import com.example.demo.service.BookingService;
+import java.util.List;
 
 @Service
-public class BookingServiceImpl implements BookingService {
+public class AppointmentItemServiceImpl implements AppointmentItemService {
     @Autowired
-    private AppointmentRepository appointmentRepository;
+    private AppointmentItemRepository appointmentItemRepository;
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Override
+    public void create(AppointmentItem appointmentItem) {
+        appointmentItemRepository.save(appointmentItem);
+    }
+
+    @Override
+    public List<AppointmentItem> getByAppointmentId(Integer appointmentItemId) {
+        List<AppointmentItem> appointmentItem = appointmentItemRepository.findByAppointmentId(appointmentItemId);
+        if(appointmentItem.isEmpty()){
+            throw new RuntimeException("Appointment Item not found");
+        }
+        return appointmentItem;
+    }
+
+    @Override
+    public List<AppointmentItem> getByDentalItem(Integer dentalId) {
+        List<AppointmentItem> appointmentItem = appointmentItemRepository.findByDentalItemId(dentalId);
+        if(appointmentItem.isEmpty()){
+            throw new RuntimeException("Appointment Item not found");
+        }
+        return appointmentItem;
+    }
+
 
 //    @Override
 //	public String bookAppointment(Appointment appointment) {

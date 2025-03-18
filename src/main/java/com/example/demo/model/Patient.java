@@ -1,16 +1,11 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "patients")
@@ -28,7 +23,25 @@ public class Patient {
     private LocalDate createdAt;
     private LocalDate lastLoginAt;
     private String gender;
+    private LocalDate dob;
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
 
+    public Patient(LocalDate createdAt, LocalDate dob, String emailAddress, String firstName, String gender, int id, LocalDate lastLoginAt, String lastName, String password, String phone) {
+        this.appointments = appointments;
+        this.createdAt = createdAt;
+        this.dob = dob;
+        this.emailAddress = emailAddress;
+        this.firstName = firstName;
+        this.gender = gender;
+        this.id = id;
+        this.lastLoginAt = lastLoginAt;
+        this.lastName = lastName;
+        this.password = password;
+        this.phone = phone;
+    }
+
+    public Patient() {
+
+    }
 }

@@ -8,4 +8,5 @@ public interface PatientService {
 
 	Patient login(String email, String password);
 
+	Patient getById(Integer id);
 }

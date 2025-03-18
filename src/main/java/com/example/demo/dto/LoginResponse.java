@@ -13,14 +13,4 @@ public class LoginResponse extends BaseResponse {
     public LoginResponse(Patient patient) {
         this.patient = patient;
     }
-
-    public LoginResponse(int code, Patient patient) {
-        super(code);
-        this.patient = patient;
-    }
-
-    public LoginResponse(int code, String message, Patient patient) {
-        super(code, message);
-        this.patient = patient;
-    }
 }

@@ -1,8 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Dentist;
 import com.example.demo.model.DentistItem;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface DentistItemRepository extends JpaRepository<DentistItem, Long> {
+import java.util.List;
+
+@Repository
+public interface DentistItemRepository extends JpaRepository<DentistItem, Integer> {
+    public List<DentistItem> findDentistItemByDentistId(Integer dentistId);
 }
