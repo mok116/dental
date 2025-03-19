@@ -25,8 +25,8 @@ public class PatientController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<?> getById(@RequestParam int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable int id) {
         try {
             Patient patient = patientService.getById(id);
             return new ResponseEntity<>(new PatientByIdResponse(patient), HttpStatus.OK);
