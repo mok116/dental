@@ -1,17 +1,11 @@
 package com.example.demo.model;
 
 
-
-import java.util.List;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "dentists")
@@ -21,7 +15,11 @@ public class Dentist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    private String phone;
+    private String emailAddress;
 
     @OneToMany(mappedBy = "dentist")
     private List<ClinicDentist> clinicDentist;

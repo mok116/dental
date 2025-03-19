@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
-@Table(name = "timeslots")
+@Table(name = "appointment_items")
 @Getter
 @Setter
 public class AppointmentItem {
@@ -21,6 +19,7 @@ public class AppointmentItem {
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
-    @Column(name = "dental_item_id") 
-    private Integer dentalItemId;
+    @ManyToOne
+    @JoinColumn(name = "dentist_item_id")
+    private DentistItem dentistItem;
 }

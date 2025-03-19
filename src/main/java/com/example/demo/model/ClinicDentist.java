@@ -25,6 +25,8 @@ public class ClinicDentist {
     @ManyToOne
     @JoinColumn(name = "timeslot_id")
     private Timeslot timeslot;
+
+    @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek;
 
     @OneToMany(mappedBy = "clinicDentist")

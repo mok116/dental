@@ -5,7 +5,6 @@ import com.example.demo.dto.BaseResponse;
 import com.example.demo.model.AppointmentItem;
 import com.example.demo.service.AppointmentItemService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,10 +17,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/appointmentItem")
 public class AppointmentItemController {
-	@Autowired
-	private AppointmentItemService appointmentItemService;
-	@Autowired
-	private ModelMapper modelMapper;
+
+	private final AppointmentItemService appointmentItemService;
+	private final ModelMapper modelMapper;
+
+    public AppointmentItemController(AppointmentItemService appointmentItemService, ModelMapper modelMapper) {
+        this.appointmentItemService = appointmentItemService;
+        this.modelMapper = modelMapper;
+    }
+
 
 //	@PostMapping("/create")
 //	public ResponseEntity<?> createAppointmentItem(@RequestBody AppointmentItemCreateRequest appointmentItemCreateRequest) {

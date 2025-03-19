@@ -30,5 +30,5 @@ public class Appointment {
     private LocalTime appointmentDate;
     private String totalAmount;
     private String status;
-    private LocalTime createAt;
+    private LocalTime createdAt;
 }

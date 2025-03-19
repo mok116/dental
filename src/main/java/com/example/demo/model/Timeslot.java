@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "timeslots")
 @Getter
@@ -14,5 +16,8 @@ public class Timeslot {
     private int id;
     private String startTime;
     private String endTime;
+
+    @OneToMany(mappedBy = "timeslot")
+    private List<ClinicDentist> clinicDentists;
 
 }

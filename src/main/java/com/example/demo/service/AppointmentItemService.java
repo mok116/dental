@@ -10,5 +10,5 @@ public interface AppointmentItemService {
 
 	List<AppointmentItem> getByAppointmentId(Integer id);
 
-	List<AppointmentItem> getByDentalItem(Integer id);
+	List<AppointmentItem> getByDentistItem(Integer id);
 }

@@ -77,14 +77,14 @@ CREATE TABLE `clinic_dentists` (
   `clinic_id` int(11) NOT NULL,
   `dentist_id` int(11) NOT NULL,
   `day_of_week` enum('Mon','Tue','Wed','Thu','Fri') NOT NULL,
-  `time_slot_id` int(11) NOT NULL
+  `timeslot_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `clinic_dentists`
 --
 
-INSERT INTO `clinic_dentists` (`id`, `clinic_id`, `dentist_id`, `day_of_week`, `time_slot_id`) VALUES
+INSERT INTO `clinic_dentists` (`id`, `clinic_id`, `dentist_id`, `day_of_week`, `timeslot_id`) VALUES
 (1, 1, 1, 'Mon', 1),
 (2, 1, 1, 'Mon', 2),
 (3, 1, 1, 'Mon', 3),
@@ -440,9 +440,9 @@ ALTER TABLE `clinics`
 --
 ALTER TABLE `clinic_dentists`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique` (`clinic_id`,`dentist_id`,`day_of_week`,`time_slot_id`),
+  ADD UNIQUE KEY `unique` (`clinic_id`,`dentist_id`,`day_of_week`,`timeslot_id`),
   ADD KEY `FK_DENTIST_1` (`dentist_id`),
-  ADD KEY `FK_TIMESLOT_1` (`time_slot_id`);
+  ADD KEY `FK_TIMESLOT_1` (`timeslot_id`);
 
 --
 -- Indexes for table `dentists`
@@ -558,7 +558,7 @@ ALTER TABLE `appointment_items`
 ALTER TABLE `clinic_dentists`
   ADD CONSTRAINT `FK_CLINIC_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_DENTIST_1` FOREIGN KEY (`dentist_id`) REFERENCES `dentists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_TIMESLOT_1` FOREIGN KEY (`time_slot_id`) REFERENCES `timeslots` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_TIMESLOT_1` FOREIGN KEY (`timeslot_id`) REFERENCES `timeslots` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `dentist_items`

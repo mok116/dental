@@ -4,15 +4,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
-@Table(name = "timeslots")
+@Table(name = "dentist_items")
 @Getter
 @Setter
 public class DentistItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
     private int fee;
 
     @ManyToOne
@@ -23,7 +24,6 @@ public class DentistItem {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @ManyToOne
-    @JoinColumn(name = "appointment_items_id")
-    private AppointmentItem appointmentItem;
+    @OneToMany(mappedBy = "dentistItem")
+    private List<AppointmentItem> appointmentItem;
 }

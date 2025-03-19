@@ -3,15 +3,18 @@ package com.example.demo.serviceImpl;
 import com.example.demo.model.AppointmentItem;
 import com.example.demo.repository.AppointmentItemRepository;
 import com.example.demo.service.AppointmentItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class AppointmentItemServiceImpl implements AppointmentItemService {
-    @Autowired
-    private AppointmentItemRepository appointmentItemRepository;
+    private final AppointmentItemRepository appointmentItemRepository;
+
+    public AppointmentItemServiceImpl(AppointmentItemRepository appointmentItemRepository) {
+        this.appointmentItemRepository = appointmentItemRepository;
+    }
+
 
     @Override
     public void create(AppointmentItem appointmentItem) {
@@ -28,8 +31,8 @@ public class AppointmentItemServiceImpl implements AppointmentItemService {
     }
 
     @Override
-    public List<AppointmentItem> getByDentalItem(Integer dentalId) {
-        List<AppointmentItem> appointmentItem = appointmentItemRepository.findByDentalItemId(dentalId);
+    public List<AppointmentItem> getByDentistItem(Integer dentalId) {
+        List<AppointmentItem> appointmentItem = appointmentItemRepository.findByDentistItemId(dentalId);
         if(appointmentItem.isEmpty()){
             throw new RuntimeException("Appointment Item not found");
         }

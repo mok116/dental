@@ -28,7 +28,7 @@ public class AppointmentController {
 	public ResponseEntity<?> createAppointment(@RequestBody AppointmentCreateRequest appointmentCreateRequest) {
 		try {
 			Appointment appointment = modelMapper.map(appointmentCreateRequest, Appointment.class);
-			appointment.setCreateAt(LocalTime.now());
+			appointment.setCreatedAt(LocalTime.now());
 			appointmentService.createAppointment(appointment);
 			return new ResponseEntity<>(new BaseResponse(), HttpStatus.OK);
 		}catch(Exception e) {
