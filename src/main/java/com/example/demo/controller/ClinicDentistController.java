@@ -33,7 +33,7 @@ public class ClinicDentistController {
 		}
 	}
 
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable Integer id) {
 		try {
 			ClinicDentist clinicDentist = clinicDentistService.getById(id);
@@ -53,7 +53,7 @@ public class ClinicDentistController {
 		}
 	}
 
-	@GetMapping("{clinicId}")
+	@GetMapping("/{clinicId}")
 	public ResponseEntity<?> getByClinicId(@PathVariable Integer clinicId) {
 		try {
 			List<ClinicDentist> clinicDentists = clinicDentistService.getByClinicId(clinicId);
@@ -63,7 +63,7 @@ public class ClinicDentistController {
 		}
 	}
 
-	@GetMapping("{timeslotId}")
+	@GetMapping("/{timeslotId}")
 	public ResponseEntity<?> getByTimeslotId(@PathVariable Integer timeslotId) {
 		try {
 			List<ClinicDentist> clinicDentists = clinicDentistService.getByTimeslotId(timeslotId);
