@@ -37,7 +37,9 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public LoginResponse login(String email, String password) {
         Optional<Patient> loginPatient = patientRepository.findByEmailAddress(email);
-        if (loginPatient.isEmpty() || loginPatient.get().getPassword().equals(password)) {
+        if (loginPatient.isEmpty()
+                || !loginPatient.get().getPassword().equals(password)
+        ) {
             throw new RuntimeException("Invalid credentials!");
         }
         return new LoginResponse(modelMapper.map(loginPatient.get(), LoginResponse.Patient.class));
