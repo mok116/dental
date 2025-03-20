@@ -16,4 +16,3 @@ spring:
     password: xxxx
 server:
   port: 6616
-  

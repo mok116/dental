@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Clinic;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +21,15 @@ public class ClinicByIdResponse extends BaseResponse {
     public ClinicByIdResponse(int code, String message, Clinic clinic) {
         super(code, message);
         this.clinic = clinic;
+    }
+    @Getter
+    @Setter
+    public static class Clinic{
+            private int id;
+            private String name;
+            private String address;
+            private String district;
+            private String phone;
+            private String openHours;
     }
 }

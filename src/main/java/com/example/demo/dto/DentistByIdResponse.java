@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Dentist;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DentistByIdResponse extends BaseResponse {
-    private Dentist dentist;
-
-    public DentistByIdResponse(Dentist dentist) {
-        this.dentist = dentist;
-    }
+//    private DentistDTO dentist;
+//
+//    public DentistByIdResponse(DentistDTO dentist) {
+//        this.dentist = dentist;
+//    }
 }

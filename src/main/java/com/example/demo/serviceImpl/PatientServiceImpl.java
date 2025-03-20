@@ -1,43 +1,51 @@
 package com.example.demo.serviceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.example.demo.dto.LoginResponse;
+import com.example.demo.dto.PatientByIdResponse;
+import com.example.demo.dto.RegisterRequest;
 import com.example.demo.model.Patient;
 import com.example.demo.repository.PatientRepository;
 import com.example.demo.service.PatientService;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
 public class PatientServiceImpl implements PatientService {
-    @Autowired
-    private PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
+    private final ModelMapper modelMapper;
+
+    public PatientServiceImpl(PatientRepository patientRepository, ModelMapper modelMapper) {
+        this.patientRepository = patientRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
-    public Patient registerPatient(Patient patient) {
+    public void registerPatient(RegisterRequest registerRequest) {
+        Patient patient = modelMapper.map(registerRequest, Patient.class);
+        patient.setCreatedAt(LocalDate.now());
+        patient.setLastLoginAt(LocalDate.now());
         Optional<Patient> registeredPatient = patientRepository.findByEmailAddress(patient.getEmailAddress());
-        if (registeredPatient.isEmpty()) {
+        if (registeredPatient.isPresent() && registeredPatient.get().getEmailAddress().equals(registerRequest.getEmailAddress())) {
             throw new RuntimeException("Email already registered!");
         }
-        return patientRepository.save(patient);
+        patientRepository.save(patient);
     }
 
     @Override
-    public Patient login(String email, String password) {
-        Optional<Patient> loginedPatient = patientRepository.findByEmailAddress(email);
-        if (loginedPatient.isEmpty() || loginedPatient.get().getPassword().equals(password)) {
+    public LoginResponse login(String email, String password) {
+        Optional<Patient> loginPatient = patientRepository.findByEmailAddress(email);
+        if (loginPatient.isEmpty() || loginPatient.get().getPassword().equals(password)) {
             throw new RuntimeException("Invalid credentials!");
         }
-        return loginedPatient.get();
+        return new LoginResponse(modelMapper.map(loginPatient.get(), LoginResponse.Patient.class));
     }
 
     @Override
-    public Patient getById(Integer id) {
-            Optional<Patient> patientById = patientRepository.findById(id);
-        if (patientById.isEmpty()) {
-            throw new RuntimeException("patient not found!");
-        }
-        return patientById.get();
+    public PatientByIdResponse getById(Integer id) {
+            Patient patient = patientRepository.findById(id).orElseThrow(() -> new RuntimeException("Patient not found!"));
+        return new PatientByIdResponse(modelMapper.map(patient, PatientByIdResponse.Patient.class));
     }
 }

@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Clinic;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,9 +9,20 @@ import java.util.List;
 @Getter
 @Setter
 public class ClinicListResponse extends BaseResponse {
-    private List<Clinic> ItemList;
+    private List<Clinic> ClinicList;
 
-    public ClinicListResponse(List<Clinic> itemList) {
-        ItemList = itemList;
+    public ClinicListResponse(List<Clinic> ClinicList) {
+        this.ClinicList = ClinicList;
+    }
+
+    @Getter
+    @Setter
+    public static class Clinic{
+        private int id;
+        private String name;
+        private String address;
+        private String district;
+        private String phone;
+        private String openHours;
     }
 }

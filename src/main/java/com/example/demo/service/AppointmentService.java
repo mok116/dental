@@ -1,16 +1,17 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.AppointmentByPatientIdResponse;
+import com.example.demo.dto.AppointmentCreateRequest;
+import com.example.demo.dto.AppointmentListResponse;
 import com.example.demo.model.Appointment;
-
-import java.util.List;
 
 public interface AppointmentService {
 
-	void createAppointment(Appointment appointment);
+	void createAppointment(AppointmentCreateRequest appointmentCreateRequest);
 
-	List<Appointment> getAppointmentsByPatient(Integer patientId);
+	AppointmentByPatientIdResponse getAppointmentsByPatient(Integer patientId);
 
 	Appointment getAppointment(Integer id);
 
-	List<Appointment> getAll();
+	AppointmentListResponse getAll();
 }

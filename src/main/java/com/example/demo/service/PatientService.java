@@ -1,12 +1,14 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Patient;
+import com.example.demo.dto.LoginResponse;
+import com.example.demo.dto.PatientByIdResponse;
+import com.example.demo.dto.RegisterRequest;
 
 public interface PatientService {
 
-	Patient registerPatient(Patient patient);
+	void registerPatient(RegisterRequest registerRequest);
 
-	Patient login(String email, String password);
+	LoginResponse login(String email, String password);
 
-	Patient getById(Integer id);
+	PatientByIdResponse getById(Integer id);
 }

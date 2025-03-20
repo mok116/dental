@@ -1,8 +1,9 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Patient;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalTime;
 
 
 @Getter
@@ -12,5 +13,21 @@ public class LoginResponse extends BaseResponse {
 
     public LoginResponse(Patient patient) {
         this.patient = patient;
+    }
+
+    @Getter
+    @Setter
+    public static class Patient {
+        private int id;
+        private String firstName;
+        private String lastName;
+        private String emailAddress;
+        private String gender;
+        private LocalTime dob;
+        private String phone;
+        private String password;
+        private LocalTime createdAt;
+        private LocalTime lastLoginAt;
+
     }
 }

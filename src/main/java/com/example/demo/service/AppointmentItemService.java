@@ -8,7 +8,7 @@ public interface AppointmentItemService {
 
 	void create(AppointmentItem appointmentItem);
 
-	List<AppointmentItem> getByAppointmentId(Integer id);
+//	AppointmentItemByPatientIdResponse getByPatientId(Integer id);
 
 	List<AppointmentItem> getByDentistItem(Integer id);
 }

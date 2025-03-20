@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Item;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,5 +13,12 @@ public class ItemListResponse extends BaseResponse {
 
     public ItemListResponse(List<Item> ItemList) {
         this.ItemList = ItemList;
+    }
+
+    @Getter
+    @Setter
+    public static class Item{
+        private Integer id;
+        private String name;
     }
 }

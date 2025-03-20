@@ -1,14 +1,14 @@
 package com.example.demo.service;
 
-import com.example.demo.model.DentistItem;
-
-import java.util.List;
+import com.example.demo.dto.DentistItemByDentistIdResponse;
+import com.example.demo.dto.DentistItemByIdResponse;
+import com.example.demo.dto.DentistItemListResponse;
 
 public interface DentistItemService {
 
-	List<DentistItem> getList();
+	DentistItemListResponse getList();
 
-	DentistItem getById(Integer id);
+	DentistItemByIdResponse getById(Integer id);
 
-	List<DentistItem> getByDentistId(Integer id);
+	DentistItemByDentistIdResponse getByDentistId(Integer id);
 }

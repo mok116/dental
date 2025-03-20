@@ -1,47 +1,53 @@
 package com.example.demo.serviceImpl;
 
+import com.example.demo.dto.DentistItemByDentistIdResponse;
+import com.example.demo.dto.DentistItemByIdResponse;
+import com.example.demo.dto.DentistItemListResponse;
 import com.example.demo.model.DentistItem;
 import com.example.demo.repository.DentistItemRepository;
 import com.example.demo.service.DentistItemService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DentistItemServiceImpl implements DentistItemService {
     private final DentistItemRepository dentistRepository;
+    private final ModelMapper modelMapper;
 
-
-    public DentistItemServiceImpl(DentistItemRepository dentistRepository) {
+    public DentistItemServiceImpl(DentistItemRepository dentistRepository, ModelMapper modelMapper) {
         this.dentistRepository = dentistRepository;
+        this.modelMapper = modelMapper;
     }
 
 
     @Override
-    public List<DentistItem> getList() {
-        List<DentistItem> dentists = dentistRepository.findAll();
-        if(dentists.isEmpty()) {
+    public DentistItemListResponse getList() {
+        List<DentistItem> dentistItems = dentistRepository.findAll();
+        if(dentistItems.isEmpty()) {
             throw new RuntimeException("No dentist item found");
         }
-        return dentists;
+        return new DentistItemListResponse(dentistItems.stream()
+                .map(dentistItem -> modelMapper.map(dentistItem, DentistItemListResponse.DentistItem.class))
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public DentistItem getById(Integer id) {
-        Optional<DentistItem> dentist = dentistRepository.findById(id);
-        if(dentist.isEmpty()) {
-            throw new RuntimeException("No dentist item found");
-        }
-        return dentist.get();
+    public DentistItemByIdResponse getById(Integer id) {
+        DentistItem dentistItem = dentistRepository.findById(id).orElseThrow(() -> new RuntimeException("No Dentist item found"));
+        return new DentistItemByIdResponse(modelMapper.map( dentistItem, DentistItemByIdResponse.DentistItem.class));
     }
 
     @Override
-    public List<DentistItem> getByDentistId(Integer dentistId) {
-        List<DentistItem> dentists = dentistRepository.findDentistItemByDentistId(dentistId);
-        if(dentists.isEmpty()) {
+    public DentistItemByDentistIdResponse getByDentistId(Integer dentistId) {
+        List<DentistItem> dentistItems = dentistRepository.findDentistItemByDentistId(dentistId);
+        if(dentistItems.isEmpty()) {
             throw new RuntimeException("No dentist item found");
         }
-        return dentists;
+        return new DentistItemByDentistIdResponse(dentistItems.stream()
+                .map(dentistItem -> modelMapper.map(dentistItem, DentistItemByDentistIdResponse.DentistItem.class))
+                .collect(Collectors.toList()));
     }
 }

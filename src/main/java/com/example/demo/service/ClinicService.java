@@ -1,12 +1,11 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Clinic;
-
-import java.util.List;
+import com.example.demo.dto.ClinicByIdResponse;
+import com.example.demo.dto.ClinicListResponse;
 
 public interface ClinicService {
 
-	List<Clinic> getList();
+	ClinicListResponse getList();
 
-	Clinic getById(Integer id);
+	ClinicByIdResponse getById(Integer id);
 }

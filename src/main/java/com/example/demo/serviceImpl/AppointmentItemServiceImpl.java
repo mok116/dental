@@ -3,6 +3,7 @@ package com.example.demo.serviceImpl;
 import com.example.demo.model.AppointmentItem;
 import com.example.demo.repository.AppointmentItemRepository;
 import com.example.demo.service.AppointmentItemService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
 @Service
 public class AppointmentItemServiceImpl implements AppointmentItemService {
     private final AppointmentItemRepository appointmentItemRepository;
+    private final ModelMapper modelMapper;
 
-    public AppointmentItemServiceImpl(AppointmentItemRepository appointmentItemRepository) {
+    public AppointmentItemServiceImpl(AppointmentItemRepository appointmentItemRepository, ModelMapper modelMapper) {
         this.appointmentItemRepository = appointmentItemRepository;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -21,14 +24,18 @@ public class AppointmentItemServiceImpl implements AppointmentItemService {
         appointmentItemRepository.save(appointmentItem);
     }
 
-    @Override
-    public List<AppointmentItem> getByAppointmentId(Integer appointmentItemId) {
-        List<AppointmentItem> appointmentItem = appointmentItemRepository.findByAppointmentId(appointmentItemId);
-        if(appointmentItem.isEmpty()){
-            throw new RuntimeException("Appointment Item not found");
-        }
-        return appointmentItem;
-    }
+//    @Override
+//    public AppointmentItemByPatientIdResponse getByPatientId(Integer PatientId) {
+//        List<AppointmentItem> appointmentItemList = appointmentItemRepository.findByPatientId(PatientId);
+//        if(appointmentItemList.isEmpty()){
+//            throw new RuntimeException("Appointment Item not found");
+//        }
+//        return new AppointmentItemByPatientIdResponse(appointmentItemList.stream()
+//                .map(appointmentItem -> modelMapper
+//                        .map(appointmentItem, AppointmentItemByPatientIdResponse.AppointmentItem.class))
+//                .collect(Collectors.toList()));
+//    }
+
 
     @Override
     public List<AppointmentItem> getByDentistItem(Integer dentalId) {

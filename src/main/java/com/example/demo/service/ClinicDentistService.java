@@ -1,19 +1,17 @@
 package com.example.demo.service;
 
-import com.example.demo.model.ClinicDentist;
-
-import java.util.List;
+import com.example.demo.dto.*;
 
 public interface ClinicDentistService {
 
-	List<ClinicDentist> getList();
+	ClinicDentistListResponse getList();
 
 
-	ClinicDentist getById(Integer id);
+	ClinicDentistByIdResponse getById(Integer id);
 
-	List<ClinicDentist> getByClinicId(Integer clinicId);
+	ClinicDentistByClinicIdResponse getByClinicId(Integer clinicId);
 
-	List<ClinicDentist> getByDentistId(Integer dentistId);
+	ClinicDentistByDentistIdResponse getByDentistId(Integer dentistId);
 
-	List<ClinicDentist> getByTimeslotId(Integer timeslotId);
+	ClinicDentistByTimeslotIdResponse getByTimeslotId(Integer timeslotId);
 }

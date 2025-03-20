@@ -1,55 +1,77 @@
 package com.example.demo.serviceImpl;
 
+import com.example.demo.dto.AppointmentByPatientIdResponse;
+import com.example.demo.dto.AppointmentCreateRequest;
+import com.example.demo.dto.AppointmentListResponse;
 import com.example.demo.model.Appointment;
 import com.example.demo.repository.AppointmentRepository;
 import com.example.demo.service.AppointmentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
-    @Autowired
-    private AppointmentRepository appointmentRepository;
+    private final AppointmentRepository appointmentRepository;
 
-    @Autowired
-    private JavaMailSender mailSender;
+    private final ModelMapper modelMapper;
+
+    private final JavaMailSender mailSender;
+
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, ModelMapper modelMapper, JavaMailSender mailSender) {
+        this.appointmentRepository = appointmentRepository;
+        this.modelMapper = modelMapper;
+        this.mailSender = mailSender;
+    }
+
 
     @Override
-    public void createAppointment(Appointment appointment) {
+    public void createAppointment(AppointmentCreateRequest appointmentCreateRequest) {
+        Appointment appointment = modelMapper.map(appointmentCreateRequest, Appointment.class);
+        appointment.setCreatedAt(LocalTime.now());
         appointmentRepository.save(appointment);
     }
 
     @Override
-    public List<Appointment> getAppointmentsByPatient(Integer patientId) {
+    public AppointmentByPatientIdResponse getAppointmentsByPatient(Integer patientId) {
         List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
-        if(appointments.isEmpty()) {
+        if (appointments.isEmpty()) {
             throw new RuntimeException("Appointment not found");
         }
-        return appointments;
+        return new AppointmentByPatientIdResponse(appointments.stream()
+                .map(appointment -> {
+                    AppointmentByPatientIdResponse.Appointment dto = modelMapper.map(appointment, AppointmentByPatientIdResponse.Appointment.class);
+                    dto.setPatientId(appointment.getPatient().getId());
+                    dto.setClinicDentistId(appointment.getClinicDentist().getId());
+                    return dto;
+                }
+        ).collect(Collectors.toList()));
     }
 
     @Override
     public Appointment getAppointment(Integer id) {
         Optional<Appointment> appointment = appointmentRepository.findById(id);
-        if(appointment.isEmpty()) {
+        if (appointment.isEmpty()) {
             throw new RuntimeException("Appointment not found");
         }
         return appointment.get();
     }
 
     @Override
-    public List<Appointment> getAll() {
+    public AppointmentListResponse getAll() {
         List<Appointment> appointments = appointmentRepository.findAll();
-        if(appointments.isEmpty()) {
+        if (appointments.isEmpty()) {
             throw new RuntimeException("Appointment not found");
         }
-        return appointments;
+        return new AppointmentListResponse(appointments.stream().map(
+                appointment -> modelMapper.map(appointment, AppointmentListResponse.Appointment.class)
+        ).collect(Collectors.toList()));
     }
-
 
 
 //    @Override

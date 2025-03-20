@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Item;
-
-import java.util.List;
+import com.example.demo.dto.ItemListResponse;
 
 public interface ItemService {
-	List<Item> getList();
+	ItemListResponse getList();
 }

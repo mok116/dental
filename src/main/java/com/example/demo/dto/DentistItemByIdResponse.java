@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.DentistItem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +11,12 @@ public class DentistItemByIdResponse extends BaseResponse {
 
     public DentistItemByIdResponse(DentistItem dentistItem) {
         this.dentistItem = dentistItem;
+    }
+
+    @Getter
+    @Setter
+    public static class DentistItem {
+        private int id;
+        private String name;
     }
 }
