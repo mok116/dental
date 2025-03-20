@@ -9,7 +9,7 @@ import com.example.demo.service.PatientService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -25,8 +25,8 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void registerPatient(RegisterRequest registerRequest) {
         Patient patient = modelMapper.map(registerRequest, Patient.class);
-        patient.setCreatedAt(LocalDate.now());
-        patient.setLastLoginAt(LocalDate.now());
+        patient.setCreatedAt(LocalDateTime.now());
+        patient.setLastLoginAt(LocalDateTime.now());
         Optional<Patient> registeredPatient = patientRepository.findByEmailAddress(patient.getEmailAddress());
         if (registeredPatient.isPresent() && registeredPatient.get().getEmailAddress().equals(registerRequest.getEmailAddress())) {
             throw new RuntimeException("Email already registered!");

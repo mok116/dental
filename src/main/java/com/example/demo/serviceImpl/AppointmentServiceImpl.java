@@ -10,7 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,7 +33,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public void createAppointment(AppointmentCreateRequest appointmentCreateRequest) {
         Appointment appointment = modelMapper.map(appointmentCreateRequest, Appointment.class);
-        appointment.setCreatedAt(LocalTime.now());
+        appointment.setCreatedAt(LocalDateTime.now());
         appointmentRepository.save(appointment);
     }
 

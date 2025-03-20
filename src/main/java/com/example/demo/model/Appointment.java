@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -27,8 +27,8 @@ public class Appointment {
     @OneToMany(mappedBy = "appointment")
     private List<AppointmentItem> appointmentItems;
 
-    private LocalTime appointmentDate;
+    private LocalDateTime appointmentDate;
     private String totalAmount;
     private String status;
-    private LocalTime createdAt;
+    private LocalDateTime createdAt;
 }

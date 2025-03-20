@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -20,28 +20,10 @@ public class Patient {
     private String emailAddress;
     private String password;
     private String phone;
-    private LocalDate createdAt;
-    private LocalDate lastLoginAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime lastLoginAt;
     private String gender;
-    private LocalDate dob;
+    private LocalDateTime dob;
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
-
-    public Patient(LocalDate createdAt, LocalDate dob, String emailAddress, String firstName, String gender, int id, LocalDate lastLoginAt, String lastName, String password, String phone) {
-        this.appointments = appointments;
-        this.createdAt = createdAt;
-        this.dob = dob;
-        this.emailAddress = emailAddress;
-        this.firstName = firstName;
-        this.gender = gender;
-        this.id = id;
-        this.lastLoginAt = lastLoginAt;
-        this.lastName = lastName;
-        this.password = password;
-        this.phone = phone;
-    }
-
-    public Patient() {
-
-    }
 }

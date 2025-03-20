@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -20,7 +20,7 @@ public class AppointmentCreateRequest extends BaseResponse {
 
     @NotNull(message = "Appointment date cannot be null")
     @FutureOrPresent(message = "Appointment date must be in the present or future")
-    private LocalTime appointmentDate;
+    private LocalDateTime appointmentDate;
 
     @NotNull(message = "Total amount cannot be null")
     @PositiveOrZero(message = "Total amount must be zero or positive")

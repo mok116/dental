@@ -23,7 +23,6 @@ public class Dentist {
 
     @OneToMany(mappedBy = "dentist")
     private List<ClinicDentist> clinicDentist;
-
     @OneToMany(mappedBy = "dentist")
     private List<DentistItem> dentistItems;
 

@@ -3,7 +3,7 @@ package com.example.demo.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -22,9 +22,9 @@ public class AppointmentByPatientIdResponse extends BaseResponse {
             private int id;
             private int patientId;
             private int clinicDentistId;
-            private LocalTime appointmentDate;
+            private LocalDateTime appointmentDate;
             private String totalAmount;
             private String status;
-            private LocalTime createdAt;
+            private LocalDateTime createdAt;
     }
 }

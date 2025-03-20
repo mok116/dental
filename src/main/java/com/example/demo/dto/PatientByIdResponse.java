@@ -3,7 +3,7 @@ package com.example.demo.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -32,11 +32,11 @@ public class PatientByIdResponse extends BaseResponse {
         private String lastName;
         private String emailAddress;
         private String gender;
-        private LocalTime dob;
+        private LocalDateTime dob;
         private String phone;
         private String password;
-        private LocalTime createdAt;
-        private LocalTime lastLoginAt;
+        private LocalDateTime createdAt;
+        private LocalDateTime lastLoginAt;
 
     }
 }

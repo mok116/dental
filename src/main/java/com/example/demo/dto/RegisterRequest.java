@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -30,5 +30,5 @@ public class RegisterRequest {
     private String gender;
 
     @NotNull(message = "Date of birth is required")
-    private LocalDate dob;
+    private LocalDateTime dob;
 }
