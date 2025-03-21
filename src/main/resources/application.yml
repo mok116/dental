@@ -1,0 +1,24 @@
+spring:
+  jpa:
+    database: mysql
+    show-sql: true
+#    hibernate:
+#      ddl-auto: create
+  datasource:
+    url: jdbc:mysql://localhost:3306/dental?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      pool-name: HikariPool-Dental
+      auto-commit: true
+  mail:
+    host: localhost
+    port: 25
+    username: xxxx
+    password: xxxx
+server:
+  port: 6616
