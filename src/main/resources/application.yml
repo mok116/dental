@@ -16,9 +16,9 @@ spring:
       pool-name: HikariPool-Dental
       auto-commit: true
   mail:
-    host: localhost
-    port: 25
-    username: xxxx
-    password: xxxx
+    host: smtp.gmail.com
+    port: 587
+    username: noreplywebpro@gmail.com
+    password: hyaedwsnjzavkyfz
 server:
   port: 6616
