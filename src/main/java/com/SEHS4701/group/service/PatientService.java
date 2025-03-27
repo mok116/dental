@@ -4,7 +4,7 @@ import com.SEHS4701.group.dto.LoginResponse;
 import com.SEHS4701.group.dto.PatientByIdResponse;
 import com.SEHS4701.group.dto.RegisterRequest;
 
-public interface PatientService {
+public interface PatientService{
 
 	void registerPatient(RegisterRequest registerRequest);
 

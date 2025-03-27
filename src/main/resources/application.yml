@@ -4,6 +4,7 @@ spring:
     show-sql: true
 #    hibernate:
 #      ddl-auto: create
+
   datasource:
     url: jdbc:mysql://localhost:3306/dental?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
@@ -22,3 +23,8 @@ spring:
     password: hyaedwsnjzavkyfz
 server:
   port: 6616
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: DEBUG
