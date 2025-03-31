@@ -24,6 +24,7 @@ import TeamCard from "@/components/cards/TeamCard";
 import TeamMember from '@/types/teamMember';
 import MapComponent from "@/components/map/MapComponent";
 import ContactSection from "@/components/contact/ContactSection";
+import Treatments from "@/components/treatments/Treatments";
 import styles from "./Home.module.css";
 
 
@@ -67,127 +68,7 @@ export default function Home() {
       <Divider text="Hong Kong Dental Care" />
 
       {/* --- Treatments Section ---  */}
-      <section>
-        <div className="container">
-          <h2 className="textHeader">Our Treatments</h2>
-          <h4 className="textSubheader" style={{marginBottom:"12px"}}>
-          You can contact us to get detailed information about oral and dental health treatments.
-          </h4>
-          <div className={`${styles.treatmentsContainer}`}>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={rootCanalImg}
-                    alt="Root Canal Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Root Canal Treatment</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={orthodontiaImg}
-                    alt="Orthodontial Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Orthodontics</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={maxillofacialSurgeryImg}
-                    alt="Maxillofacial Surgery Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Maxillofacial Surgery</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={implantImg}
-                    alt="Implant Operation Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Dental Implants</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={aestheticDentistryImg}
-                    alt="Aesthetic Dentistry Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Aesthetic Dentistry</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={dentalRestorationImg}
-                    alt="Dental Restoration Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Dental Restoration</span>
-            </article>
-
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={teethWhiteningImg}
-                    alt="Teeth Whitening Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Teeth Whitening</span>
-            </article>
-
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={toothExtractionImg}
-                    alt="Tooth Extraction Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Wisdom Tooth Extraction</span>
-            </article>
-
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={pediatricDentistryImg}
-                    alt="Pediatric Dentistry Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Pediatric Dentistry</span>
-            </article>
-          </div>
-        </div>
-      </section>
+      <Treatments />
 
       <Divider text="Hong Kong Dental Care" />
 

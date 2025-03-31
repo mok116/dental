@@ -19,6 +19,22 @@ interface FormErrors {
   submit?: string;
 }
 
+interface Patient {
+  id: number;
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  gender: string;
+  dob: string;
+  phone: string;
+}
+
+interface LoginResponse {
+  code: number;
+  message: string;
+  patient: Patient;
+}
+
 const Login: React.FC = () => {
   const router = useRouter();
   const [formData, setFormData] = useState<LoginFormData>({
@@ -76,17 +92,21 @@ const Login: React.FC = () => {
       const response = await patientApi.login({
         emailAddress: formData.emailAddress,
         password: formData.password,
-      });
+      }) as LoginResponse;
 
       if (response.code === 0) {
+        // Store JWT token and patient info in session storage
+        sessionStorage.setItem('jwtToken', response.message);
+        sessionStorage.setItem('patientInfo', JSON.stringify(response.patient));
+        
         setShowSuccessPopup(true);
         // Store remember me preference if needed
         if (formData.rememberMe) {
           localStorage.setItem('rememberMe', 'true');
         }
-        // Redirect to home page after 2 seconds
+        // Redirect to profile page after 2 seconds
         setTimeout(() => {
-          router.push('/');
+          router.push('/profile');
         }, 2000);
       } else {
         setErrors({
@@ -175,7 +195,7 @@ const Login: React.FC = () => {
 
       {showSuccessPopup && (
         <SuccessPopup
-          message="Login successful! Redirecting..."
+          message="Login successful! Redirecting to profile..."
           onClose={() => setShowSuccessPopup(false)}
         />
       )}

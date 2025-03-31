@@ -33,4 +33,9 @@ export const patientApi = {
     const response = await api.post<ApiResponse>('/patient/login', data);
     return response.data;
   },
+
+  getTreatments: async (): Promise<ApiResponse> => {
+    const response = await api.get<ApiResponse>('/item/list');
+    return response.data;
+  },
 }; 

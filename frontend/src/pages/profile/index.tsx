@@ -1,7 +1,18 @@
-import React from "react";
-import RootLayout from "@/layouts/RootLayout";
-import { FaUser, FaCalendarAlt, FaClock, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import styles from "./Profile.module.css";
+import React, { useEffect, useState } from 'react';
+import RootLayout from '@/layouts/RootLayout';
+import styles from './Profile.module.css';
+import { useRouter } from 'next/router';
+import { FaUser, FaCalendarAlt, FaClock, FaCheckCircle, FaTimesCircle, FaSignOutAlt } from "react-icons/fa";
+
+interface Patient {
+  id: number;
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  gender: string;
+  dob: string;
+  phone: string;
+}
 
 interface Appointment {
   id: string;
@@ -12,15 +23,10 @@ interface Appointment {
 }
 
 const Profile: React.FC = () => {
-  // Mock data - replace with actual data from your backend
-  const userInfo = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    phone: "+1 234 567 8900",
-    address: "123 Main St, City, Country",
-  };
+  const router = useRouter();
+  const [patient, setPatient] = useState<Patient | null>(null);
 
+  // Mock data for appointments - replace with actual data from your backend
   const appointments: Appointment[] = [
     {
       id: "1",
@@ -45,6 +51,28 @@ const Profile: React.FC = () => {
     },
   ];
 
+  useEffect(() => {
+    // Check if user is logged in
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const patientInfo = sessionStorage.getItem('patientInfo');
+
+    if (!jwtToken || !patientInfo) {
+      router.push('/login');
+      return;
+    }
+
+    // Parse and set patient information
+    setPatient(JSON.parse(patientInfo));
+  }, [router]);
+
+  const handleLogout = () => {
+    // Clear session storage
+    sessionStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('patientInfo');
+    // Redirect to login page
+    router.push('/login');
+  };
+
   const getStatusIcon = (status: Appointment["status"]) => {
     switch (status) {
       case "completed":
@@ -67,6 +95,10 @@ const Profile: React.FC = () => {
     }
   };
 
+  if (!patient) {
+    return null;
+  }
+
   return (
     <RootLayout>
       <div className={styles.profileContainer}>
@@ -79,23 +111,27 @@ const Profile: React.FC = () => {
           <div className={styles.infoGrid}>
             <div className={styles.infoItem}>
               <label>First Name</label>
-              <p>{userInfo.firstName}</p>
+              <p>{patient.firstName}</p>
             </div>
             <div className={styles.infoItem}>
               <label>Last Name</label>
-              <p>{userInfo.lastName}</p>
+              <p>{patient.lastName}</p>
             </div>
             <div className={styles.infoItem}>
               <label>Email</label>
-              <p>{userInfo.email}</p>
+              <p>{patient.emailAddress}</p>
             </div>
             <div className={styles.infoItem}>
               <label>Phone</label>
-              <p>{userInfo.phone}</p>
+              <p>{patient.phone}</p>
             </div>
             <div className={styles.infoItem}>
-              <label>Address</label>
-              <p>{userInfo.address}</p>
+              <label>Gender</label>
+              <p>{patient.gender === 'M' ? 'Male' : 'Female'}</p>
+            </div>
+            <div className={styles.infoItem}>
+              <label>Date of Birth</label>
+              <p>{new Date(patient.dob).toLocaleDateString()}</p>
             </div>
           </div>
         </section>
@@ -123,6 +159,14 @@ const Profile: React.FC = () => {
             ))}
           </div>
         </section>
+
+        {/* Logout Button */}
+        <div className={styles.logoutContainer}>
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            <FaSignOutAlt className={styles.logoutIcon} />
+            Logout
+          </button>
+        </div>
       </div>
     </RootLayout>
   );
