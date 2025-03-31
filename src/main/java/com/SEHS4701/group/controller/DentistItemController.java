@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/dentistItem")
 public class DentistItemController {
+	
 	private final DentistItemService dentistItemService;
 
     public DentistItemController(DentistItemService dentistItemService) {
