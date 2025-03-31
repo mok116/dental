@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "311c62de-1664-4abe-bd8c-51f91ef14909",
+		"name": "dental",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16939136"
+	},
+	"item": [
+		{
+			"name": "http://localhost:6616/item/list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/item/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"item",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/dentist/list",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/dentist/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"dentist",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/clinic/list",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/clinic/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"clinic",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/clinicDentist/list",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/clinicDentist/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"clinicDentist",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/dentistItem/list",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/dentistItem/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"dentistItem",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
