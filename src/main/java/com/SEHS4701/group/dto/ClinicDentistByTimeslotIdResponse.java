@@ -10,19 +10,51 @@ import java.util.List;
 @Getter
 @Setter
 public class ClinicDentistByTimeslotIdResponse extends BaseResponse {
-    private List<ClinicDentist> clinicDentist;
+    private List<ClinicDentist> clinicDentistList;
 
-    public ClinicDentistByTimeslotIdResponse(List<ClinicDentist> clinicDentist) {
-        this.clinicDentist = clinicDentist;
+    public ClinicDentistByTimeslotIdResponse(List<ClinicDentist> CLinicDentistList) {
+        this.clinicDentistList = CLinicDentistList;
     }
 
     @Getter
     @Setter
     public static class ClinicDentist{
         private Integer id;
-        private Integer clinicId;
-        private Integer dentistId;
+        private Integer clinicReferenceId;
+        private Clinic clinic;
+        private Integer dentistReferenceId;
+        private Dentist dentist;
         private DayOfWeek dayOfWeek;
-        private String timeslotId;
+        private Integer timeslotReferenceId;
+        private Timeslot timeslot;
+
+        @Getter
+        @Setter
+        public static class Clinic {
+            private Integer id;
+            private String name;
+            private String address;
+            private String district;
+            private String phone;
+            private String openHours;
+        }
+
+        @Getter
+        @Setter
+        public static class Dentist {
+            private Integer id;
+            private String firstName;
+            private String lastName;
+            private String gender;
+            private String emailAddress;
+        }
+
+        @Getter
+        @Setter
+        public static class Timeslot {
+            private Integer id;
+            private String startTime;
+            private String endTime;
+        }
     }
 }

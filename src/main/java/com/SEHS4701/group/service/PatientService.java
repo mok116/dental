@@ -6,7 +6,7 @@ import com.SEHS4701.group.dto.RegisterRequest;
 
 public interface PatientService{
 
-	void registerPatient(RegisterRequest registerRequest);
+	int registerPatient(RegisterRequest registerRequest);
 
 	LoginResponse login(String email, String password);
 
