@@ -42,7 +42,7 @@ public class PatientController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            return new ResponseEntity<>(patientService.login(loginRequest.getEmail(), loginRequest.getPassword()), HttpStatus.OK);
+            return new ResponseEntity<>(patientService.login(loginRequest.getEmailAddress(), loginRequest.getPassword()), HttpStatus.OK);
         }catch (RuntimeException e) {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
