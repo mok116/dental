@@ -50,6 +50,29 @@
 			"response": []
 		},
 		{
+			"name": "http://localhost:6616/dentistItem/list",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/dentistItem/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"dentistItem",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "http://localhost:6616/clinic/list",
 			"request": {
 				"auth": {
@@ -96,7 +119,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:6616/dentistItem/list",
+			"name": "http://localhost:6616/clinicDentist/1",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -104,15 +127,87 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:6616/dentistItem/list",
+					"raw": "http://localhost:6616/clinicDentist/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "6616",
 					"path": [
-						"dentistItem",
-						"list"
+						"clinicDentist",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/clinicDentist/dentist/1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/clinicDentist/dentist/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"clinicDentist",
+						"dentist",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/clinicDentist/clinic/1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/clinicDentist/clinic/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"clinicDentist",
+						"clinic",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/clinicDentist/timeslot/1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/clinicDentist/timeslot/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"clinicDentist",
+						"timeslot",
+						"1"
 					]
 				}
 			},
