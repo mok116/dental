@@ -29,9 +29,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Updated: Lambda-based configuration
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("**").permitAll()
-                        .requestMatchers("/patient/login", "/patient/register").permitAll()
-                        .anyRequest().authenticated()
+                        // .requestMatchers("**").permitAll()
+                        .requestMatchers("/appointment/**").authenticated()
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(ex -> ex
@@ -42,8 +42,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
