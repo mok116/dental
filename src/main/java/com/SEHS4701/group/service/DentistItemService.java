@@ -1,6 +1,7 @@
 package com.SEHS4701.group.service;
 
 import com.SEHS4701.group.dto.DentistItemByDentistIdResponse;
+import com.SEHS4701.group.dto.DentistItemByItemIdResponse;
 import com.SEHS4701.group.dto.DentistItemByIdResponse;
 import com.SEHS4701.group.dto.DentistItemListResponse;
 
@@ -11,4 +12,6 @@ public interface DentistItemService {
 	DentistItemByIdResponse getById(Integer id);
 
 	DentistItemByDentistIdResponse getByDentistId(Integer id);
+
+	DentistItemByItemIdResponse getByItemId(Integer id);
 }

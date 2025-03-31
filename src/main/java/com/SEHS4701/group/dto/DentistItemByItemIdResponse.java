@@ -8,10 +8,10 @@ import java.util.List;
 
 @Getter
 @Setter
-public class DentistItemByDentistIdResponse extends BaseResponse {
+public class DentistItemByItemIdResponse extends BaseResponse {
     private List<DentistItem> dentistItemList;
 
-    public DentistItemByDentistIdResponse(List<DentistItem> dentistItemList) {
+    public DentistItemByItemIdResponse(List<DentistItem> dentistItemList) {
         this.dentistItemList = dentistItemList;
     }
 

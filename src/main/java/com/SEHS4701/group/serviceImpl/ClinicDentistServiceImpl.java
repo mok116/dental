@@ -18,26 +18,6 @@ public class ClinicDentistServiceImpl implements ClinicDentistService {
     public ClinicDentistServiceImpl(ClinicDentistRepository clinicdentistRepository, ModelMapper modelMapper) {
         this.clinicdentistRepository = clinicdentistRepository;
         this.modelMapper = modelMapper;
-
-        modelMapper.createTypeMap(ClinicDentist.class, ClinicDentistListResponse.ClinicDentist.class)
-            .addMappings(mapper -> {
-                mapper.map(src -> src.getClinic().getId(), (dest, value) -> dest.getClinic().setId((Integer) value));
-                mapper.map(src -> src.getClinic().getName(), (dest, value) -> dest.getClinic().setName((String) value));
-                mapper.map(src -> src.getClinic().getAddress(), (dest, value) -> dest.getClinic().setAddress((String) value));
-                mapper.map(src -> src.getClinic().getDistrict(), (dest, value) -> dest.getClinic().setDistrict((String) value));
-                mapper.map(src -> src.getClinic().getPhone(), (dest, value) -> dest.getClinic().setPhone((String) value));
-                mapper.map(src -> src.getClinic().getOpenHours(), (dest, value) -> dest.getClinic().setOpenHours((String) value));
-
-                mapper.map(src -> src.getDentist().getId(), (dest, value) -> dest.getDentist().setId((Integer) value));
-                mapper.map(src -> src.getDentist().getFirstName(), (dest, value) -> dest.getDentist().setFirstName((String) value));
-                mapper.map(src -> src.getDentist().getLastName(), (dest, value) -> dest.getDentist().setLastName((String) value));
-                mapper.map(src -> src.getDentist().getGender(), (dest, value) -> dest.getDentist().setGender((String) value));
-                mapper.map(src -> src.getDentist().getEmailAddress(), (dest, value) -> dest.getDentist().setEmailAddress((String) value));
-
-                mapper.map(src -> src.getTimeslot().getId(), (dest, value) -> dest.getTimeslot().setId((Integer) value));
-                mapper.map(src -> src.getTimeslot().getStartTime(), (dest, value) -> dest.getTimeslot().setStartTime((String) value));
-                mapper.map(src -> src.getTimeslot().getEndTime(), (dest, value) -> dest.getTimeslot().setEndTime((String) value));
-            });
     }
 
 
