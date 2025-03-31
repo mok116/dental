@@ -2,35 +2,36 @@ import React from 'react';
 import styles from './TextInput.module.css';
 
 interface TextInputProps {
-  placeholder: string;
+  label?: string;
+  name: string;
+  type?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type?: string;
-  pattern?: string;
-  id?: string;
+  error?: string;
+  placeholder?: string;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
-  placeholder,
-  value,
-  id,
-  onChange,
+  label,
+  name,
   type = 'text',
-  pattern,
+  value,
+  onChange,
+  error,
+  placeholder,
 }) => {
   return (
-    <div className={styles.main}>
+    <div className={styles.inputWrapper}>
+      {label && <label className={styles.label}>{label}</label>}
       <input
+        className={`${styles.input} ${error ? styles.error : ''}`}
         type={type}
-        name={id}
-        id={id}
-        placeholder=""
+        name={name}
         value={value}
         onChange={onChange}
-        pattern={pattern}
-        required
+        placeholder={placeholder}
       />
-      <label htmlFor={id}>{placeholder}</label>
+      {error && <span className={styles.errorMessage}>{error}</span>}
     </div>
   );
 };

@@ -24,6 +24,7 @@ import TeamCard from "@/components/cards/TeamCard";
 import TeamMember from '@/types/teamMember';
 import MapComponent from "@/components/map/MapComponent";
 import ContactSection from "@/components/contact/ContactSection";
+import Treatments from "@/components/treatments/Treatments";
 import styles from "./Home.module.css";
 
 
@@ -40,10 +41,9 @@ export default function Home() {
       <section>
         <div className={`${styles.heroContainer} container`}>
           <article>
-            <h1>Sağlıklı Gülüşler için doğru yerdesin!</h1>
+            <h1>You're in the right place for Healthy Smiles!</h1>
             <p>
-              Bugün ağız sağlığınıza öncelik verin - randevunuzu diş ekibimizle
-              planlayın!
+            Prioritize your oral health today - schedule your appointment with our dental team!
             </p>
             <p className={styles.contactHero}>
               <Link href="/contact">
@@ -65,138 +65,17 @@ export default function Home() {
         </div>
       </section>
 
-      <Divider text="Lorem Diş Kliniği" />
+      <Divider text="Hong Kong Dental Care" />
 
       {/* --- Treatments Section ---  */}
-      <section>
-        <div className="container">
-          <h2 className="textHeader">Tedavilerimiz</h2>
-          <h4 className="textSubheader" style={{marginBottom:"12px"}}>
-            Ağız ve diş sağlığı tedavileri hakkında detaylı bilgi almak için
-            bizimle iletişime geçebilirsiniz.
-          </h4>
-          <div className={`${styles.treatmentsContainer}`}>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={rootCanalImg}
-                    alt="Root Canal Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Kanal Tedavisi</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={orthodontiaImg}
-                    alt="Orthodontial Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Ortodonti</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={maxillofacialSurgeryImg}
-                    alt="mMaxillofacial Surgery Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Çene Cerrahisi</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={implantImg}
-                    alt="Implant Operation Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>İmplant Tedavisi</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={aestheticDentistryImg}
-                    alt="Aesthetic Dentistry Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Estetik Diş Hekimliği</span>
-            </article>
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={dentalRestorationImg}
-                    alt="Dental Restoration Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Diş Restorasyonu</span>
-            </article>
+      <Treatments />
 
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={teethWhiteningImg}
-                    alt="Teeth Whitening Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Diş Beyazlatma</span>
-            </article>
-
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={toothExtractionImg}
-                    alt="Tooth Extraction Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Yirmilik Diş Çekimi</span>
-            </article>
-
-            <article>
-              <figure>
-                <picture>
-                  <Image
-                    src={pediatricDentistryImg}
-                    alt="Pediatric Dentistry Image"
-                    fill={true}
-                  />
-                </picture>
-              </figure>
-              <span>Çocuk Diş Hekimliği</span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <Divider text="Lorem Diş Kliniği" />
+      <Divider text="Hong Kong Dental Care" />
 
       {/* --- Team Section ---  */}
       <section>
         <div className={`${styles.team} container`}>
-          <h1>Ekibimiz</h1>
+          <h1>Our Team</h1>
           <Swiper
             spaceBetween={50}
             slidesPerView={1}
@@ -233,7 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Divider text="Lorem Diş Kliniği" />
+      <Divider text="Hong Kong Dental Care" />
 
       {/* --- Workhours Section ---  */}
       <section className={`${styles.workhourShowcase} container-fluid`}>
@@ -259,42 +138,42 @@ export default function Home() {
         </svg>
         <div className={`${styles.workhours} container`}>
           <article>
-            <h1>Diş Polikliniği Çalışma Saatleri</h1>
+            <h1>Dental Clinic Working Hours</h1>
             <table className={styles.workhourTable}>
               <thead>
                 <tr>
-                  <th>Gün</th>
-                  <th>Saatler</th>
+                  <th>Day</th>
+                  <th>Hours</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Pazartesi</td>
+                  <td>Monday</td>
                   <td>09:00 - 18:00</td>
                 </tr>
                 <tr>
-                  <td>Salı</td>
+                  <td>Tuesday</td>
                   <td>09:00 - 18:00</td>
                 </tr>
                 <tr>
-                  <td>Çarşamba</td>
+                  <td>Wednesday</td>
                   <td>09:00 - 18:00</td>
                 </tr>
                 <tr>
-                  <td>Perşembe</td>
+                  <td>Thursday</td>
                   <td>09:00 - 18:00</td>
                 </tr>
                 <tr>
-                  <td>Cuma</td>
+                  <td>Friday</td>
                   <td>09:00 - 18:00</td>
                 </tr>
                 <tr>
-                  <td>Cumartesi</td>
+                  <td>Saturday</td>
                   <td>10:00 - 16:00</td>
                 </tr>
                 <tr>
-                  <td>Pazar</td>
-                  <td>Kapalı</td>
+                  <td>Sunday</td>
+                  <td>Closed</td>
                 </tr>
               </tbody>
             </table>
@@ -336,7 +215,7 @@ export default function Home() {
       {/* --- Map Location Section --- */}
       <section>
         <div className="container">
-          <h2 className="textHeader">Klinik Konumu</h2>
+          <h2 className="textHeader">Clinic Location</h2>
           <MapComponent />
         </div>
       </section>

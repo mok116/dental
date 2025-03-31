@@ -7,9 +7,9 @@ const ContactSection: React.FC = () => {
     <section className={styles.main}>
       <div className={`${styles.contactContainer} container-fluid`}>
         <h2 className={styles.contactHeader}>
-          Sizin İçin En İyi Tedavi Çözümünü Bulmak İçin İletişime Geçin!
+          Contact Us to Find the Best Treatment Solution for You!
         </h2>
-        <Link href="/contact">İletişim</Link>
+        <Link href="/contact">Contact</Link>
       </div>
     </section>
   );

@@ -13,12 +13,13 @@ interface BreadCrumbProps {
 }
 
 const breadcrumbTranslations: { [key: string]: string } = {
-  "": "Anasayfa",
-  "about-us": "Hakkımızda",
-  "treatments": "Tedaviler",
+  "": "Home",
+  "about-us": "About Us",
+  "treatments": "Treatments",
   "blogs": "Blog",
-  "contact": "İletişim",
-  "get-appointment": "Randevu Al",
+  "contact": "Contact",
+  "get-appointment": "Get Appointment",
+  "login": "Login",
 };
 
 const BreadCrumb: React.FC<BreadCrumbProps> = ({customStyles}) => {

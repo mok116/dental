@@ -34,7 +34,7 @@ const TeamCard: React.FC<TeamMember> = ({
       <figure>
         <Image
           src={typeof photoUrl === "string" ? photoUrl : photoUrl.src}
-          alt={`${name}'s fotoğrafı`}
+          alt={`${name}'s photo`}
           quality={100}
           fill={true}
         />
@@ -45,7 +45,7 @@ const TeamCard: React.FC<TeamMember> = ({
         <h4>{title}</h4>
         <Link href={`/dentist/${slug}`} onClick={handleClick}>
           <AiOutlineLink />
-          Özgeçmiş
+          Resume
         </Link>
       </div>
     </div>

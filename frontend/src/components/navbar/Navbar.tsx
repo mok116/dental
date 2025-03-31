@@ -1,4 +1,4 @@
-import { FaBars, FaTimes, FaPhoneAlt } from "react-icons/fa";
+import { FaBars, FaTimes, FaPhoneAlt, FaUser } from "react-icons/fa";
 import React, { useState, useEffect, useRef } from "react";
 import Logo from "./Logo";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import styles from "./Navbar.module.css";
 const Navbar: React.FC = () => {
   const [menuActive, setMenuActive] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
@@ -34,6 +35,10 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
+    // Check if user is logged in
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    setIsLoggedIn(!!jwtToken);
+
     window.addEventListener("scroll", handleScroll);
     document.addEventListener("mousedown", handleClickOutside);
     window.addEventListener("resize", handleResize);
@@ -70,6 +75,12 @@ const Navbar: React.FC = () => {
           </li>
           <li>
             <Link href="/contact" onClick={toggleMenu}>Contact Us</Link>
+          </li>
+          <li>
+            <Link href={isLoggedIn ? "/profile" : "/login"} onClick={toggleMenu}>
+              {menuActive ? "" : <FaUser />}
+              {isLoggedIn ? "Profile" : "Login"}
+            </Link>
           </li>
           <li>
             <Link href="/get-appointment">

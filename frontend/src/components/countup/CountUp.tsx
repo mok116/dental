@@ -62,20 +62,20 @@ const CountUp: React.FC<CountUpProps> = ({ clients, experience, team }) => {
     <div ref={elementRef} className={styles.countUpWrapper}>
       <div>
         <span>
-          <RiToothLine /> Hasta
+          <RiToothLine /> Patient
         </span>
         +{clientsCount}
       </div>
       <div>
         <span>
           <IoBusinessOutline />
-          Yıl Tecrübe
+          Years Experience
         </span>
         +{experienceCount}
       </div>
       <div>
         <span>
-          <CiStethoscope /> Diş Hekimi
+          <CiStethoscope /> Dentist
         </span>
         +{teamCount}
       </div>

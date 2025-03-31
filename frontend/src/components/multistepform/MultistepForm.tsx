@@ -36,12 +36,12 @@ const MultistepForm: React.FC = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   const doctors = [
-    { value: "dt-yusuf-ridvan-dilek", label: "Dt. Yusuf Rıdvan Dilek" },
-    { value: "dr-mehmet-ozturk", label: "Dr. Mehmet Öztürk" },
+    { value: "dt-yusuf-ridvan-dilek", label: "Dr. Yusuf Ridvan Dilek" },
+    { value: "dr-mehmet-ozturk", label: "Dr. Mehmet Ozturk" },
     { value: "dr-ali-can", label: "Dr. Ali Can" },
     { value: "dr-ahmet-demir", label: "Dr. Ahmet Demir" },
-    { value: "dr-mustafa-yildiz", label: "Dr. Mustafa Yıldız" },
-    { value: "dr-burak-aydin", label: "Dr. Burak Aydın" },
+    { value: "dr-mustafa-yildiz", label: "Dr. Mustafa Yildiz" },
+    { value: "dr-burak-aydin", label: "Dr. Burak Aydin" },
   ];
 
   const handleInputChange = (
@@ -75,12 +75,12 @@ const MultistepForm: React.FC = () => {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Gönderildi.", formData);
+    console.log("Form Submitted.", formData);
     await Swal.fire({
-      title: "Başarılı!",
-      html: '<p class="custom-swal-text">Randevu talebiniz başarıyla gönderildi.</p>',
+      title: "Success!",
+      html: '<p class="custom-swal-text">Your appointment request has been successfully sent.</p>',
       icon: "success",
-      confirmButtonText: "Onayla",
+      confirmButtonText: "Confirm",
       customClass: {
         title: "custom-swal-title",
         confirmButton: "custom-swal-confirm-button",
@@ -143,13 +143,13 @@ const MultistepForm: React.FC = () => {
         return (
           <>
             <TextInput
-              placeholder="Adınız"
+              placeholder="Your First Name"
               value={formData.firstName}
               id="firstName"
               onChange={handleInputChange}
             />
             <TextInput
-              placeholder="İkinci Adınız(Opsiyonel)"
+              placeholder="Your Middle Name (Optional)"
               value={formData.midinit}
               id="midinit"
               onChange={handleInputChange}
@@ -160,13 +160,13 @@ const MultistepForm: React.FC = () => {
         return (
           <>
             <TextInput
-              placeholder="Soyadınız"
+              placeholder="Your Last Name"
               value={formData.lastName}
               id="lastName"
               onChange={handleInputChange}
             />
             <PhoneNumberInput
-              placeholder="Telefon Numaranız (05XX XXX XX XX)"
+              placeholder="Your Phone Number (05XX XXX XX XX)"
               value={formData.phone}
               id="phone"
               onChange={(e) => handleInputChange(e as any)}
@@ -178,7 +178,7 @@ const MultistepForm: React.FC = () => {
         return (
           <>
             <SelectComponent
-              placeholder="Randevu almak istediğiniz doktoru seçiniz."
+              placeholder="Select the doctor you want to make an appointment with."
               value={formData.selectedDoctor}
               onChange={handleSelectChange}
               options={doctors}
@@ -223,7 +223,7 @@ const MultistepForm: React.FC = () => {
         {currentIndex > 0 && (
           <button type="button" onClick={onPrevious}>
             <MdArrowBack />
-            Geri
+            Back
           </button>
         )}
         {currentIndex < 4 && (
@@ -233,13 +233,13 @@ const MultistepForm: React.FC = () => {
             className={isNextButtonDisabled() ? styles.disabledButton : ""}
             disabled={isNextButtonDisabled()}
           >
-            İleri
+            Next
             <MdArrowForward />
           </button>
         )}
         {currentIndex === 4 && (
           <button type="submit" disabled={isSubmitButtonDisabled()}>
-            Gönder
+            Submit
             <LiaClipboardCheckSolid />
           </button>
         )}
