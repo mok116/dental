@@ -18,6 +18,26 @@ public class ClinicDentistServiceImpl implements ClinicDentistService {
     public ClinicDentistServiceImpl(ClinicDentistRepository clinicdentistRepository, ModelMapper modelMapper) {
         this.clinicdentistRepository = clinicdentistRepository;
         this.modelMapper = modelMapper;
+
+        modelMapper.createTypeMap(ClinicDentist.class, ClinicDentistListResponse.ClinicDentist.class)
+            .addMappings(mapper -> {
+                mapper.map(src -> src.getClinic().getId(), (dest, value) -> dest.getClinic().setId((Integer) value));
+                mapper.map(src -> src.getClinic().getName(), (dest, value) -> dest.getClinic().setName((String) value));
+                mapper.map(src -> src.getClinic().getAddress(), (dest, value) -> dest.getClinic().setAddress((String) value));
+                mapper.map(src -> src.getClinic().getDistrict(), (dest, value) -> dest.getClinic().setDistrict((String) value));
+                mapper.map(src -> src.getClinic().getPhone(), (dest, value) -> dest.getClinic().setPhone((String) value));
+                mapper.map(src -> src.getClinic().getOpenHours(), (dest, value) -> dest.getClinic().setOpenHours((String) value));
+
+                mapper.map(src -> src.getDentist().getId(), (dest, value) -> dest.getDentist().setId((Integer) value));
+                mapper.map(src -> src.getDentist().getFirstName(), (dest, value) -> dest.getDentist().setFirstName((String) value));
+                mapper.map(src -> src.getDentist().getLastName(), (dest, value) -> dest.getDentist().setLastName((String) value));
+                mapper.map(src -> src.getDentist().getGender(), (dest, value) -> dest.getDentist().setGender((String) value));
+                mapper.map(src -> src.getDentist().getEmailAddress(), (dest, value) -> dest.getDentist().setEmailAddress((String) value));
+
+                mapper.map(src -> src.getTimeslot().getId(), (dest, value) -> dest.getTimeslot().setId((Integer) value));
+                mapper.map(src -> src.getTimeslot().getStartTime(), (dest, value) -> dest.getTimeslot().setStartTime((String) value));
+                mapper.map(src -> src.getTimeslot().getEndTime(), (dest, value) -> dest.getTimeslot().setEndTime((String) value));
+            });
     }
 
 
@@ -25,7 +45,7 @@ public class ClinicDentistServiceImpl implements ClinicDentistService {
     public ClinicDentistListResponse getList() {
             List<ClinicDentist> clinicDentists = clinicdentistRepository.findAll();
         if (clinicDentists.isEmpty()) {
-            throw new RuntimeException("clinic not found!");
+            throw new RuntimeException("clinic dentists not found!");
         }
         return new ClinicDentistListResponse(clinicDentists.stream()
                 .map(clinicDentist -> modelMapper.map(clinicDentist, ClinicDentistListResponse.ClinicDentist.class))
@@ -34,7 +54,7 @@ public class ClinicDentistServiceImpl implements ClinicDentistService {
 
     @Override
     public ClinicDentistByIdResponse getById(Integer id) {
-        ClinicDentist clinicDentist = clinicdentistRepository.findById(id).orElseThrow(() -> new RuntimeException("clinic not found!"));
+        ClinicDentist clinicDentist = clinicdentistRepository.findById(id).orElseThrow(() -> new RuntimeException("clinic dentists not found!"));
 
         return new ClinicDentistByIdResponse(modelMapper.map(clinicDentist, ClinicDentistByIdResponse.ClinicDentist.class));
     }
@@ -43,7 +63,7 @@ public class ClinicDentistServiceImpl implements ClinicDentistService {
     public ClinicDentistByClinicIdResponse getByClinicId(Integer clinicId) {
         List<ClinicDentist> clinicDentists = clinicdentistRepository.findByClinicId(clinicId);
         if (clinicDentists.isEmpty()) {
-            throw new RuntimeException("clinic not found!");
+            throw new RuntimeException("clinic dentists not found!");
         }
         return new ClinicDentistByClinicIdResponse(clinicDentists.stream()
                 .map(clinicDentist -> modelMapper.map(clinicDentist, ClinicDentistByClinicIdResponse.ClinicDentist.class))
@@ -54,7 +74,7 @@ public class ClinicDentistServiceImpl implements ClinicDentistService {
     public ClinicDentistByDentistIdResponse getByDentistId(Integer dentistId) {
         List<ClinicDentist> clinicDentists = clinicdentistRepository.findByDentistId(dentistId);
         if (clinicDentists.isEmpty()) {
-            throw new RuntimeException("clinic not found!");
+            throw new RuntimeException("clinic dentists not found!");
         }
         return new ClinicDentistByDentistIdResponse(clinicDentists.stream()
                 .map(clinicDentist -> modelMapper.map(clinicDentist, ClinicDentistByDentistIdResponse.ClinicDentist.class))

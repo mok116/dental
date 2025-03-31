@@ -47,7 +47,7 @@ public class ClinicDentistController {
 		}
 	}
 
-	@GetMapping("/{clinicId}")
+	@GetMapping("/clinic/{clinicId}")
 	public ResponseEntity<?> getByClinicId(@PathVariable Integer clinicId) {
 		try {
 			return new ResponseEntity<>(clinicDentistService.getByClinicId(clinicId), HttpStatus.OK);
@@ -56,7 +56,7 @@ public class ClinicDentistController {
 		}
 	}
 
-	@GetMapping("/{timeslotId}")
+	@GetMapping("/timeslot/{timeslotId}")
 	public ResponseEntity<?> getByTimeslotId(@PathVariable Integer timeslotId) {
 		try {
 			return new ResponseEntity<>(clinicDentistService.getByTimeslotId(timeslotId), HttpStatus.OK);
