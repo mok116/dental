@@ -64,6 +64,4 @@ public class ClinicDentistController {
 			return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
 		}
 	}
-
-
 }
