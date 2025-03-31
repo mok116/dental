@@ -32,7 +32,8 @@
   will-change: transform;
 }
 
-.main ul li:last-child a {
+.main ul li:last-child a,
+.main ul li:nth-last-child(2) a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,11 +45,13 @@
   transition: background-color 0.3 ease-in;
 }
 
-.main ul li:last-child a:hover {
+.main ul li:last-child a:hover,
+.main ul li:nth-last-child(2) a:hover {
   background-color: var(--primary-button-hover-color);
 }
 
-.main ul li:last-child svg {
+.main ul li:last-child svg,
+.main ul li:nth-last-child(2) svg {
   font-size: var(--font-size-base);
   width: 16px;
   height: 16px;

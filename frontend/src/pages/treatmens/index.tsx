@@ -24,10 +24,9 @@ const Treatments: React.FC = () => {
       {/* --- Hero Section --- */}
       <section className={`${styles.main} container-fluid`}>
         <div className={`${styles.treatmentsHero}`}>
-          <h2 className={styles.textHeaderHero}>Tedavilerimiz</h2>
+          <h2 className={styles.textHeaderHero}>Our Treatments</h2>
           <p className={styles.subTextheaderHero}>
-            Uzman,tecrübeli ve gelişmiş bilimsel teknolojik cihazlarla
-            gülümseminize yeniden kavuşun!
+            Get your smile back with expert, experienced staff and advanced scientific technology!
           </p>
         </div>
       </section>
@@ -35,35 +34,34 @@ const Treatments: React.FC = () => {
       {/* --- Treatment Steps Section --- */}
       <section className={`${styles.section}`}>
         <div className={`${styles.main} container`}>
-          <h2 className={styles.stepsHeader}>Lorem, ipsum.</h2>
+          <h2 className={styles.stepsHeader}>Treatment Process</h2>
           <p className={styles.stepsSubheader}>
-            Ağız ve diş sağlığı tedavileri hakkında detaylı bilgi almak için
-            bizimle iletişime geçebilirsiniz.
+            You can contact us to get detailed information about oral and dental health treatments.
           </p>
           <div className={styles.stepsContainer}>
             <article>
               <h4>
-                <CiCalendarDate size={24} /> Randevu Talebi
+                <CiCalendarDate size={24} /> Appointment Request
               </h4>
-              <p>Web sitemizden veya telefonla randevu talebinde bulunun.</p>
+              <p>Request an appointment through our website or by phone.</p>
             </article>
             <article>
               <h4>
-                <CiStethoscope size={24} /> Özel Danışmanlık
+                <CiStethoscope size={24} /> Special Consultation
               </h4>
-              <p>Uzmanlarımızla ihtiyaçlarınızı değerlendiriyoruz.</p>
+              <p>We evaluate your needs with our specialists.</p>
             </article>
             <article>
               <h4>
-                <RiToothLine size={24} /> Kişiye Özel Tedavi Planı
+                <RiToothLine size={24} /> Personalized Treatment Plan
               </h4>
-              <p>Size özel tedavi planı oluşturuyoruz.</p>
+              <p>We create a personalized treatment plan for you.</p>
             </article>
             <article>
               <h4>
-                <MdOutlineHealthAndSafety size={24} /> Takip ve Destek
+                <MdOutlineHealthAndSafety size={24} /> Follow-up and Support
               </h4>
-              <p>Tedavi sonrası düzenli takip ve destek sağlıyoruz.</p>
+              <p>We provide regular follow-up and support after treatment.</p>
             </article>
           </div>
         </div>
@@ -71,7 +69,7 @@ const Treatments: React.FC = () => {
 
       {/* --- Treatments Showcase --- */}
       <section className={`${styles.section}`}>
-        <h2 className="textHeader container">Tedavilerimiz</h2>
+        <h2 className="textHeader container">Our Treatments</h2>
         <div className={`${styles.treatmentsContainer} container`}>
           <article>
             <figure>
@@ -79,7 +77,7 @@ const Treatments: React.FC = () => {
                 <Image src={rootCanalImg} alt="Root Canal Image" fill={true} />
               </picture>
             </figure>
-            <span>Kanal Tedavisi</span>
+            <span>Root Canal Treatment</span>
           </article>
           <article>
             <figure>
@@ -91,19 +89,19 @@ const Treatments: React.FC = () => {
                 />
               </picture>
             </figure>
-            <span>Ortodonti</span>
+            <span>Orthodontics</span>
           </article>
           <article>
             <figure>
               <picture>
                 <Image
                   src={maxillofacialSurgeryImg}
-                  alt="mMaxillofacial Surgery Image"
+                  alt="Maxillofacial Surgery Image"
                   fill={true}
                 />
               </picture>
             </figure>
-            <span>Çene Cerrahisi</span>
+            <span>Maxillofacial Surgery</span>
           </article>
           <article>
             <figure>
@@ -115,7 +113,7 @@ const Treatments: React.FC = () => {
                 />
               </picture>
             </figure>
-            <span>İmplant Tedavisi</span>
+            <span>Dental Implants</span>
           </article>
           <article>
             <figure>
@@ -127,7 +125,7 @@ const Treatments: React.FC = () => {
                 />
               </picture>
             </figure>
-            <span>Estetik Diş Hekimliği</span>
+            <span>Aesthetic Dentistry</span>
           </article>
           <article>
             <figure>
@@ -139,7 +137,7 @@ const Treatments: React.FC = () => {
                 />
               </picture>
             </figure>
-            <span>Diş Restorasyonu</span>
+            <span>Dental Restoration</span>
           </article>
 
           <article>
@@ -152,7 +150,7 @@ const Treatments: React.FC = () => {
                 />
               </picture>
             </figure>
-            <span>Diş Beyazlatma</span>
+            <span>Teeth Whitening</span>
           </article>
 
           <article>
@@ -165,7 +163,7 @@ const Treatments: React.FC = () => {
                 />
               </picture>
             </figure>
-            <span>Yirmilik Diş Çekimi</span>
+            <span>Wisdom Tooth Extraction</span>
           </article>
 
           <article>
@@ -178,7 +176,7 @@ const Treatments: React.FC = () => {
                 />
               </picture>
             </figure>
-            <span>Çocuk Diş Hekimliği</span>
+            <span>Pediatric Dentistry</span>
           </article>
         </div>
       </section>

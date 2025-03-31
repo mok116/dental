@@ -1,4 +1,4 @@
-import { FaBars, FaTimes, FaPhoneAlt } from "react-icons/fa";
+import { FaBars, FaTimes, FaPhoneAlt, FaUser } from "react-icons/fa";
 import React, { useState, useEffect, useRef } from "react";
 import Logo from "./Logo";
 import Link from "next/link";
@@ -70,6 +70,12 @@ const Navbar: React.FC = () => {
           </li>
           <li>
             <Link href="/contact" onClick={toggleMenu}>Contact Us</Link>
+          </li>
+          <li>
+            <Link href="/login" onClick={toggleMenu}>
+              {menuActive ? "" : <FaUser />}
+              Login
+            </Link>
           </li>
           <li>
             <Link href="/get-appointment">
