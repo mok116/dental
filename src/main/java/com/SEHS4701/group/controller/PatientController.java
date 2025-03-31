@@ -3,6 +3,7 @@ package com.SEHS4701.group.controller;
 import com.SEHS4701.group.dto.BaseResponse;
 import com.SEHS4701.group.dto.LoginRequest;
 import com.SEHS4701.group.dto.RegisterRequest;
+import com.SEHS4701.group.dto.RegisterResponse;
 import com.SEHS4701.group.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -31,8 +32,8 @@ public class PatientController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
         try {
-            patientService.registerPatient(registerRequest);
-            return new ResponseEntity<>(new BaseResponse(), HttpStatus.CREATED);
+            int lastInsertId = patientService.registerPatient(registerRequest);
+            return new ResponseEntity<>(new RegisterResponse(lastInsertId), HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -46,5 +47,4 @@ public class PatientController {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
-
 }

@@ -9,6 +9,7 @@ import com.SEHS4701.group.security.JwtUtil;
 import com.SEHS4701.group.service.PatientService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -18,34 +19,43 @@ public class PatientServiceImpl implements PatientService {
     private final PatientRepository patientRepository;
     private final ModelMapper modelMapper;
     private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
 
-    public PatientServiceImpl(PatientRepository patientRepository, ModelMapper modelMapper, JwtUtil jwtUtil) {
+    public PatientServiceImpl(PatientRepository patientRepository, ModelMapper modelMapper, JwtUtil jwtUtil, PasswordEncoder passwordEncoder) {
         this.patientRepository = patientRepository;
         this.modelMapper = modelMapper;
         this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public void registerPatient(RegisterRequest registerRequest) {
+    public int registerPatient(RegisterRequest registerRequest) {
         Optional<Patient> registeredPatient = patientRepository.findByEmailAddress(registerRequest.getEmailAddress());
         if (registeredPatient.isPresent() && registeredPatient.get().getEmailAddress().equals(registerRequest.getEmailAddress())) {
             throw new RuntimeException("Email already registered!");
         }
         Patient patient = modelMapper.map(registerRequest, Patient.class);
+        patient.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         patient.setCreatedAt(LocalDateTime.now());
-        patient.setLastLoginAt(LocalDateTime.now());
-        patientRepository.save(patient);
+        // patient.setLastLoginAt(LocalDateTime.now());
+        Patient savedPatient = patientRepository.save(patient);
+        return savedPatient.getId();
     }
 
     @Override
     public LoginResponse login(String email, String password) {
 
-        Optional<Patient> loginPatient = patientRepository.findByEmailAddress(email);
-        if (loginPatient.isEmpty()
-                || !loginPatient.get().getPassword().equals(password)
+        Optional<Patient> loginPatientOpt = patientRepository.findByEmailAddress(email);
+        if (loginPatientOpt.isEmpty()
+                || !passwordEncoder.matches(password, loginPatientOpt.get().getPassword())
         ) {
             throw new RuntimeException("Invalid credentials!");
         }
+        
+        Patient loginPatient = loginPatientOpt.get();
+        loginPatient.setLastLoginAt(LocalDateTime.now());
+        patientRepository.save(loginPatient);
+
         LoginResponse.Patient patient = modelMapper.map(loginPatient, LoginResponse.Patient.class);
         String token = jwtUtil.generateToken(email);
         return new LoginResponse(0, token, patient);

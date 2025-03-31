@@ -46,6 +46,4 @@ public class AppointmentItemController {
 //			return new ResponseEntity<>(new BaseResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()), HttpStatus.NOT_FOUND);
 //		}
 //	}
-
-
 }
