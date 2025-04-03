@@ -1,9 +1,6 @@
 package com.SEHS4701.group.controller;
 
-import com.SEHS4701.group.dto.BaseResponse;
-import com.SEHS4701.group.dto.LoginRequest;
-import com.SEHS4701.group.dto.RegisterRequest;
-import com.SEHS4701.group.dto.RegisterResponse;
+import com.SEHS4701.group.dto.*;
 import com.SEHS4701.group.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -44,6 +41,16 @@ public class PatientController {
         try {
             return new ResponseEntity<>(patientService.login(loginRequest.getEmailAddress(), loginRequest.getPassword()), HttpStatus.OK);
         }catch (RuntimeException e) {
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/edit")
+    public  ResponseEntity<?> edit(@Valid @RequestBody EditRequest editRequest) {
+        try{
+            patientService.edit(editRequest);
+            return new ResponseEntity<>(new BaseResponse(), HttpStatus.OK);
+        }catch (RuntimeException e){
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }

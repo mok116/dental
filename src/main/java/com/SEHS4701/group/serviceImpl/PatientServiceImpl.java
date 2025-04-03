@@ -1,5 +1,6 @@
 package com.SEHS4701.group.serviceImpl;
 
+import com.SEHS4701.group.dto.EditRequest;
 import com.SEHS4701.group.dto.LoginResponse;
 import com.SEHS4701.group.dto.PatientByIdResponse;
 import com.SEHS4701.group.dto.RegisterRequest;
@@ -7,9 +8,10 @@ import com.SEHS4701.group.model.Patient;
 import com.SEHS4701.group.repository.PatientRepository;
 import com.SEHS4701.group.security.JwtUtil;
 import com.SEHS4701.group.service.PatientService;
+import jakarta.persistence.EntityManager;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -20,12 +22,14 @@ public class PatientServiceImpl implements PatientService {
     private final ModelMapper modelMapper;
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
+    private final EntityManager entityManager;
 
-    public PatientServiceImpl(PatientRepository patientRepository, ModelMapper modelMapper, JwtUtil jwtUtil, PasswordEncoder passwordEncoder) {
+    public PatientServiceImpl(PatientRepository patientRepository, ModelMapper modelMapper, JwtUtil jwtUtil, PasswordEncoder passwordEncoder, EntityManager entityManager) {
         this.patientRepository = patientRepository;
         this.modelMapper = modelMapper;
         this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -65,5 +69,13 @@ public class PatientServiceImpl implements PatientService {
     public PatientByIdResponse getById(Integer id) {
             Patient patient = patientRepository.findById(id).orElseThrow(() -> new RuntimeException("Patient not found!"));
         return new PatientByIdResponse(modelMapper.map(patient, PatientByIdResponse.Patient.class));
+    }
+
+    @Override
+    public void edit(EditRequest editRequest) {
+        Patient existingPatient = patientRepository.findById(editRequest.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Patient not found"));
+        modelMapper.map(editRequest, existingPatient);
+        patientRepository.save(existingPatient);
     }
 }
