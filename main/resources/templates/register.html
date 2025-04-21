@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <style>body { font-family: Arial, sans-serif; margin: 20px; } label { display: inline-block; width: 100px; }</style>
+</head>
+<body>
+    <h2>Patient Registration</h2>
+    <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+    <form th:action="@{/patient/register}" th:object="${patient}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" th:field="*{name}" id="name" required/><br><br>
+        <label for="email">Email:</label>
+        <input type="email" th:field="*{email}" id="email" required/><br><br>
+        <label for="password">Password:</label>
+        <input type="password" th:field="*{password}" id="password" required/><br><br>
+        <input type="submit" value="Register"/>
+    </form>
+    <a th:href="@{/patient/login}">Already registered? Login</a>
+</body>
+</html>

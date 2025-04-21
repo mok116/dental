@@ -1,3 +1,12 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1
+-- 產生時間： 2025-04-16 17:24:41
+-- 伺服器版本： 10.4.21-MariaDB
+-- PHP 版本： 7.3.31
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -9,13 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dental`
+-- 資料庫: `dental`
 --
+CREATE DATABASE IF NOT EXISTS `dental` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dental`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `appointments`
+-- 資料表結構 `appointments`
 --
 
 CREATE TABLE `appointments` (
@@ -31,7 +42,7 @@ CREATE TABLE `appointments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `appointment_items`
+-- 資料表結構 `appointment_items`
 --
 
 CREATE TABLE `appointment_items` (
@@ -43,7 +54,7 @@ CREATE TABLE `appointment_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clinics`
+-- 資料表結構 `clinics`
 --
 
 CREATE TABLE `clinics` (
@@ -56,7 +67,7 @@ CREATE TABLE `clinics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `clinics`
+-- 傾印資料表的資料 `clinics`
 --
 
 INSERT INTO `clinics` (`id`, `name`, `address`, `district`, `phone`, `open_hours`) VALUES
@@ -69,7 +80,7 @@ INSERT INTO `clinics` (`id`, `name`, `address`, `district`, `phone`, `open_hours
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clinic_dentists`
+-- 資料表結構 `clinic_dentists`
 --
 
 CREATE TABLE `clinic_dentists` (
@@ -77,14 +88,14 @@ CREATE TABLE `clinic_dentists` (
   `clinic_id` int(11) NOT NULL,
   `dentist_id` int(11) NOT NULL,
   `day_of_week` enum('Mon','Tue','Wed','Thu','Fri') NOT NULL,
-  `timeslot_id` int(11) NOT NULL
+  `time_slot_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `clinic_dentists`
+-- 傾印資料表的資料 `clinic_dentists`
 --
 
-INSERT INTO `clinic_dentists` (`id`, `clinic_id`, `dentist_id`, `day_of_week`, `timeslot_id`) VALUES
+INSERT INTO `clinic_dentists` (`id`, `clinic_id`, `dentist_id`, `day_of_week`, `time_slot_id`) VALUES
 (1, 1, 1, 'Mon', 1),
 (2, 1, 1, 'Mon', 2),
 (3, 1, 1, 'Mon', 3),
@@ -264,7 +275,24 @@ INSERT INTO `clinic_dentists` (`id`, `clinic_id`, `dentist_id`, `day_of_week`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dentists`
+-- 資料表結構 `contact_us`
+--
+
+CREATE TABLE `contact_us` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `email_address` varchar(255) NOT NULL,
+  `topic` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `dentists`
 --
 
 CREATE TABLE `dentists` (
@@ -273,29 +301,30 @@ CREATE TABLE `dentists` (
   `last_name` varchar(100) NOT NULL,
   `gender` varchar(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
-  `email_address` varchar(255) NOT NULL
+  `email_address` varchar(255) NOT NULL,
+  `image_url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `dentists`
+-- 傾印資料表的資料 `dentists`
 --
 
-INSERT INTO `dentists` (`id`, `first_name`, `last_name`, `gender`, `phone`, `email_address`) VALUES
-(1, 'William', 'Lam', 'M', '12345678', 'william.lam@clinic.com'),
-(2, 'Emily', 'Wong', 'F', '23456789', 'emily.wong@clinic.com'),
-(3, 'David', 'Cheung', 'M', '34567890', 'david.cheung@clinic.com'),
-(4, 'Sophie', 'Li', 'F', '45678901', 'sophie.li@clinic.com'),
-(5, 'Michael', 'Ng', 'M', '56789012', 'michael.ng@clinic.com'),
-(6, 'Grace', 'Chan', 'F', '67890123', 'grace.chan@clinic.com'),
-(7, 'Thomas', 'Ho', 'M', '78901234', 'thomas.ho@clinic.com'),
-(8, 'Rachel', 'Lau', 'F', '89012345', 'rachel.lau@clinic.com'),
-(9, 'James', 'Yip', 'M', '90123456', 'james.yip@clinic.com'),
-(10, 'Linda', 'Tsang', 'F', '91234567', 'linda.tsang@clinic.com');
+INSERT INTO `dentists` (`id`, `first_name`, `last_name`, `gender`, `phone`, `email_address`, `image_url`) VALUES
+(1, 'William', 'Lam', 'M', '12345678', 'william.lam@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/william.jpg'),
+(2, 'Emily', 'Wong', 'F', '23456789', 'emily.wong@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/emily.jpg'),
+(3, 'David', 'Cheung', 'M', '34567890', 'david.cheung@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/david.jpg'),
+(4, 'Sophie', 'Li', 'F', '45678901', 'sophie.li@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/sophie.jpg'),
+(5, 'Michael', 'Ng', 'M', '56789012', 'michael.ng@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/michael.jpg'),
+(6, 'Grace', 'Chan', 'F', '67890123', 'grace.chan@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/grace.jpg'),
+(7, 'Thomas', 'Ho', 'M', '78901234', 'thomas.ho@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/thomas.jpg'),
+(8, 'Rachel', 'Lau', 'F', '89012345', 'rachel.lau@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/rachel.jpg'),
+(9, 'James', 'Yip', 'M', '90123456', 'james.yip@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/james.jpg'),
+(10, 'Linda', 'Tsang', 'F', '91234567', 'linda.tsang@clinic.com', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dentists/linda.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dentist_items`
+-- 資料表結構 `dentist_items`
 --
 
 CREATE TABLE `dentist_items` (
@@ -306,7 +335,7 @@ CREATE TABLE `dentist_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `dentist_items`
+-- 傾印資料表的資料 `dentist_items`
 --
 
 INSERT INTO `dentist_items` (`id`, `dentist_id`, `item_id`, `fee`) VALUES
@@ -346,29 +375,30 @@ INSERT INTO `dentist_items` (`id`, `dentist_id`, `item_id`, `fee`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `items`
+-- 資料表結構 `items`
 --
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `image_url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `items`
+-- 傾印資料表的資料 `items`
 --
 
-INSERT INTO `items` (`id`, `name`) VALUES
-(1, 'Teeth Cleaning'),
-(2, 'Tooth Filling'),
-(3, 'Tooth Extraction'),
-(4, 'Root Canal Treatment'),
-(5, 'Dental Checkup');
+INSERT INTO `items` (`id`, `name`, `image_url`) VALUES
+(1, 'Teeth Cleaning', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/teeth_cleaning.jpg'),
+(2, 'Tooth Filling', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/tooth_filling.jpg'),
+(3, 'Tooth Extraction', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/tooth_extraction.jpg'),
+(4, 'Root Canal Treatment', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/root_canal_treatment.jpg'),
+(5, 'Dental Checkup', 'https://poly-sehs4701-groupproject-s3.s3.ap-east-1.amazonaws.com/dental_checkup.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `patients`
+-- 資料表結構 `patients`
 --
 
 CREATE TABLE `patients` (
@@ -387,7 +417,7 @@ CREATE TABLE `patients` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `timeslots`
+-- 資料表結構 `timeslots`
 --
 
 CREATE TABLE `timeslots` (
@@ -397,7 +427,7 @@ CREATE TABLE `timeslots` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `timeslots`
+-- 傾印資料表的資料 `timeslots`
 --
 
 INSERT INTO `timeslots` (`id`, `start_time`, `end_time`) VALUES
@@ -410,19 +440,20 @@ INSERT INTO `timeslots` (`id`, `start_time`, `end_time`) VALUES
 (7, '17:00:00', '18:00:00');
 
 --
--- Indexes for dumped tables
+-- 已傾印資料表的索引
 --
 
 --
--- Indexes for table `appointments`
+-- 資料表索引 `appointments`
 --
 ALTER TABLE `appointments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_PATIENT` (`patient_id`),
-  ADD KEY `FK_CLINIC_DENTIST` (`clinic_dentist_id`);
+  ADD KEY `FK_CLINIC_DENTIST` (`clinic_dentist_id`),
+  ADD KEY `idx_appointments` (`appointment_date`);
 
 --
--- Indexes for table `appointment_items`
+-- 資料表索引 `appointment_items`
 --
 ALTER TABLE `appointment_items`
   ADD PRIMARY KEY (`id`),
@@ -430,28 +461,34 @@ ALTER TABLE `appointment_items`
   ADD KEY `FK_DENTIST_ITEM` (`dentist_item_id`);
 
 --
--- Indexes for table `clinics`
+-- 資料表索引 `clinics`
 --
 ALTER TABLE `clinics`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `clinic_dentists`
+-- 資料表索引 `clinic_dentists`
 --
 ALTER TABLE `clinic_dentists`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique` (`clinic_id`,`dentist_id`,`day_of_week`,`timeslot_id`),
+  ADD UNIQUE KEY `unique` (`clinic_id`,`dentist_id`,`day_of_week`,`time_slot_id`),
   ADD KEY `FK_DENTIST_1` (`dentist_id`),
-  ADD KEY `FK_TIMESLOT_1` (`timeslot_id`);
+  ADD KEY `FK_TIMESLOT_1` (`time_slot_id`);
 
 --
--- Indexes for table `dentists`
+-- 資料表索引 `contact_us`
+--
+ALTER TABLE `contact_us`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `dentists`
 --
 ALTER TABLE `dentists`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `dentist_items`
+-- 資料表索引 `dentist_items`
 --
 ALTER TABLE `dentist_items`
   ADD PRIMARY KEY (`id`),
@@ -459,109 +496,115 @@ ALTER TABLE `dentist_items`
   ADD KEY `FK_ITEM_1` (`item_id`);
 
 --
--- Indexes for table `items`
+-- 資料表索引 `items`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `patients`
+-- 資料表索引 `patients`
 --
 ALTER TABLE `patients`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `timeslots`
+-- 資料表索引 `timeslots`
 --
 ALTER TABLE `timeslots`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- AUTO_INCREMENT for table `appointments`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `appointments`
 --
 ALTER TABLE `appointments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `appointment_items`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `appointment_items`
 --
 ALTER TABLE `appointment_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `clinics`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `clinics`
 --
 ALTER TABLE `clinics`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `clinic_dentists`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `clinic_dentists`
 --
 ALTER TABLE `clinic_dentists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
--- AUTO_INCREMENT for table `dentists`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `contact_us`
+--
+ALTER TABLE `contact_us`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `dentists`
 --
 ALTER TABLE `dentists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `dentist_items`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `dentist_items`
 --
 ALTER TABLE `dentist_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `items`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `items`
 --
 ALTER TABLE `items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `patients`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `patients`
 --
 ALTER TABLE `patients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `timeslots`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `timeslots`
 --
 ALTER TABLE `timeslots`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Constraints for dumped tables
+-- 已傾印資料表的限制式
 --
 
 --
--- Constraints for table `appointments`
+-- 資料表的限制式 `appointments`
 --
 ALTER TABLE `appointments`
   ADD CONSTRAINT `FK_CLINIC_DENTIST` FOREIGN KEY (`clinic_dentist_id`) REFERENCES `clinic_dentists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_PATIENT` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `appointment_items`
+-- 資料表的限制式 `appointment_items`
 --
 ALTER TABLE `appointment_items`
   ADD CONSTRAINT `FK_APPOINTMENT` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_DENTIST_ITEM` FOREIGN KEY (`dentist_item_id`) REFERENCES `dentist_items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `clinic_dentists`
+-- 資料表的限制式 `clinic_dentists`
 --
 ALTER TABLE `clinic_dentists`
   ADD CONSTRAINT `FK_CLINIC_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_DENTIST_1` FOREIGN KEY (`dentist_id`) REFERENCES `dentists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_TIMESLOT_1` FOREIGN KEY (`timeslot_id`) REFERENCES `timeslots` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_TIMESLOT_1` FOREIGN KEY (`time_slot_id`) REFERENCES `timeslots` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `dentist_items`
+-- 資料表的限制式 `dentist_items`
 --
 ALTER TABLE `dentist_items`
   ADD CONSTRAINT `FK_DENTIST_2` FOREIGN KEY (`dentist_id`) REFERENCES `dentists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
