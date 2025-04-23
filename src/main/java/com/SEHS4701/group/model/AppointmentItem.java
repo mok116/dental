@@ -12,8 +12,6 @@ public class AppointmentItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String startTime;
-    private String endTime;
 
     @ManyToOne
     @JoinColumn(name = "appointment_id")

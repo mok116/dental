@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Getter
 @Setter
 public class AppointmentCreateRequest extends BaseResponse {
@@ -15,7 +14,7 @@ public class AppointmentCreateRequest extends BaseResponse {
     @Positive(message = "Patient ID must be a positive number")
     private Integer patientId;
 
-    @NotNull(message = "Clinic Dventist ID cannot be null")
+    @NotNull(message = "Clinic Dentist ID cannot be null")
     @Positive(message = "Clinic Dentist ID must be a positive number")
     private Integer clinicDentistId;
 
@@ -35,18 +34,8 @@ public class AppointmentCreateRequest extends BaseResponse {
 
     @Getter
     @Setter
-    public static class AppointmentItem{
+    public static class AppointmentItem {
         private int id;
-        private String startTime;
-        private String endTime;
-//        private List<DentistItem> dentistItems;
-//
-//        @Getter
-//        @Setter
-//        public static class DentistItem{
-//            private int id;
-//            private Float fee;
-//            private int dentistReferenceId;
-//        }
+        private int dentistItemId;
     }
 }

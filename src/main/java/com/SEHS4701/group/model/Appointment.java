@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Appointment {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -27,8 +27,19 @@ public class Appointment {
     @OneToMany(mappedBy = "appointment")
     private List<AppointmentItem> appointmentItems;
 
+    @Column(name = "appointment_date")
     private LocalDateTime appointmentDate;
-    private String totalAmount;
+
+    @Column(name = "total_amount")
+    private int totalAmount;
+
     private String status;
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }
