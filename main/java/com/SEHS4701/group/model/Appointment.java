@@ -27,8 +27,8 @@ public class Appointment {
     @OneToMany(mappedBy = "appointment")
     private List<AppointmentItem> appointmentItems;
 
-    private LocalDateTime appointmentDate;
-    private String totalAmount;
+    private String appointmentDate;
+    private int totalAmount;
     private String status;
     private LocalDateTime createdAt;
 }

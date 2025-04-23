@@ -1,3 +1,4 @@
+
 package com.SEHS4701.group.controller;
 
 import com.SEHS4701.group.dto.BaseResponse;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/clinicDentist")
 public class ClinicDentistController {
+	
 	private final ClinicDentistService clinicDentistService;
 
     public ClinicDentistController(ClinicDentistService clinicDentistService) {
@@ -47,7 +49,7 @@ public class ClinicDentistController {
 		}
 	}
 
-	@GetMapping("/{clinicId}")
+	@GetMapping("/clinic/{clinicId}")
 	public ResponseEntity<?> getByClinicId(@PathVariable Integer clinicId) {
 		try {
 			return new ResponseEntity<>(clinicDentistService.getByClinicId(clinicId), HttpStatus.OK);
@@ -56,7 +58,7 @@ public class ClinicDentistController {
 		}
 	}
 
-	@GetMapping("/{timeslotId}")
+	@GetMapping("/timeslot/{timeslotId}")
 	public ResponseEntity<?> getByTimeslotId(@PathVariable Integer timeslotId) {
 		try {
 			return new ResponseEntity<>(clinicDentistService.getByTimeslotId(timeslotId), HttpStatus.OK);
@@ -64,6 +66,4 @@ public class ClinicDentistController {
 			return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
 		}
 	}
-
-
 }
