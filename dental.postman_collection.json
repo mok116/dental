@@ -395,6 +395,14 @@
 			"response": []
 		},
 		{
+			"name": "http://localhost:6616/patient/edit",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
 			"name": "http://localhost:6616/patient/1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -512,6 +520,14 @@
 		},
 		{
 			"name": "http://localhost:6616/appointment/list",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/appointment/patient/1",
 			"request": {
 				"method": "GET",
 				"header": []
