@@ -12,61 +12,48 @@ const Footer = () => {
   return (
     <nav className={`${styles.main} container`}>
       <div className={styles.logo}>
-        <Link href="/">Lorem Klinik</Link>
+        <Link href="/">Hong Kong Dental Care</Link>
       </div>
       <div className={styles.sections}>
         <div className={styles.section}>
-          <h2>Tedavilerimiz</h2>
+          <h2>Our Treatments</h2>
           <ul>
             <li>
-              <AiOutlineCheck className={styles.icon} /> Kanal Tedavisi
+              <AiOutlineCheck className={styles.icon} /> Teeth Cleaning
             </li>
             <li>
-              <AiOutlineCheck className={styles.icon} /> Ortodonti Tedavisi
+              <AiOutlineCheck className={styles.icon} /> Tooth Filling
             </li>
             <li>
-              <AiOutlineCheck className={styles.icon} /> Çene Cerrahisi
+              <AiOutlineCheck className={styles.icon} /> Tooth Extraction
             </li>
             <li>
-              <AiOutlineCheck className={styles.icon} /> Implant Tedavisi
+              <AiOutlineCheck className={styles.icon} /> Root Canal Treatment
             </li>
             <li>
-              <AiOutlineCheck className={styles.icon} /> Estetik Diş Hekimliği
-            </li>
-            <li>
-              <AiOutlineCheck className={styles.icon} /> Diş Restorasyonu
-            </li>
-            <li>
-              <AiOutlineCheck className={styles.icon} /> Diş Beyazlatma
-            </li>
-            <li>
-              <AiOutlineCheck className={styles.icon} /> 20’lik Diş Çekimi
-              Tedavisi
-            </li>
-            <li>
-              <AiOutlineCheck className={styles.icon} /> Çocuk Diş Hekimliği
+              <AiOutlineCheck className={styles.icon} /> Dental Checkup
             </li>
           </ul>
         </div>
         <div className={styles.section}>
-          <h2>Bağlantılar</h2>
+          <h2>Links</h2>
           <ul>
             <li>
-              <Link href="/about-us">Hakkımızda</Link>
+              <Link href="/about-us">About Us</Link>
             </li>
             <li>
-              <Link href="/contact">İletişim</Link>
+              <Link href="/contact">Contact</Link>
             </li>
             <li>
-              <Link href="/#">Gizlilik Politikası</Link>
+              <Link href="/#">Privacy Policy</Link>
             </li>
             <li>
-              <Link href="/#">Hizmet Şartları</Link>
+              <Link href="/#">Terms of Service</Link>
             </li>
           </ul>
         </div>
         <div className={styles.section}>
-          <h2>Bizi Takip Edin</h2>
+          <h2>Follow Us</h2>
           <div className={styles.socials}>
             <Link
               href="https://www.instagram.com"
