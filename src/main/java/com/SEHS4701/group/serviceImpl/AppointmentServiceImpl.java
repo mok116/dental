@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -49,11 +50,23 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Transactional
     public int createAppointment(AppointmentCreateRequest appointmentCreateRequest) {
         try {
+            // check Patient & ClinicDentist exist
             Patient patient = patientRepository.findById(appointmentCreateRequest.getPatientId())
                     .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + appointmentCreateRequest.getPatientId()));
             ClinicDentist clinicDentist = clinicDentistRepository.findById(appointmentCreateRequest.getClinicDentistId())
                     .orElseThrow(() -> new RuntimeException("ClinicDentist not found with ID: " + appointmentCreateRequest.getClinicDentistId()));
 
+            // check duplicate appointment
+            Optional<Appointment> existingAppointment = appointmentRepository.findByPatientIdAndClinicDentistIdAndAppointmentDate(
+                    appointmentCreateRequest.getPatientId(),
+                    appointmentCreateRequest.getClinicDentistId(),
+                    appointmentCreateRequest.getAppointmentDate()
+            );
+            if (existingAppointment.isPresent()) {
+                throw new RuntimeException("Duplicate appointment exists for this patient, clinic dentist, and date.");
+            }
+
+            // create Appointment
             Appointment appointment = new Appointment();
             appointment.setPatient(patient);
             appointment.setClinicDentist(clinicDentist);
@@ -61,6 +74,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setTotalAmount(appointmentCreateRequest.getTotalAmount());
             appointment.setStatus(appointmentCreateRequest.getStatus());
 
+            // create AppointmentItems
             if (appointmentCreateRequest.getAppointmentItems() != null && !appointmentCreateRequest.getAppointmentItems().isEmpty()) {
                 List<AppointmentItem> items = appointmentCreateRequest.getAppointmentItems().stream()
                         .map(itemDto -> {
@@ -74,13 +88,16 @@ public class AppointmentServiceImpl implements AppointmentService {
                 appointment.setAppointmentItems(items);
             }
 
+            // check appointment date within 3 months
             LocalDateTime maxDate = LocalDateTime.now().plusMonths(3);
             if (appointment.getAppointmentDate().isAfter(maxDate)) {
                 throw new RuntimeException("Booking must be within the next 3 months!");
             }
 
+            // save Appointment
             Appointment savedAppointment = appointmentRepository.save(appointment);
 
+            // send email
             sendConfirmationEmail(appointment);
             return savedAppointment.getId();
         } catch (Exception e) {

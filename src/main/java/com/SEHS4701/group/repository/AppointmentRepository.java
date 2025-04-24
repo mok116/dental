@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +18,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
 	@Query("SELECT a FROM Appointment a LEFT JOIN FETCH a.appointmentItems WHERE a.id = :id")
     Optional<Appointment> findByIdWithItems(@Param("id") Integer id);
+
+	@Query("SELECT a FROM Appointment a WHERE a.patient.id = :patientId AND a.clinicDentist.id = :clinicDentistId AND a.appointmentDate = :appointmentDate")
+    Optional<Appointment> findByPatientIdAndClinicDentistIdAndAppointmentDate(
+            @Param("patientId") Integer patientId,
+            @Param("clinicDentistId") Integer clinicDentistId,
+            @Param("appointmentDate") LocalDateTime appointmentDate);
 }

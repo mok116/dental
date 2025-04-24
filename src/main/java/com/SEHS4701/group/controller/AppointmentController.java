@@ -26,7 +26,7 @@ public class AppointmentController {
         try {
             int lastInsertId = appointmentService.createAppointment(appointmentCreateRequest);
             return new ResponseEntity<>(new AppointmentCreateResponse(lastInsertId), HttpStatus.CREATED);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
