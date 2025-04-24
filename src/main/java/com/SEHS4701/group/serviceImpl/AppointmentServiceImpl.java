@@ -2,8 +2,8 @@ package com.SEHS4701.group.serviceImpl;
 
 import com.SEHS4701.group.dto.AppointmentByPatientIdResponse;
 import com.SEHS4701.group.dto.AppointmentCreateRequest;
-import com.SEHS4701.group.dto.AppointmentCreateResponse;
 import com.SEHS4701.group.dto.AppointmentListResponse;
+import com.SEHS4701.group.dto.AppointmentResponse;
 import com.SEHS4701.group.model.Appointment;
 import com.SEHS4701.group.model.AppointmentItem;
 import com.SEHS4701.group.model.ClinicDentist;
@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,43 +47,45 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     @Transactional
-    public AppointmentCreateResponse createAppointment(AppointmentCreateRequest appointmentCreateRequest) throws Exception {
-        Patient patient = patientRepository.findById(appointmentCreateRequest.getPatientId())
-                .orElseThrow(() -> new Exception("Patient not found with ID: " + appointmentCreateRequest.getPatientId()));
-        ClinicDentist clinicDentist = clinicDentistRepository.findById(appointmentCreateRequest.getClinicDentistId())
-                .orElseThrow(() -> new Exception("ClinicDentist not found with ID: " + appointmentCreateRequest.getClinicDentistId()));
+    public int createAppointment(AppointmentCreateRequest appointmentCreateRequest) {
+        try {
+            Patient patient = patientRepository.findById(appointmentCreateRequest.getPatientId())
+                    .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + appointmentCreateRequest.getPatientId()));
+            ClinicDentist clinicDentist = clinicDentistRepository.findById(appointmentCreateRequest.getClinicDentistId())
+                    .orElseThrow(() -> new RuntimeException("ClinicDentist not found with ID: " + appointmentCreateRequest.getClinicDentistId()));
 
-        Appointment appointment = new Appointment();
-        appointment.setPatient(patient);
-        appointment.setClinicDentist(clinicDentist);
-        appointment.setAppointmentDate(appointmentCreateRequest.getAppointmentDate());
-        appointment.setTotalAmount(appointmentCreateRequest.getTotalAmount());
-        appointment.setStatus(appointmentCreateRequest.getStatus());
+            Appointment appointment = new Appointment();
+            appointment.setPatient(patient);
+            appointment.setClinicDentist(clinicDentist);
+            appointment.setAppointmentDate(appointmentCreateRequest.getAppointmentDate());
+            appointment.setTotalAmount(appointmentCreateRequest.getTotalAmount());
+            appointment.setStatus(appointmentCreateRequest.getStatus());
 
-        if (appointmentCreateRequest.getAppointmentItems() != null) {
-            List<AppointmentItem> items = appointmentCreateRequest.getAppointmentItems().stream()
-                    .map(itemDto -> {
-                        AppointmentItem item = new AppointmentItem();
-                        item.setAppointment(appointment);
-                        DentistItem dentistItem = dentistItemRepository.findById(itemDto.getDentistItemId())
-                                .orElseThrow(() -> new RuntimeException("DentistItem not found with ID: " + itemDto.getDentistItemId()));
-                        item.setDentistItem(dentistItem);
-                        return item;
-                    }).collect(Collectors.toList());
-            appointment.setAppointmentItems(items);
+            if (appointmentCreateRequest.getAppointmentItems() != null && !appointmentCreateRequest.getAppointmentItems().isEmpty()) {
+                List<AppointmentItem> items = appointmentCreateRequest.getAppointmentItems().stream()
+                        .map(itemDto -> {
+                            AppointmentItem item = new AppointmentItem();
+                            item.setAppointment(appointment);
+                            DentistItem dentistItem = dentistItemRepository.findById(itemDto.getDentistItemId())
+                                    .orElseThrow(() -> new RuntimeException("DentistItem not found with ID: " + itemDto.getDentistItemId()));
+                            item.setDentistItem(dentistItem);
+                            return item;
+                        }).collect(Collectors.toList());
+                appointment.setAppointmentItems(items);
+            }
+
+            LocalDateTime maxDate = LocalDateTime.now().plusMonths(3);
+            if (appointment.getAppointmentDate().isAfter(maxDate)) {
+                throw new RuntimeException("Booking must be within the next 3 months!");
+            }
+
+            Appointment savedAppointment = appointmentRepository.save(appointment);
+
+            sendConfirmationEmail(appointment);
+            return savedAppointment.getId();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create appointment: " + e.getMessage(), e);
         }
-
-        LocalDateTime maxDate = LocalDateTime.now().plusMonths(3);
-        if (appointment.getAppointmentDate().isAfter(maxDate)) {
-            throw new Exception("Booking must be within the next 3 months!");
-        }
-
-        Appointment savedAppointment = appointmentRepository.save(appointment);
-        AppointmentCreateResponse response = new AppointmentCreateResponse();
-        response.setId(savedAppointment.getId());
-
-        sendConfirmationEmail(appointment);
-        return response;
     }
 
     @Override
@@ -103,9 +104,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Appointment getAppointment(Integer id) {
-        return appointmentRepository.findById(id)
+    public AppointmentResponse getAppointment(Integer id) {
+        Appointment appointment = appointmentRepository.findByIdWithItems(id)
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
+        AppointmentResponse.Appointment responseAppointment = modelMapper.map(appointment, AppointmentResponse.Appointment.class);
+        responseAppointment.setPatient(modelMapper.map(appointment.getPatient(), AppointmentResponse.Patient.class));
+        responseAppointment.setClinicDentist(modelMapper.map(appointment.getClinicDentist(), AppointmentResponse.ClinicDentist.class));
+        return new AppointmentResponse(0, "success", responseAppointment);
     }
 
     @Override
@@ -124,15 +129,19 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     private void sendConfirmationEmail(Appointment appointment) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(appointment.getPatient().getEmailAddress());
-        message.setSubject("Appointment Confirmation");
-        message.setText("Dear " + appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName() + ",\n\n" +
-                "Your appointment with " + appointment.getClinicDentist().getDentist().getFirstName() + " " +
-                appointment.getClinicDentist().getDentist().getLastName() +
-                " at " + appointment.getClinicDentist().getClinic().getName() +
-                " on " + appointment.getAppointmentDate() +
-                " is confirmed.\n\nBest regards,\nHKDC Team");
-        mailSender.send(message);
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(appointment.getPatient().getEmailAddress());
+            message.setSubject("Appointment Confirmation");
+            message.setText("Dear " + appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName() + ",\n\n" +
+                    "Your appointment with " + appointment.getClinicDentist().getDentist().getFirstName() + " " +
+                    appointment.getClinicDentist().getDentist().getLastName() +
+                    " at " + appointment.getClinicDentist().getClinic().getName() +
+                    " on " + appointment.getAppointmentDate() +
+                    " is confirmed.\n\nBest regards,\nHKDC Team");
+            mailSender.send(message);
+        } catch (Exception e) {
+            System.err.println("Failed to send confirmation email: " + e.getMessage());
+        }
     }
 }

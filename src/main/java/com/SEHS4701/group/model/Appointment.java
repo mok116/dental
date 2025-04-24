@@ -24,7 +24,7 @@ public class Appointment {
     @JoinColumn(name = "clinic_dentist_id")
     private ClinicDentist clinicDentist;
 
-    @OneToMany(mappedBy = "appointment")
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<AppointmentItem> appointmentItems;
 
     @Column(name = "appointment_date")
