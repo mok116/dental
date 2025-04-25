@@ -50,9 +50,9 @@ public class AppointmentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id){
         try {
-            return new ResponseEntity<>(appointmentService.getAppointment(id), HttpStatus.OK);
+            return new ResponseEntity<>(appointmentService.getById(id), HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()), HttpStatus.NOT_FOUND);
         }

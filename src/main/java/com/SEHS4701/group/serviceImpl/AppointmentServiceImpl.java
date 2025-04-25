@@ -3,7 +3,7 @@ package com.SEHS4701.group.serviceImpl;
 import com.SEHS4701.group.dto.AppointmentByPatientIdResponse;
 import com.SEHS4701.group.dto.AppointmentCreateRequest;
 import com.SEHS4701.group.dto.AppointmentListResponse;
-import com.SEHS4701.group.dto.AppointmentResponse;
+import com.SEHS4701.group.dto.AppointmentByIdResponse;
 import com.SEHS4701.group.model.Appointment;
 import com.SEHS4701.group.model.AppointmentItem;
 import com.SEHS4701.group.model.ClinicDentist;
@@ -26,8 +26,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -58,7 +58,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public int createAppointment(AppointmentCreateRequest appointmentCreateRequest) {
         try {
             // check Patient & ClinicDentist exist
-            if(appointmentCreateRequest.getAppointmentDate().toLocalDate().equals(LocalDate.now())){
+            if (appointmentCreateRequest.getAppointmentDate().toLocalDate().equals(LocalDate.now())) {
                 throw new IllegalArgumentException("Appointment date cannot be today");
             }
 
@@ -132,13 +132,51 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentResponse getAppointment(Integer id) {
+    public AppointmentByIdResponse getById(Integer id) {
         Appointment appointment = appointmentRepository.findByIdWithItems(id)
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
-        AppointmentResponse.Appointment responseAppointment = modelMapper.map(appointment, AppointmentResponse.Appointment.class);
-        responseAppointment.setPatient(modelMapper.map(appointment.getPatient(), AppointmentResponse.Patient.class));
-        responseAppointment.setClinicDentist(modelMapper.map(appointment.getClinicDentist(), AppointmentResponse.ClinicDentist.class));
-        return new AppointmentResponse(0, "success", responseAppointment);
+
+        // Map to AppointmentByIdResponse.Appointment
+        AppointmentByIdResponse.Appointment responseAppointment = modelMapper.map(appointment, AppointmentByIdResponse.Appointment.class);
+
+        // Map Patient
+        if (appointment.getPatient() != null) {
+            responseAppointment.setPatient(modelMapper.map(appointment.getPatient(), AppointmentByIdResponse.Patient.class));
+        }
+
+        // Map ClinicDentist and its nested Dentist and Clinic
+        if (appointment.getClinicDentist() != null) {
+            AppointmentByIdResponse.ClinicDentist clinicDentistDto = modelMapper.map(appointment.getClinicDentist(), AppointmentByIdResponse.ClinicDentist.class);
+            if (appointment.getClinicDentist().getDentist() != null) {
+                clinicDentistDto.setDentist(modelMapper.map(appointment.getClinicDentist().getDentist(), AppointmentByIdResponse.Dentist.class));
+            }
+            if (appointment.getClinicDentist().getClinic() != null) {
+                clinicDentistDto.setClinic(modelMapper.map(appointment.getClinicDentist().getClinic(), AppointmentByIdResponse.Clinic.class));
+            }
+            responseAppointment.setClinicDentist(clinicDentistDto);
+        }
+
+        // Map AppointmentItems
+        if (appointment.getAppointmentItems() != null && !appointment.getAppointmentItems().isEmpty()) {
+            List<AppointmentByIdResponse.AppointmentItem> appointmentItems = appointment.getAppointmentItems().stream()
+                    .map(item -> {
+                        AppointmentByIdResponse.AppointmentItem itemDto = modelMapper.map(item, AppointmentByIdResponse.AppointmentItem.class);
+                        if (item.getDentistItem() != null) {
+                            AppointmentByIdResponse.DentistItem dentistItemDto = modelMapper.map(item.getDentistItem(), AppointmentByIdResponse.DentistItem.class);
+                            if (item.getDentistItem().getDentist() != null) {
+                                dentistItemDto.setDentist(modelMapper.map(item.getDentistItem().getDentist(), AppointmentByIdResponse.Dentist.class));
+                            }
+                            if (item.getDentistItem().getItem() != null) {
+                                dentistItemDto.setItem(modelMapper.map(item.getDentistItem().getItem(), AppointmentByIdResponse.Item.class));
+                            }
+                            itemDto.setDentistItem(dentistItemDto);
+                        }
+                        return itemDto;
+                    }).collect(Collectors.toList());
+            responseAppointment.setAppointmentItems(appointmentItems);
+        }
+
+        return new AppointmentByIdResponse(responseAppointment);
     }
 
     @Override
@@ -166,7 +204,6 @@ public class AppointmentServiceImpl implements AppointmentService {
             helper.setTo(appointment.getPatient().getEmailAddress());
             helper.setSubject("Appointment Confirmation");
 
-
             // Prepare the Thymeleaf context with dynamic variables
             Context context = new Context();
             context.setVariable("patientName",
@@ -179,14 +216,11 @@ public class AppointmentServiceImpl implements AppointmentService {
             context.setVariable("appointmentDate",
                     appointment.getAppointmentDate().format(DateTimeFormatter.ofPattern("MMMM d, yyyy 'at' h:mm a")));
 
-
             // Process the HTML template
             String htmlContent = templateEngine.process("appointment-confirmation", context);
 
             // Set the HTML content
             helper.setText(htmlContent, true); // true indicates HTML content
-
-//            helper.addInline("logo", new ClassPathResource("\\static\\images\\logo.png"));
 
             // Send the email
             mailSender.send(message);

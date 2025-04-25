@@ -8,21 +8,10 @@ import java.util.List;
 
 @Getter
 @Setter
-public class AppointmentResponse {
-    
-    private int code;
-    private String message;
+public class AppointmentByIdResponse extends BaseResponse {
     private Appointment appointment;
-
-    public AppointmentResponse(Appointment appointment) {
-        this.code = 0;
-        this.message = "success";
-        this.appointment = appointment;
-    }
-
-    public AppointmentResponse(int code, String message, Appointment appointment) {
-        this.code = code;
-        this.message = message;
+    
+    public AppointmentByIdResponse(Appointment appointment) {
         this.appointment = appointment;
     }
 
