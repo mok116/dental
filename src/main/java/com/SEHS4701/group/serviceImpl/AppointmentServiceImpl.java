@@ -14,13 +14,17 @@ import com.SEHS4701.group.repository.ClinicDentistRepository;
 import com.SEHS4701.group.repository.DentistItemRepository;
 import com.SEHS4701.group.repository.PatientRepository;
 import com.SEHS4701.group.service.AppointmentService;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;
@@ -33,17 +37,20 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final PatientRepository patientRepository;
     private final ClinicDentistRepository clinicDentistRepository;
     private final DentistItemRepository dentistItemRepository;
+    private final SpringTemplateEngine templateEngine;
 
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, ModelMapper modelMapper,
                                   JavaMailSender mailSender, PatientRepository patientRepository,
                                   ClinicDentistRepository clinicDentistRepository,
-                                  DentistItemRepository dentistItemRepository) {
+                                  DentistItemRepository dentistItemRepository,
+                                  SpringTemplateEngine templateEngine) {
         this.appointmentRepository = appointmentRepository;
         this.modelMapper = modelMapper;
         this.mailSender = mailSender;
         this.patientRepository = patientRepository;
         this.clinicDentistRepository = clinicDentistRepository;
         this.dentistItemRepository = dentistItemRepository;
+        this.templateEngine = templateEngine;
     }
 
     @Override
@@ -51,6 +58,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     public int createAppointment(AppointmentCreateRequest appointmentCreateRequest) {
         try {
             // check Patient & ClinicDentist exist
+            if(appointmentCreateRequest.getAppointmentDate().toLocalDate().equals(LocalDate.now())){
+                throw new IllegalArgumentException("Appointment date cannot be today");
+            }
+
             Patient patient = patientRepository.findById(appointmentCreateRequest.getPatientId())
                     .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + appointmentCreateRequest.getPatientId()));
             ClinicDentist clinicDentist = clinicDentistRepository.findById(appointmentCreateRequest.getClinicDentistId())
@@ -147,15 +158,37 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private void sendConfirmationEmail(Appointment appointment) {
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(appointment.getPatient().getEmailAddress());
-            message.setSubject("Appointment Confirmation");
-            message.setText("Dear " + appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName() + ",\n\n" +
-                    "Your appointment with " + appointment.getClinicDentist().getDentist().getFirstName() + " " +
-                    appointment.getClinicDentist().getDentist().getLastName() +
-                    " at " + appointment.getClinicDentist().getClinic().getName() +
-                    " on " + appointment.getAppointmentDate() +
-                    " is confirmed.\n\nBest regards,\nHKDC Team");
+            // Create a MimeMessage
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            // Set email details
+            helper.setTo(appointment.getPatient().getEmailAddress());
+            helper.setSubject("Appointment Confirmation");
+
+
+            // Prepare the Thymeleaf context with dynamic variables
+            Context context = new Context();
+            context.setVariable("patientName",
+                    appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName());
+            context.setVariable("dentistName",
+                    appointment.getClinicDentist().getDentist().getFirstName() + " " +
+                            appointment.getClinicDentist().getDentist().getLastName());
+            context.setVariable("clinicName",
+                    appointment.getClinicDentist().getClinic().getName());
+            context.setVariable("appointmentDate",
+                    appointment.getAppointmentDate().format(DateTimeFormatter.ofPattern("MMMM d, yyyy 'at' h:mm a")));
+
+
+            // Process the HTML template
+            String htmlContent = templateEngine.process("appointment-confirmation", context);
+
+            // Set the HTML content
+            helper.setText(htmlContent, true); // true indicates HTML content
+
+//            helper.addInline("logo", new ClassPathResource("\\static\\images\\logo.png"));
+
+            // Send the email
             mailSender.send(message);
         } catch (Exception e) {
             System.err.println("Failed to send confirmation email: " + e.getMessage());

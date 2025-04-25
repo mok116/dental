@@ -2,12 +2,7 @@ package com.SEHS4701.group.model;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +20,7 @@ public class Clinic {
     private String phone;
     private String openHours;
 
-    @OneToMany(mappedBy = "clinic")
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.EAGER)
     private List<ClinicDentist> clinicDentists;
 
 }

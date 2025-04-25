@@ -31,7 +31,7 @@ public class Patient {
     private LocalDateTime lastLoginAt;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private List<Appointment> appointments;
 
     @PrePersist

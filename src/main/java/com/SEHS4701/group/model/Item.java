@@ -17,7 +17,7 @@ public class Item {
     private String name;
     private String image_url;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
     private List<DentistItem> dentistItems;
 
 

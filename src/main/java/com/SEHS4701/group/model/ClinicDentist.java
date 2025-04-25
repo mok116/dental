@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Table(name = "clinic_dentists")
 @Getter
@@ -18,21 +16,21 @@ public class ClinicDentist {
     @Column(name = "clinic_id", insertable = false, updatable = false)
     private int clinicReferenceId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
     @Column(name = "dentist_id", insertable = false, updatable = false)
     private int dentistReferenceId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dentist_id")
     private Dentist dentist;
 
     @Column(name = "time_slot_id", insertable = false, updatable = false)
     private int timeslotReferenceId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "time_slot_id")
     private Timeslot timeslot;
 

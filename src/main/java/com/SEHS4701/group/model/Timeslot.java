@@ -17,7 +17,7 @@ public class Timeslot {
     private String startTime;
     private String endTime;
 
-    @OneToMany(mappedBy = "timeslot")
+    @OneToMany(mappedBy = "timeslot", fetch = FetchType.EAGER)
     private List<ClinicDentist> clinicDentists;
 
 }

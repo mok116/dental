@@ -19,14 +19,14 @@ public class DentistItem {
     @Column(name = "dentist_id", insertable = false, updatable = false)
     private int dentistReferenceId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dentist_id")
     private Dentist dentist;
 
     @Column(name = "item_id", insertable = false, updatable = false)
     private int itemReferenceId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 }
