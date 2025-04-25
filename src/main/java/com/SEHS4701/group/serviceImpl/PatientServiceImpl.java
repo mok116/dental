@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -23,6 +24,9 @@ public class PatientServiceImpl implements PatientService {
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
     private final EntityManager entityManager;
+
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    private static final int MIN_EMAIL_LENGTH = 8;
 
     public PatientServiceImpl(PatientRepository patientRepository, ModelMapper modelMapper, JwtUtil jwtUtil, PasswordEncoder passwordEncoder, EntityManager entityManager) {
         this.patientRepository = patientRepository;
@@ -34,14 +38,24 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public int registerPatient(RegisterRequest registerRequest) {
+
+        String email = registerRequest.getEmailAddress();
+        if (email == null || !EMAIL_PATTERN.matcher(email).matches()) {
+            throw new RuntimeException("Invalid email format!");
+        }
+
+        if (email.length() < MIN_EMAIL_LENGTH) {
+            throw new RuntimeException("Email must be at least 8 characters long!");
+        }
+
         Optional<Patient> registeredPatient = patientRepository.findByEmailAddress(registerRequest.getEmailAddress());
         if (registeredPatient.isPresent() && registeredPatient.get().getEmailAddress().equals(registerRequest.getEmailAddress())) {
             throw new RuntimeException("Email already registered!");
         }
+
         Patient patient = modelMapper.map(registerRequest, Patient.class);
         patient.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         patient.setCreatedAt(LocalDateTime.now());
-        // patient.setLastLoginAt(LocalDateTime.now());
         Patient savedPatient = patientRepository.save(patient);
         return savedPatient.getId();
     }
