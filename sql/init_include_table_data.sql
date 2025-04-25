@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
--- 產生時間： 2025-04-16 17:24:41
--- 伺服器版本： 10.4.21-MariaDB
--- PHP 版本： 7.3.31
+-- Host: 127.0.0.1
+-- Generation Time: Apr 25, 2025 at 06:49 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫: `dental`
+-- Database: `dental`
 --
 CREATE DATABASE IF NOT EXISTS `dental` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `dental`;
@@ -26,7 +26,7 @@ USE `dental`;
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `appointments`
+-- Table structure for table `appointments`
 --
 
 CREATE TABLE `appointments` (
@@ -37,24 +37,56 @@ CREATE TABLE `appointments` (
   `total_amount` decimal(12,2) NOT NULL,
   `status` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `appointment_items`
+-- Table structure for table `appointment_items`
 --
 
 CREATE TABLE `appointment_items` (
   `id` int(11) NOT NULL,
   `appointment_id` int(11) NOT NULL,
   `dentist_item_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `clinics`
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `snippet` text NOT NULL,
+  `content` text NOT NULL,
+  `post_date` date NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `title`, `slug`, `snippet`, `content`, `post_date`, `image`) VALUES
+(1, 'Dental Examination: First Step to a Healthy Smile', 'dental-examination-first-step-to-healthy-smile', 'Learn about the importance of regular dental check-ups and what to expect during your visit.', 'Regular dental examinations are crucial for maintaining optimal oral health. During your visit, our experienced dentists will thoroughly assess your oral health, identify potential issues early, and create a personalized treatment plan to ensure your smile stays healthy and bright.', '2024-07-19', '/images/heroDoctors.png'),
+(2, 'Teeth Whitening: Tips for a Brighter Smile', 'teeth-whitening-tips-for-brighter-smile', 'Everything you need to know about teeth whitening procedures.', 'Teeth whitening procedures are aesthetic treatments designed to restore your teeth\'s natural color. Learn about the treatment process, products used, and care recommendations for maintaining your bright smile.', '2024-07-20', '/images/orthodontia.jpg'),
+(3, 'Bridges and Crowns: Best Solutions for Your Teeth', 'bridges-and-crowns-best-solutions-for-your-teeth', 'Everything about bridge and crown treatments.', 'Bridges and crowns are dental treatments used to restore missing teeth. In this article, learn how these procedures are performed and when they might be the right choice for you.', '2024-07-21', '/images/maxillofacialSurgery.jpg'),
+(4, 'Orthodontic Treatment: Align Your Teeth', 'orthodontic-treatment-align-your-teeth', 'Understanding orthodontic treatment process and benefits.', 'Orthodontic treatment is designed to straighten your teeth and improve jaw alignment. Learn about braces, wires, and other orthodontic appliances that can help you achieve a perfect smile.', '2024-07-22', '/images/implant.jpg'),
+(5, 'Pediatric Dentistry: Healthy Teeth from an Early Age', 'pediatric-dentistry-healthy-teeth-from-early-age', 'The importance and applications of pediatric dentistry.', 'Pediatric dentistry focuses on protecting and supporting children\'s dental health. Learn about early dental care and treatment methods to ensure your child\'s healthy smile.', '2024-07-23', '/images/dentalRestoration.jpg'),
+(6, 'Dental Implants: Permanent Tooth Solutions', 'dental-implants-permanent-tooth-solutions', 'Dental implants and implementation processes.', 'Dental implants provide permanent solutions for missing teeth. Learn how implant procedures are performed and discover their advantages in this comprehensive guide.', '2024-07-24', '/images/pediatricDentistry.jpg'),
+(7, 'Gum Disease: Symptoms and Treatment Methods', 'gum-disease-symptoms-and-treatment-methods', 'Understanding gum disease symptoms and treatment options.', 'Gum disease occurs when tissues around the teeth become inflamed. Learn about the symptoms, causes, and treatment methods to maintain healthy gums.', '2024-07-25', '/images/teethWhitening.jpg'),
+(8, 'Tooth Decay: Prevention and Treatment Methods', 'tooth-decay-prevention-and-treatment-methods', 'Methods for preventing and treating tooth decay.', 'Tooth decay is damage that occurs to tooth enamel. Discover effective methods for preventing cavities and learn about available treatment options for existing decay.', '2024-07-26', '/images/toothExtraction.jpg'),
+(9, 'What to Consider When Choosing a Dentist?', 'what-to-consider-when-choosing-a-dentist', 'Important factors to consider when selecting a dentist.', 'Choosing the right dentist is crucial for your dental health. Learn about the key factors to consider when selecting a dental professional who best meets your needs.', '2024-07-27', '/images/aestheticDentistry.jpg'),
+(10, 'Dental Cleaning: Professional Cleaning and Care', 'dental-cleaning-professional-cleaning-and-care', 'Dental cleaning and care recommendations.', 'Professional dental cleaning is an essential step in maintaining oral health. Learn about professional cleaning procedures and home care methods for optimal dental hygiene.', '2024-07-28', '/images/rootCanal.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clinics`
 --
 
 CREATE TABLE `clinics` (
@@ -64,10 +96,10 @@ CREATE TABLE `clinics` (
   `district` varchar(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
   `open_hours` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `clinics`
+-- Dumping data for table `clinics`
 --
 
 INSERT INTO `clinics` (`id`, `name`, `address`, `district`, `phone`, `open_hours`) VALUES
@@ -80,7 +112,7 @@ INSERT INTO `clinics` (`id`, `name`, `address`, `district`, `phone`, `open_hours
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `clinic_dentists`
+-- Table structure for table `clinic_dentists`
 --
 
 CREATE TABLE `clinic_dentists` (
@@ -89,10 +121,10 @@ CREATE TABLE `clinic_dentists` (
   `dentist_id` int(11) NOT NULL,
   `day_of_week` enum('Mon','Tue','Wed','Thu','Fri') NOT NULL,
   `time_slot_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `clinic_dentists`
+-- Dumping data for table `clinic_dentists`
 --
 
 INSERT INTO `clinic_dentists` (`id`, `clinic_id`, `dentist_id`, `day_of_week`, `time_slot_id`) VALUES
@@ -275,7 +307,7 @@ INSERT INTO `clinic_dentists` (`id`, `clinic_id`, `dentist_id`, `day_of_week`, `
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `contact_us`
+-- Table structure for table `contact_us`
 --
 
 CREATE TABLE `contact_us` (
@@ -287,12 +319,12 @@ CREATE TABLE `contact_us` (
   `topic` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `dentists`
+-- Table structure for table `dentists`
 --
 
 CREATE TABLE `dentists` (
@@ -303,10 +335,10 @@ CREATE TABLE `dentists` (
   `phone` varchar(100) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `image_url` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `dentists`
+-- Dumping data for table `dentists`
 --
 
 INSERT INTO `dentists` (`id`, `first_name`, `last_name`, `gender`, `phone`, `email_address`, `image_url`) VALUES
@@ -324,7 +356,7 @@ INSERT INTO `dentists` (`id`, `first_name`, `last_name`, `gender`, `phone`, `ema
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `dentist_items`
+-- Table structure for table `dentist_items`
 --
 
 CREATE TABLE `dentist_items` (
@@ -332,60 +364,60 @@ CREATE TABLE `dentist_items` (
   `dentist_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `fee` decimal(12,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `dentist_items`
+-- Dumping data for table `dentist_items`
 --
 
 INSERT INTO `dentist_items` (`id`, `dentist_id`, `item_id`, `fee`) VALUES
-(1, 1, 1, '200.00'),
-(2, 1, 2, '300.00'),
-(3, 1, 5, '150.00'),
-(4, 2, 1, '250.00'),
-(5, 2, 3, '400.00'),
-(6, 2, 5, '180.00'),
-(7, 3, 2, '350.00'),
-(8, 3, 3, '500.00'),
-(9, 3, 4, '1000.00'),
-(10, 4, 1, '180.00'),
-(11, 4, 2, '280.00'),
-(12, 4, 5, '120.00'),
-(13, 5, 3, '450.00'),
-(14, 5, 4, '1100.00'),
-(15, 5, 5, '160.00'),
-(16, 6, 1, '220.00'),
-(17, 6, 2, '320.00'),
-(18, 6, 3, '480.00'),
-(19, 6, 5, '140.00'),
-(20, 7, 3, '550.00'),
-(21, 7, 4, '1200.00'),
-(22, 8, 1, '270.00'),
-(23, 8, 2, '340.00'),
-(24, 8, 5, '170.00'),
-(25, 9, 1, '230.00'),
-(26, 9, 3, '520.00'),
-(27, 9, 4, '1050.00'),
-(28, 9, 5, '190.00'),
-(29, 10, 2, '360.00'),
-(30, 10, 3, '580.00'),
-(31, 10, 4, '1150.00'),
-(32, 10, 5, '200.00');
+(1, 1, 1, 200.00),
+(2, 1, 2, 300.00),
+(3, 1, 5, 150.00),
+(4, 2, 1, 250.00),
+(5, 2, 3, 400.00),
+(6, 2, 5, 180.00),
+(7, 3, 2, 350.00),
+(8, 3, 3, 500.00),
+(9, 3, 4, 1000.00),
+(10, 4, 1, 180.00),
+(11, 4, 2, 280.00),
+(12, 4, 5, 120.00),
+(13, 5, 3, 450.00),
+(14, 5, 4, 1100.00),
+(15, 5, 5, 160.00),
+(16, 6, 1, 220.00),
+(17, 6, 2, 320.00),
+(18, 6, 3, 480.00),
+(19, 6, 5, 140.00),
+(20, 7, 3, 550.00),
+(21, 7, 4, 1200.00),
+(22, 8, 1, 270.00),
+(23, 8, 2, 340.00),
+(24, 8, 5, 170.00),
+(25, 9, 1, 230.00),
+(26, 9, 3, 520.00),
+(27, 9, 4, 1050.00),
+(28, 9, 5, 190.00),
+(29, 10, 2, 360.00),
+(30, 10, 3, 580.00),
+(31, 10, 4, 1150.00),
+(32, 10, 5, 200.00);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `items`
+-- Table structure for table `items`
 --
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `image_url` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `items`
+-- Dumping data for table `items`
 --
 
 INSERT INTO `items` (`id`, `name`, `image_url`) VALUES
@@ -398,7 +430,7 @@ INSERT INTO `items` (`id`, `name`, `image_url`) VALUES
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `patients`
+-- Table structure for table `patients`
 --
 
 CREATE TABLE `patients` (
@@ -412,22 +444,22 @@ CREATE TABLE `patients` (
   `password` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `last_login_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `timeslots`
+-- Table structure for table `timeslots`
 --
 
 CREATE TABLE `timeslots` (
   `id` int(11) NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `timeslots`
+-- Dumping data for table `timeslots`
 --
 
 INSERT INTO `timeslots` (`id`, `start_time`, `end_time`) VALUES
@@ -440,11 +472,11 @@ INSERT INTO `timeslots` (`id`, `start_time`, `end_time`) VALUES
 (7, '17:00:00', '18:00:00');
 
 --
--- 已傾印資料表的索引
+-- Indexes for dumped tables
 --
 
 --
--- 資料表索引 `appointments`
+-- Indexes for table `appointments`
 --
 ALTER TABLE `appointments`
   ADD PRIMARY KEY (`id`),
@@ -453,7 +485,7 @@ ALTER TABLE `appointments`
   ADD KEY `idx_appointments` (`appointment_date`);
 
 --
--- 資料表索引 `appointment_items`
+-- Indexes for table `appointment_items`
 --
 ALTER TABLE `appointment_items`
   ADD PRIMARY KEY (`id`),
@@ -461,13 +493,19 @@ ALTER TABLE `appointment_items`
   ADD KEY `FK_DENTIST_ITEM` (`dentist_item_id`);
 
 --
--- 資料表索引 `clinics`
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `clinics`
 --
 ALTER TABLE `clinics`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `clinic_dentists`
+-- Indexes for table `clinic_dentists`
 --
 ALTER TABLE `clinic_dentists`
   ADD PRIMARY KEY (`id`),
@@ -476,19 +514,19 @@ ALTER TABLE `clinic_dentists`
   ADD KEY `FK_TIMESLOT_1` (`time_slot_id`);
 
 --
--- 資料表索引 `contact_us`
+-- Indexes for table `contact_us`
 --
 ALTER TABLE `contact_us`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `dentists`
+-- Indexes for table `dentists`
 --
 ALTER TABLE `dentists`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `dentist_items`
+-- Indexes for table `dentist_items`
 --
 ALTER TABLE `dentist_items`
   ADD PRIMARY KEY (`id`),
@@ -496,107 +534,107 @@ ALTER TABLE `dentist_items`
   ADD KEY `FK_ITEM_1` (`item_id`);
 
 --
--- 資料表索引 `items`
+-- Indexes for table `items`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `patients`
+-- Indexes for table `patients`
 --
 ALTER TABLE `patients`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `timeslots`
+-- Indexes for table `timeslots`
 --
 ALTER TABLE `timeslots`
   ADD PRIMARY KEY (`id`);
 
 --
--- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `appointments`
+-- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `appointment_items`
+-- AUTO_INCREMENT for table `appointment_items`
 --
 ALTER TABLE `appointment_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `clinics`
+-- AUTO_INCREMENT for table `clinics`
 --
 ALTER TABLE `clinics`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `clinic_dentists`
+-- AUTO_INCREMENT for table `clinic_dentists`
 --
 ALTER TABLE `clinic_dentists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `contact_us`
+-- AUTO_INCREMENT for table `contact_us`
 --
 ALTER TABLE `contact_us`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `dentists`
+-- AUTO_INCREMENT for table `dentists`
 --
 ALTER TABLE `dentists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `dentist_items`
+-- AUTO_INCREMENT for table `dentist_items`
 --
 ALTER TABLE `dentist_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `items`
+-- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `patients`
+-- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `timeslots`
+-- AUTO_INCREMENT for table `timeslots`
 --
 ALTER TABLE `timeslots`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- 已傾印資料表的限制式
+-- Constraints for dumped tables
 --
 
 --
--- 資料表的限制式 `appointments`
+-- Constraints for table `appointments`
 --
 ALTER TABLE `appointments`
   ADD CONSTRAINT `FK_CLINIC_DENTIST` FOREIGN KEY (`clinic_dentist_id`) REFERENCES `clinic_dentists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_PATIENT` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- 資料表的限制式 `appointment_items`
+-- Constraints for table `appointment_items`
 --
 ALTER TABLE `appointment_items`
   ADD CONSTRAINT `FK_APPOINTMENT` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_DENTIST_ITEM` FOREIGN KEY (`dentist_item_id`) REFERENCES `dentist_items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- 資料表的限制式 `clinic_dentists`
+-- Constraints for table `clinic_dentists`
 --
 ALTER TABLE `clinic_dentists`
   ADD CONSTRAINT `FK_CLINIC_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -604,7 +642,7 @@ ALTER TABLE `clinic_dentists`
   ADD CONSTRAINT `FK_TIMESLOT_1` FOREIGN KEY (`time_slot_id`) REFERENCES `timeslots` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- 資料表的限制式 `dentist_items`
+-- Constraints for table `dentist_items`
 --
 ALTER TABLE `dentist_items`
   ADD CONSTRAINT `FK_DENTIST_2` FOREIGN KEY (`dentist_id`) REFERENCES `dentists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

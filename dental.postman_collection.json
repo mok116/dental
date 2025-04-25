@@ -599,6 +599,46 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:6616/blog/list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/blog/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"blog",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/blog/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/blog/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"blog",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

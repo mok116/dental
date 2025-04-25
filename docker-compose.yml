@@ -28,7 +28,6 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/dental?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=123456
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.cj.jdbc.Driver
       - SPRING_DATASOURCE_HIKARI_CONNECTION-TIMEOUT=20000  # 20 seconds timeout
       - SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE=5
