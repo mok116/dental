@@ -466,7 +466,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTQ2NTMxNywiZXhwIjoxNzQ1NTUxNzE3fQ.AIsC594m3L1_HN_Kcs5UkrLAdmXqwGcYhEsiKwdE17kEIlFA7AIk4q3UWNc8QP6M",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTYwODUyNiwiZXhwIjoxNzQ1Njk0OTI2fQ.NHYxuSkpUXUSYQeuL1hp95Rer9KCais9D1DtRRCDQFumfwzMPTn-gVkwVxWMdxCs",
 							"type": "string"
 						}
 					]
@@ -475,7 +475,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"patientId\": 1,\r\n  \"clinicDentistId\": 1,\r\n  \"appointmentDate\": \"2025-04-24T10:00:00\",\r\n  \"totalAmount\": 150,\r\n  \"status\": \"PENDING\",\r\n  \"appointmentItems\": [\r\n    {\r\n      \"id\": 0,\r\n      \"dentistItemId\": 1\r\n    },\r\n    {\r\n      \"id\": 0,\r\n      \"dentistItemId\": 2\r\n    }\r\n  ]\r\n}",
+					"raw": "{\r\n  \"patientId\": 1,\r\n  \"clinicDentistId\": 2,\r\n  \"appointmentDate\": \"2025-05-24T10:00:00\",\r\n  \"totalAmount\": 150,\r\n  \"status\": \"PENDING\",\r\n  \"appointmentItems\": [\r\n    {\r\n      \"id\": 0,\r\n      \"dentistItemId\": 1\r\n    },\r\n    {\r\n      \"id\": 0,\r\n      \"dentistItemId\": 2\r\n    }\r\n  ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -508,7 +508,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTQ2MzMwOCwiZXhwIjoxNzQ1NTQ5NzA4fQ.r3EeBPxQxaxHuZp36qzN2KiWx6C5GCsKE9am24b_YbYK1ccntuT0QpSPWsvciUe6",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTYwODUyNiwiZXhwIjoxNzQ1Njk0OTI2fQ.NHYxuSkpUXUSYQeuL1hp95Rer9KCais9D1DtRRCDQFumfwzMPTn-gVkwVxWMdxCs",
 							"type": "string"
 						}
 					]
@@ -547,7 +547,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTUwMjM3NSwiZXhwIjoxNzQ1NTg4Nzc1fQ.yk3Rwbjw96WaSQIUpsfbspuZBzHmBZKZsVrO0VnitFXJwMm0pguNJem7zoEPqghS",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTYwNjkzMSwiZXhwIjoxNzQ1NjkzMzMxfQ.x3ri5APKGRnp0q8EnmtNgiqAZY4H62aV5Zk7qW4eibJ3aYtTw0XeGQP30knZ66X1",
 							"type": "string"
 						}
 					]
@@ -577,7 +577,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTUwMjM3NSwiZXhwIjoxNzQ1NTg4Nzc1fQ.yk3Rwbjw96WaSQIUpsfbspuZBzHmBZKZsVrO0VnitFXJwMm0pguNJem7zoEPqghS",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTYwODUyNiwiZXhwIjoxNzQ1Njk0OTI2fQ.NHYxuSkpUXUSYQeuL1hp95Rer9KCais9D1DtRRCDQFumfwzMPTn-gVkwVxWMdxCs",
 							"type": "string"
 						}
 					]
@@ -595,6 +595,41 @@
 						"appointment",
 						"patient",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/appointment/clinicId/1/dentistId/1/appointmentDate/2025-05-24",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0NTYwODUyNiwiZXhwIjoxNzQ1Njk0OTI2fQ.NHYxuSkpUXUSYQeuL1hp95Rer9KCais9D1DtRRCDQFumfwzMPTn-gVkwVxWMdxCs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6616/appointment/clinicId/1/dentistId/1/appointmentDate/2025-05-24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"appointment",
+						"clinicId",
+						"1",
+						"dentistId",
+						"1",
+						"appointmentDate",
+						"2025-05-24"
 					]
 				}
 			},
