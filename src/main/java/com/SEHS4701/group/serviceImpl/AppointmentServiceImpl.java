@@ -3,7 +3,9 @@ package com.SEHS4701.group.serviceImpl;
 import com.SEHS4701.group.dto.AppointmentByPatientIdResponse;
 import com.SEHS4701.group.dto.AppointmentCreateRequest;
 import com.SEHS4701.group.dto.AppointmentListResponse;
+import com.SEHS4701.group.dto.BookedClinicDentistIdsResponse;
 import com.SEHS4701.group.dto.AppointmentByIdResponse;
+import com.SEHS4701.group.dto.BookedClinicDentistIdsResponse;
 import com.SEHS4701.group.model.Appointment;
 import com.SEHS4701.group.model.AppointmentItem;
 import com.SEHS4701.group.model.ClinicDentist;
@@ -192,6 +194,29 @@ public class AppointmentServiceImpl implements AppointmentService {
                     dto.setClinicDentistId(appointment.getClinicDentist().getId());
                     return dto;
                 }).collect(Collectors.toList()));
+    }
+
+    @Override
+    public BookedClinicDentistIdsResponse getBookedClinicDentistIds(Integer clinicId, Integer dentistId, LocalDate appointmentDate) {
+        // Find ClinicDentist records matching clinicId and dentistId
+        List<ClinicDentist> clinicDentists = clinicDentistRepository.findByClinicIdAndDentistId(clinicId, dentistId);
+
+        // Extract clinic_dentist_id list
+        List<Integer> clinicDentistIds = clinicDentists.stream()
+                .map(ClinicDentist::getId)
+                .collect(Collectors.toList());
+
+        // Find appointments for the given date and clinic_dentist_ids
+        List<Appointment> appointments = appointmentRepository.findByClinicDentistIdInAndAppointmentDate(
+                clinicDentistIds, appointmentDate);
+
+        // Extract booked clinic_dentist_id
+        List<Integer> bookedClinicDentistIds = appointments.stream()
+                .map(appointment -> appointment.getClinicDentist().getId())
+                .distinct()
+                .collect(Collectors.toList());
+
+        return new BookedClinicDentistIdsResponse(bookedClinicDentistIds);
     }
 
     private void sendConfirmationEmail(Appointment appointment) {

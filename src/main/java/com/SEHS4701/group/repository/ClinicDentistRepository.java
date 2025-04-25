@@ -13,4 +13,6 @@ public interface ClinicDentistRepository extends JpaRepository<ClinicDentist, In
     List<ClinicDentist> findByDentistId(int dentistId);
 
     List<ClinicDentist> findByTimeslotId(int timeslotId);
+
+    List<ClinicDentist> findByClinicIdAndDentistId(Integer clinicId, Integer dentistId);
 }

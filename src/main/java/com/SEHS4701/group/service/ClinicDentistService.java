@@ -6,7 +6,6 @@ public interface ClinicDentistService {
 
 	ClinicDentistListResponse getList();
 
-
 	ClinicDentistByIdResponse getById(Integer id);
 
 	ClinicDentistByClinicIdResponse getByClinicId(Integer clinicId);

@@ -3,9 +3,14 @@ package com.SEHS4701.group.controller;
 import com.SEHS4701.group.dto.AppointmentCreateRequest;
 import com.SEHS4701.group.dto.AppointmentCreateResponse;
 import com.SEHS4701.group.dto.BaseResponse;
+import com.SEHS4701.group.dto.BookedClinicDentistIdsResponse;
 import com.SEHS4701.group.service.AppointmentService;
 import jakarta.validation.Valid;
+
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -55,6 +60,21 @@ public class AppointmentController {
             return new ResponseEntity<>(appointmentService.getById(id), HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    
+
+    @GetMapping("/clinicId/{clinicId}/dentistId/{dentistId}/appointmentDate/{appointmentDate}")
+    public ResponseEntity<?> getBookedClinicDentistIds(
+            @PathVariable Integer clinicId,
+            @PathVariable Integer dentistId,
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate appointmentDate) {
+        try {
+            BookedClinicDentistIdsResponse response = appointmentService.getBookedClinicDentistIds(clinicId, dentistId, appointmentDate);
+            return new ResponseEntity<>(response, response.getCode() == 0 ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 }
