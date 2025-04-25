@@ -1,10 +1,66 @@
 .formContainer {
-  font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  row-gap: 32px;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.clinicTimeSlots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
   width: 100%;
+}
+
+.clinicCard {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clinicCard h3 {
+  margin: 0 0 0.5rem;
+  color: #333;
+}
+
+.clinicCard p {
+  margin: 0 0 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.timeSlotButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.timeSlotButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeSlotButton:hover {
+  background: #e0e0e0;
+}
+
+.timeSlotButton.selected {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+.noTimeSlotsMessage {
+  color: #666;
+  font-style: italic;
+  margin-top: 0.5rem;
 }
 
 .formContainer .buttonsWrapper {
@@ -34,6 +90,10 @@
 
 .formContainer .buttonsWrapper button:disabled:hover {
   background-color: #d6d6d6;
+}
+
+.disabledButton {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -46,4 +106,11 @@
 .formContainer .buttonsWrapper button:hover {
   cursor: pointer;
   background-color: var(--primary-button-hover-color);
+}
+
+.noTimeSlotsMessage {
+  color: #ff4d4f;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
 }

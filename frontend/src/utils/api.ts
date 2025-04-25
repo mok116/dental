@@ -16,6 +16,12 @@ api.interceptors.request.use((config) => {
   // Remove the Access-Control-Allow-Origin header from client-side requests
   // This header should only be set by the server
   delete config.headers['Access-Control-Allow-Origin'];
+  
+  // Add JWT token to headers if available
+  const token = sessionStorage.getItem('jwtToken');
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
   return config;
 });
 
@@ -185,6 +191,19 @@ interface ContactFormData {
   message: string;
 }
 
+interface appointmentData {
+  patientId: number;
+  clinicDentistId: number;
+  appointmentDate: string;
+  totalAmount: number;
+  status: string;
+  appointmentItems: Array<{
+    id: number;
+    dentistItemId: number;
+  }>;
+}
+
+
 // API Functions
 export const patientApi = {
   register: async (data: PatientRegisterRequest): Promise<ApiResponse> => {
@@ -236,9 +255,14 @@ export const patientApi = {
     const response = await api.get<ClinicDentistResponse>(`/clinicDentist/dentist/${dentistId}`);
     return response.data;
   },
-};
 
-export const submitContactForm = async (formData: ContactFormData): Promise<ApiResponse> => {
-  const response = await api.post<ApiResponse>('/contact_us', formData);
-  return response.data;
-}; 
+  submitContactForm : async (formData: ContactFormData): Promise<ApiResponse> => {
+    const response = await api.post<ApiResponse>('/contact_us', formData);
+    return response.data;
+  },
+
+  submitAppointment : async (formData: appointmentData): Promise<ApiResponse> => {
+    const response = await api.post<ApiResponse>('/appointment/create', formData);
+    return response.data;
+  },
+};

@@ -1,0 +1,23 @@
+.termsContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.backLink {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.backLink a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.backLink a:hover {
+  text-decoration: underline;
+}

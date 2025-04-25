@@ -11,7 +11,7 @@ import MapComponent from "@/components/map/MapComponent";
 import Divider from "@/components/divider/Divider";
 import { useRouter } from "next/router";
 import styles from "./Contact.module.css";
-import { submitContactForm } from '../../utils/api';
+import { patientApi } from "@/utils/api";
 
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      await submitContactForm(formState);
+      await patientApi.submitContactForm(formState);
       await Swal.fire({
         title: "Success!",
         html: '<p class="custom-swal-text">Your request has been successfully submitted.</p>',

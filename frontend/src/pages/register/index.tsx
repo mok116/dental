@@ -130,7 +130,7 @@ const Register: React.FC = () => {
         lastName: formData.lastName,
         emailAddress: formData.emailAddress,
         gender: formData.gender,
-        dob: formData.dob,
+        dob: formData.dob ? `${formData.dob}T10:00:00` : "",
         phone: formData.phone,
         password: formData.password,
       });
@@ -217,7 +217,7 @@ const Register: React.FC = () => {
                 <TextInput
                   label="Date of Birth"
                   name="dob"
-                  type="datetime-local"
+                  type="date"
                   value={formData.dob}
                   onChange={handleInputChange}
                   error={errors.dob}
@@ -233,7 +233,7 @@ const Register: React.FC = () => {
                 value={formData.phone}
                 onChange={handleInputChange}
                 error={errors.phone}
-                placeholder="Example: +1234567890"
+                placeholder="Example: 45678900"
               />
             </div>
 
@@ -312,4 +312,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register; 
+export default Register;
