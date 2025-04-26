@@ -198,7 +198,6 @@ interface appointmentData {
   totalAmount: number;
   status: string;
   appointmentItems: Array<{
-    id: number;
     dentistItemId: number;
   }>;
 }
