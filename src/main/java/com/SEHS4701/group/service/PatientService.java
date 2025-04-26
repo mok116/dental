@@ -14,4 +14,8 @@ public interface PatientService{
 	PatientByIdResponse getById(Integer id);
 
 	void edit(EditRequest editRequest);
+
+	void sendPasswordResetEmail(String email);
+	
+    void resetPassword(String email, String code, String newPassword);
 }

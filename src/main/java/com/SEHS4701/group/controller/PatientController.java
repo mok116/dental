@@ -54,4 +54,28 @@ public class PatientController {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest forgotPasswordRequest) {
+        try {
+            patientService.sendPasswordResetEmail(forgotPasswordRequest.getEmail());
+            return new ResponseEntity<>(new BaseResponse(0, "Password reset email sent successfully"), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+        try {
+            patientService.resetPassword(
+                resetPasswordRequest.getEmail(),
+                resetPasswordRequest.getCode(),
+                resetPasswordRequest.getNewPassword()
+            );
+            return new ResponseEntity<>(new BaseResponse(0, "Password reset successfully"), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

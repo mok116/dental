@@ -459,6 +459,64 @@
 			"response": []
 		},
 		{
+			"name": "http://localhost:6616/patient/forgot-password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"yeungman2424@gmail.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6616/patient/forgot-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"patient",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6616/patient/reset-password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"yeungman2424@gmail.com\",\r\n    \"code\": \"<your_code>\",\r\n    \"newPassword\": \"newpassword123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6616/patient/reset-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"patient",
+						"reset-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "http://localhost:6616/appointment/create",
 			"request": {
 				"auth": {

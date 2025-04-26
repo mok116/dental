@@ -8,10 +8,15 @@ import com.SEHS4701.group.model.Patient;
 import com.SEHS4701.group.repository.PatientRepository;
 import com.SEHS4701.group.security.JwtUtil;
 import com.SEHS4701.group.service.PatientService;
-import jakarta.persistence.EntityManager;
+import com.SEHS4701.group.service.VerificationCodeStore;
+import jakarta.mail.internet.MimeMessage;
 import org.modelmapper.ModelMapper;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -23,17 +28,25 @@ public class PatientServiceImpl implements PatientService {
     private final ModelMapper modelMapper;
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
-    private final EntityManager entityManager;
+    private final JavaMailSender mailSender;
+    private final SpringTemplateEngine templateEngine;
+    private final VerificationCodeStore codeStore;
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
     private static final int MIN_EMAIL_LENGTH = 8;
+    private static final long TOKEN_EXPIRY_MINUTES = 60; // 1 小時
 
-    public PatientServiceImpl(PatientRepository patientRepository, ModelMapper modelMapper, JwtUtil jwtUtil, PasswordEncoder passwordEncoder, EntityManager entityManager) {
+    public PatientServiceImpl(PatientRepository patientRepository, ModelMapper modelMapper,
+                              JwtUtil jwtUtil, PasswordEncoder passwordEncoder,
+                              JavaMailSender mailSender, SpringTemplateEngine templateEngine,
+                              VerificationCodeStore codeStore) {
         this.patientRepository = patientRepository;
         this.modelMapper = modelMapper;
         this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;
-        this.entityManager = entityManager;
+        this.mailSender = mailSender;
+        this.templateEngine = templateEngine;
+        this.codeStore = codeStore;
     }
 
     @Override
@@ -91,5 +104,49 @@ public class PatientServiceImpl implements PatientService {
                 .orElseThrow(() -> new IllegalArgumentException("Patient not found"));
         modelMapper.map(editRequest, existingPatient);
         patientRepository.save(existingPatient);
+    }
+
+    @Override
+    public void sendPasswordResetEmail(String email) {
+        Optional<Patient> patientOpt = patientRepository.findByEmailAddress(email);
+        if (patientOpt.isEmpty()) {
+            throw new RuntimeException("Email not registered!");
+        }
+
+        String code = codeStore.generateCode(email);
+
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            helper.setTo(email);
+            helper.setSubject("Password Reset Request");
+
+            Context context = new Context();
+            context.setVariable("patientName", patientOpt.get().getFirstName() + " " + patientOpt.get().getLastName());
+            context.setVariable("resetUrl", "http://localhost:3000/reset-password?email=" + email + "&code=" + code);
+            context.setVariable("expiryMinutes", TOKEN_EXPIRY_MINUTES);
+
+            String htmlContent = templateEngine.process("password-reset", context);
+            helper.setText(htmlContent, true);
+
+            mailSender.send(message);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to send password reset email: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void resetPassword(String email, String code, String newPassword) {
+        if (!codeStore.validateCode(email, code)) {
+            throw new RuntimeException("Invalid or expired verification code!");
+        }
+
+        Patient patient = patientRepository.findByEmailAddress(email)
+                .orElseThrow(() -> new RuntimeException("Patient not found!"));
+
+        patient.setPassword(passwordEncoder.encode(newPassword));
+        patientRepository.save(patient);
+
+        codeStore.markCodeAsUsed(email);
     }
 }
