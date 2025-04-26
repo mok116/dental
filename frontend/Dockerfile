@@ -1,5 +1,5 @@
 # Development stage
-FROM node:22-alpine
+FROM node:22-slim
 WORKDIR /app
 
 # Copy package files
