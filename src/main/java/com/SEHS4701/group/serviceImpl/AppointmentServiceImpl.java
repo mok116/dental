@@ -111,6 +111,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             Appointment savedAppointment = appointmentRepository.save(appointment);
 
             // send email
+            System.out.println("Sending email...");
             sendConfirmationEmail(appointment);
             return savedAppointment.getId();
         } catch (Exception e) {
