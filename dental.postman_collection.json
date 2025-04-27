@@ -771,6 +771,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:6616/contact_us",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"ABC\",\r\n    \"lastName\": \"DEF\",\r\n    \"phone\": \"12345678\",\r\n    \"emailAddress\": \"abc@def.com\",\r\n    \"topic\": \"topic\",\r\n    \"message\": \"message\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6616/contact_us",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6616",
+					"path": [
+						"contact_us"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
