@@ -71,12 +71,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 
             // check duplicate appointment
             Optional<Appointment> existingAppointment = appointmentRepository.findByPatientIdAndClinicDentistIdAndAppointmentDate(
-                    appointmentCreateRequest.getPatientId(),
+                    appointmentCreateRequest.getStatus(),
                     appointmentCreateRequest.getClinicDentistId(),
                     appointmentCreateRequest.getAppointmentDate()
             );
             if (existingAppointment.isPresent()) {
-                throw new RuntimeException("Duplicate appointment exists for this patient, clinic dentist, and date.");
+                throw new RuntimeException("Duplicate appointment exists for clinic dentist, and date.");
             }
 
             // create Appointment
@@ -252,6 +252,61 @@ public class AppointmentServiceImpl implements AppointmentService {
             mailSender.send(message);
         } catch (Exception e) {
             System.err.println("Failed to send confirmation email: " + e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public void cancelAppointment(Integer appointmentId) {
+        try {
+            Appointment appointment = appointmentRepository.findById(appointmentId)
+                    .orElseThrow(() -> new RuntimeException("Appointment not found with ID: " + appointmentId));
+
+            if (!"PENDING".equals(appointment.getStatus())) {
+                throw new RuntimeException("Only PENDING appointments can be cancelled");
+            }
+
+            appointment.setStatus("CANCELLED");
+            appointmentRepository.save(appointment);
+
+            sendCancellationEmail(appointment);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to cancel appointment: " + e.getMessage(), e);
+        }
+    }
+
+    private void sendCancellationEmail(Appointment appointment) {
+        try {
+            // Create a MimeMessage
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+    
+            // Set email details
+            helper.setTo(appointment.getPatient().getEmailAddress());
+            helper.setSubject("Appointment Cancellation Confirmation");
+    
+            // Prepare the Thymeleaf context with dynamic variables
+            Context context = new Context();
+            context.setVariable("patientName",
+                    appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName());
+            context.setVariable("dentistName",
+                    appointment.getClinicDentist().getDentist().getFirstName() + " " +
+                            appointment.getClinicDentist().getDentist().getLastName());
+            context.setVariable("clinicName",
+                    appointment.getClinicDentist().getClinic().getName());
+            context.setVariable("appointmentDate",
+                    appointment.getAppointmentDate().format(DateTimeFormatter.ofPattern("MMMM d, yyyy 'at' h:mm a")));
+    
+            // Process the HTML template
+            String htmlContent = templateEngine.process("appointment-cancellation", context);
+    
+            // Set the HTML content
+            helper.setText(htmlContent, true); // true indicates HTML content
+    
+            // Send the email
+            mailSender.send(message);
+        } catch (Exception e) {
+            System.err.println("Failed to send cancellation email: " + e.getMessage());
         }
     }
 }

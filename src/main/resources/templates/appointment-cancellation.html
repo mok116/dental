@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Cancellation Confirmation</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #f4f4f4;">
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f4f4f4; padding: 20px 0;">
+    <tr>
+        <td align="center">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
+                <!-- Header -->
+                <tr>
+                    <td style="background-color: #007bff; padding: 20px; text-align: center;">
+                        <img src="cid:logo" alt="HKDC Logo" style="max-width: 150px; height: auto;" />
+                        <h1 style="color: #ffffff; margin: 10px 0 0; font-size: 24px;">Appointment Cancellation Confirmation</h1>
+                    </td>
+                </tr>
+                <!-- Content -->
+                <tr>
+                    <td style="padding: 30px;">
+                        <p style="font-size: 16px; color: #333333; margin: 0 0 20px;">Dear <span th:text="${patientName}">[PatientName]</span>,</p>
+                        <p style="font-size: 16px; color: #333333; margin: 0 0 20px;">Your appointment has been successfully cancelled. Below are the details:</p>
+                        <!-- Appointment Details -->
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f9f9f9; border-radius: 6px; padding: 20px; margin-bottom: 20px;">
+                            <tr>
+                                <td style="font-size: 14px; color: #555555; padding: 5px 0;"><strong>Dentist:</strong></td>
+                                <td style="font-size: 14px; color: #333333; padding: 5px 0;"><span th:text="${dentistName}">[DentistName]</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px; color: #555555; padding: 5px 0;"><strong>Clinic:</strong></td>
+                                <td style="font-size: 14px; color: #333333; padding: 5px 0;"><span th:text="${clinicName}">[ClinicName]</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px; color: #555555; padding: 5px 0;"><strong>Date & Time:</strong></td>
+                                <td style="font-size: 14px; color: #333333; padding: 5px 0;"><span th:text="${appointmentDate}">[AppointmentDate]</span></td>
+                            </tr>
+                        </table>
+                        <p style="font-size: 16px; color: #333333; margin: 0 0 20px;">If you wish to schedule a new appointment or have any questions, please contact us.</p>
+                        <!-- Call to Action -->
+                        <p style="text-align: center; margin: 20px 0;">
+                            <a th:href="@{/login}" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 16px;">Login to Schedule a New Appointment</a>
+                        </p>
+                    </td>
+                </tr>
+                <!-- Footer -->
+                <tr>
+                    <td style="background-color: #f4f4f4; padding: 20px; text-align: center; font-size: 12px; color: #777777;">
+                        <p style="margin: 0;">Best regards,<br>HKDC Team</p>
+                        <p style="margin: 10px 0 0;"><a href="http://localhost:3000/" style="color: #007bff; text-decoration: none;">Visit Our Website</a> | <a href="/cdn-cgi/l/email-protection#2450111714100b161024011c05091408014a070b09" style="color: #007bff; text-decoration: none;">Contact Support</a></p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

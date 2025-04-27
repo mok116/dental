@@ -1,6 +1,7 @@
 package com.SEHS4701.group.controller;
 
 import com.SEHS4701.group.dto.AppointmentCreateRequest;
+import com.SEHS4701.group.dto.AppointmentCancelRequest;
 import com.SEHS4701.group.dto.AppointmentCreateResponse;
 import com.SEHS4701.group.dto.BaseResponse;
 import com.SEHS4701.group.dto.BookedClinicDentistIdsResponse;
@@ -63,8 +64,6 @@ public class AppointmentController {
         }
     }
 
-    
-
     @GetMapping("/clinicId/{clinicId}/dentistId/{dentistId}/appointmentDate/{appointmentDate}")
     public ResponseEntity<?> getBookedClinicDentistIds(
             @PathVariable Integer clinicId,
@@ -73,6 +72,16 @@ public class AppointmentController {
         try {
             BookedClinicDentistIdsResponse response = appointmentService.getBookedClinicDentistIds(clinicId, dentistId, appointmentDate);
             return new ResponseEntity<>(response, response.getCode() == 0 ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/cancel")
+    public ResponseEntity<?> cancelAppointment(@Valid @RequestBody AppointmentCancelRequest cancelRequest) {
+        try {
+            appointmentService.cancelAppointment(cancelRequest.getAppointmentId());
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.OK.value(), "Appointment cancelled successfully"), HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }

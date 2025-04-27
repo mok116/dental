@@ -19,9 +19,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 	@Query("SELECT a FROM Appointment a LEFT JOIN FETCH a.appointmentItems WHERE a.id = :id")
     Optional<Appointment> findByIdWithItems(@Param("id") Integer id);
 
-	@Query("SELECT a FROM Appointment a WHERE a.patient.id = :patientId AND a.clinicDentist.id = :clinicDentistId AND a.appointmentDate = :appointmentDate")
+	@Query("SELECT a FROM Appointment a WHERE a.status = :status AND a.clinicDentist.id = :clinicDentistId AND a.appointmentDate = :appointmentDate")
     Optional<Appointment> findByPatientIdAndClinicDentistIdAndAppointmentDate(
-            @Param("patientId") Integer patientId,
+            @Param("status") String status,
             @Param("clinicDentistId") Integer clinicDentistId,
             @Param("appointmentDate") LocalDateTime appointmentDate);
 

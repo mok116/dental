@@ -13,6 +13,8 @@ public interface AppointmentService {
 	
     int createAppointment(AppointmentCreateRequest appointmentCreateRequest);
 
+    void cancelAppointment(Integer appointmentId);
+
     AppointmentByPatientIdResponse getAppointmentsByPatient(Integer patientId);
 
     AppointmentByIdResponse getById(Integer id);
