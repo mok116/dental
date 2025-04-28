@@ -20,13 +20,13 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build and push API Docker image
         run: |
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/dental-api:${{ github.sha }}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/dental-api:${{ github.sha }}
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/dental-api-204:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/dental-api-204:${{ github.sha }}
       - name: Deploy API to Azure App Service
         uses: azure/webapps-deploy@v3
         with:
-          app-name: dental-api
-          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/dental-api:${{ github.sha }}
+          app-name: dental-api-204
+          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/dental-api-204:${{ github.sha }}
   build-and-deploy-frontend:
     runs-on: ubuntu-latest
     steps:
